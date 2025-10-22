@@ -1,0 +1,417 @@
+:root {
+  --bg: #3B1B0E;
+  --ink: #232523;
+  --muted: #6d6f6d;
+  --accent: #7E2625;
+  --glass: rgba(255, 255, 255, 0.214);
+  --line: #F3ECDC;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  line-height: 1.7;
+  color: #F3ECDC;
+  font-family: 'poppins', sans-serif;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+a { color: inherit; text-decoration: none; }
+
+/* NAV */
+/* Tambahin transisi */
+.nav {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  width: 100%;
+  backdrop-filter: blur(3px) saturate(150%);
+  transition: transform 0.3s ease-in-out; /* animasi hide/show */
+}
+
+/* class hidden */
+.nav.hidden {
+  transform: translateY(-100%);
+}
+.nav a:hover { opacity: 1;
+    transition: opacity 0.3s;
+}
+.nav-inner {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+ }
+
+ .brand img {
+    height: 120px; /* Atur tinggi logo sesuai kebutuhan */
+    width: auto;
+ }
+
+.links {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    width: 100%;
+}
+
+.links a {
+  font-size: 12px; letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #F3ECDC;
+}
+.hamb {
+  display: none; width: 40px; height: 40px;
+  align-items: center; justify-content: center;
+  background: #F3ECDC;
+  position: absolute; top: 45px; right: 20px;
+  z-index: 99;
+}
+
+.hamb:hover { background: none; cursor: pointer; }
+
+.hamb span {
+  display: block; width: 18px; height: 1px;
+  background: #F3ECDC; position: relative;
+}
+.hamb span::before, .hamb span::after {
+  content: ""; position: absolute; left: 0;
+  width: 18px; height: 1px; background: #F3ECDC;
+  transition: all 0.3s ease;
+}
+.hamb span::before { top: -6px; }
+.hamb span::after { top: 6px; }
+
+.panel {
+  display: none;
+  width: 100%;
+  background: #F3ECDC;
+  color: var(--ink);
+  position: absolute;
+  top: 0;   /* mulai dari atas */
+  left: 0;
+  text-align: center;
+  height: 100vh; /* full screen */
+  z-index: 99;
+  align-items: center;
+  justify-content: center;
+}
+
+.panel a {
+  display: block;
+  padding: 16px;
+  font-size: 14px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.panel.open {
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 28px;
+  background: none;
+  border: none;
+  color: #000;  /* kalau background putih */
+  cursor: pointer;
+  z-index: 101;
+}
+
+.close-btn:hover {
+  color: rgba(0, 0, 0, 0.432);
+  background-color: transparent;
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+
+
+/* HERO (index) */
+header {
+  position: relative;
+  top: 0; height: 92vh; min-height: 520px;
+  overflow: hidden;
+}
+header video {
+  position: relative; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  filter: contrast(1.03) saturate(1.05);
+}
+header .veil {
+  position: absolute; inset: 0;
+  background: #23252348;
+  mix-blend-mode: multiply;
+}
+.names {
+  font-family: Fraunces, serif; font-weight: 600;
+  font-size: clamp(28px,6vw,48px); margin: 0;
+}
+.tag { color: var(--muted); font-size: 14px; margin-top: 4px; }
+.date {
+  letter-spacing: 3px; font-size: 12px;
+  text-transform: uppercase; margin-top: 2px; color: #4b4f4b;
+}
+
+/* BODY */
+h4 {
+    font-weight: 600;
+    font-weight: 300;
+    font-size: 18px;
+    margin: 0 0 20px 0;
+}
+
+h1 {
+    font-weight: 300;
+    font-size: 32px;
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+}
+
+p {
+    font-size: 14px;
+    margin: 0 0 20px 0;
+    color: #cbb8a0;
+}
+
+.btn {
+  display: inline-block;
+  color: #F3ECDC;
+  font-weight: 300;
+  padding: 12px 30px;
+  border-bottom: 1px solid var(--line);
+  margin: 0 20px;
+}
+.btn:hover {
+  background: var(--accent);
+  border: none;
+  color: #7E2625;
+  transition: background 0.3s ease;
+}
+
+/* Countdown Container */
+.countdown {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.count-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  padding: 10px 10px;
+  text-align: center;
+  border-bottom: 1px solid var(--line);
+}
+
+.count-box span {
+  font-size: 32px;
+  font-weight: 300;
+  color: #F3ECDC;
+}
+
+.count-box label {
+  font-size: 12px;
+  font-weight: 300;
+  color: #F3ECDC;
+  margin-top: 0.5rem;
+  display: block;
+}
+
+
+/* Gallery */
+
+.our-gallery {
+    padding: 50px 10%;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 150px;
+    box-sizing: border-box;
+}
+
+
+/* DETAILS & RSVP */
+
+section.simple {
+    padding: 50px 30%;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.item {
+    margin-bottom: 40px;
+}
+
+img.gracias {
+    margin: 100px auto;
+    width: 80%;
+    height: auto;
+    box-sizing: border-box;
+    mix-blend-mode: screen;
+    overlay: white;
+}
+
+form { max-width: 600px; margin: 0 auto; display: grid; gap: 14px; }
+input, textarea, button {
+  font: inherit; padding: 12px;
+  border: none;
+  border-bottom: 1px solid var(--line);
+}
+
+.name {
+    display: flex;
+    gap: 20px;
+}
+
+.row-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+label {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0;
+    text-align: left;
+}
+
+.radios {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+label.radio {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+input.radio {
+    width: 16px; height: 16px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    position: relative;
+}
+
+input {
+    width: 100%;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 2px;
+    padding: 5px 5px;
+}
+
+textarea { min-height: 120px; resize: vertical; }
+
+button {
+  border-bottom: 1px solid var(--bg);
+  font-weight: 300; cursor: pointer;
+  color: var(--bg);
+  background-color: transparent;
+}
+button:hover {
+    background: var(--bg);
+    color: #F3ECDC;
+  transition: background 0.3s ease;
+  color: #F3ECDC;}
+
+
+  iframe {
+    width: 100%;
+    height: 300px;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 120px;
+  }
+
+footer {
+position: relative;
+  border-top: 0.5px solid var(--line);
+  color: #F3ECDC; font-size: 12px;
+  text-transform: none;
+  text-align: center; padding: 28px 0; margin-top: 40px;
+}
+
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: scale(0.9);}
+  to   {opacity: 1; transform: scale(1);}
+}
+
+
+
+@media (max-width: 800px) {
+  .links { display: none; }
+  .hamb { display: flex;
+    cursor: pointer;
+    flex-direction: column;
+    background-color: transparent;
+    border: none;
+    color: #F3ECDC;
+
+    }
+
+    .brand img {
+        height: 60px; /* Atur tinggi logo sesuai kebutuhan */
+        width: auto;
+     }
+
+     .nav {
+        padding: 20px 0;
+     }
+
+    .nav-inner {
+        padding: 20px 0; flex-direction: row;justify-content: space-between; align-items: center;
+    }
+
+    section.simple {
+    padding: 50px 5%;
+    }
+
+}
