@@ -6,6 +6,7 @@
   <title>Ava & Mateo — Details</title>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
+  <link rel="icon" href="{{ asset('media/anm-logo.png') }}" type="image/png">
   <style>
     .nav {
         backdrop-filter: blur(0px);
@@ -48,6 +49,12 @@
           <h1>2PM<br>
             The Cathedral of the Annunciation of Our Lady<br>
             Surry Hills, NSW</h1>
+            @if(!empty($venue?->venue_location))
+                <iframe src="{{ $venue->venue_location }}" width="100%" height="450"
+                        style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            @else
+                <p>Venue location not set yet.</p>
+  @endif
       </div>
       <div class="item">
           <h4>DINNER & PARTY — THE PROOF</h4>

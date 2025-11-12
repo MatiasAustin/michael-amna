@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('role')->default('user');
-
+        Schema::create('countdowns', function (Blueprint $t) {
+            $t->id();
+            $t->timestamp('event_at_utc')->nullable(); // simpan UTC biar aman timezone
+            $t->string('headline')->nullable();
+            $t->timestamps();
         });
     }
 
@@ -22,9 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('role');
-
-        });
+        Schema::dropIfExists('countdowns');
     }
 };

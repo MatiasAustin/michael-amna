@@ -7,6 +7,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
 
+  <link rel="icon" href="{{ asset('media/anm-logo.png') }}" type="image/png">
+
   <style>
     .nav {
         backdrop-filter: blur(0px);
@@ -22,16 +24,16 @@
         transition: all 0.3s ease;}
   </style>
 </head>
-<body style="background-color: #F3ECDC; color: black;">
+<body>
   <nav class="nav">
     <div class="nav-inner">
       <div class="brand">
-        <img src="{{ asset('media/anm-logo-brown.png') }}" alt="">
+        <img src="{{ asset('media/anm-logo.png') }}" alt="">
       </div>
       <div class="links">
-        <a href="{{ url('/') }}" style="color: #3B1B0E;">Home</a>
-        <a href="{{ url('/details') }}" style="color: #3B1B0E;">Details</a>
-        <a href="{{ url('/rsvp') }}" style="color: #3B1B0E;">RSVP</a>
+        <a href="{{ url('/') }}">Home</a>
+        <a href="{{ url('/details') }}">Details</a>
+        <a href="{{ url('/rsvp') }}">RSVP</a>
       </div>
       <button class="hamb" aria-label="Open menu" aria-controls="mPanel" aria-expanded="false"><span style="background: #3B1B0E;"></span></button>
     </div>
@@ -51,47 +53,43 @@
 
     </div>
 
-    <form action="https://script.google.com/macros/s/AKfycbzhYDSdUpS68leHueoRKfcoeEB_L1orSkEdtQKrsSjzCjyAWdYGqty0GBKQL5YLf8E/exec" method="POST" id="rsvpForm">
-        <div class="name">
-            <div class="row-form">
-                <label for="name">First Name</label>
-                <input type="text" placeholder="" name="first" id="first" required>
-            </div>
-            <div class="row-form">
-                <label for="name">Last Name</label>
-                <input type="text" placeholder="" name="last" id="last" required>
-            </div>
+
+    {{-- RSVP FORM --}}
+    <form action="{{ route('rsvp.store') }}" method="POST" id="rsvpForm">
+    @csrf
+
+    <h4>Reservation Contact</h4>
+    <input name="contact_name"  placeholder="Your name" required>
+    <input name="contact_email" placeholder="Email (optional)" type="email">
+
+    <fieldset>
+        <legend>Are you attending?</legend>
+        <label><input type="radio" name="attend" value="yes" required> Accept with pleasure</label>
+        <label><input type="radio" name="attend" value="no"  required> Decline with regret</label>
+    </fieldset>
+
+    <h4>Guests</h4>
+    <div id="guestList">
+        <!-- row template -->
+        <div class="guest-row" data-index="0">
+        <input name="guests[0][first_name]"     placeholder="First name" required>
+        <input name="guests[0][last_name]"      placeholder="Last name">
+        <input name="guests[0][dietary]"        placeholder="Dietary (optional)">
+        <input name="guests[0][accessibility]"  placeholder="Accessibility needs (optional)">
+        <button type="button" class="remove">Remove</button>
         </div>
+    </div>
+    <button type="button" id="addGuest">+ Add another guest</button>
 
-        <label for="guests">NAME(S) OF Guest(s) in your Party</label>
-        <input type="text" placeholder="" name="guests" id="guests" required>
+    <h4>Message for the couple (optional)</h4>
+    <textarea name="message" rows="3" placeholder="Write a short note…"></textarea>
 
-        <label for="attend">SO — ARE YOU COMING?</label>
-        <div class="radios" name="attend" id="attend">
-            <label class="radio"><input class="radio" type="radio" name="attend" value="yes" required> Accept with pleasure</label>
-            <label class="radio"><input class="radio" type="radio" name="attend" value="no" required> Decline with regret</label>
-        </div>
-
-        <br>
-        <label for="wishes">DIETARY NEEDS</label>
-        <textarea rows="4" placeholder="Short wishes here..." name="wishes" id="wishes" required></textarea>
-
-        <br>
-        <button type="submit">'I Do'</button>
+    <button type="submit">Send RSVP</button>
     </form>
 
-        <form id="uploadForm" method="POST" action="{{ route('photos.store') }}" enctype="multipart/form-data">
-            @csrf
-            <input type="file" name="photo" id="photoInput" accept=".jpg,.jpeg,.png" />
-            <div id="previewContainer"></div>
-            <p id="errorMsg" style="color: red;"></p>
-            <button type="submit">Upload</button>
-            </form>
-        @if ($errors->has('photo'))
-        <span class="text-danger">{{ $errors->first('photo') }}</span>
-        @endif
+    <script src="{{ asset('js/rsvp-form.js') }}"></script>
 
-
+    {{-- POPUP --}}
 
     <div id="successPopup" class="popup" style="display:none;
     position:fixed;inset:0;z-index:9999;justify-content:center;align-items:center;background:rgba(0,0,0,.6); margin: 0 auto;">
@@ -137,7 +135,7 @@
     <iframe width="560" height="315" src="https://www.youtube.com/embed/3wDnIk5tuwY?si=DiGfxUGE2-Sxleod" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
   </section>
 
-  <footer style="color: rgb(23, 23, 23);">All Right Reserved by @Freellab2025</footer>
+  <footer>All Right Reserved by @Freellab2025</footer>
 
   <script>
     ///General

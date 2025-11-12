@@ -11,12 +11,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-
-        // Tambahkan session middleware agar Session::get() bisa dipakai
-        // Ensure cookies & sessions work like the default "web" group:
-
-        $middleware->append(\Illuminate\Session\Middleware\StartSession::class);
-
+            // Kosongkan atau tambahkan middleware valid
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         // Kosongkan atau tambahkan konfigurasi valid

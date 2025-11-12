@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Photo extends Model
+class Venue extends Model
 {
-    protected $fillable = ['filename'];
+    protected $fillable = ['venue_location'];
 }
+
