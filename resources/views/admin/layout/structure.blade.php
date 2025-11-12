@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="{{ asset('css/admin.css') }}" />
         <link rel="icon" href="{{ asset('media/anm-logo.png') }}" type="image/png">
 
-        @vite(['resources/css/admin.css', 'resources/js/admin.js'])
+
 
     </head>
     <body style="background-color: #7E2625; color: #F3ECDC;">
