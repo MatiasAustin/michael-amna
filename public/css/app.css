@@ -255,77 +255,113 @@ p {
 
 /* WISHES */
 
+/* === WISHES SECTION === */
 .wishes-section {
-    margin: 80px 0;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  text-align: center;
+  margin: 80px 0 60px;
+  padding: 0 20px;
 }
 
-.wishes-title {
-    font-size: 28px;
-    letter-spacing: 1px;
-    margin-bottom: 35px;
-    color: #fff;
+.wishes-subtitle {
+  margin-bottom: 40px;
 }
 
-/* Wrapper slider */
-.wish-slider {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    padding: 10px 0;
-    scrollbar-width: none;
-}
-.wish-slider::-webkit-scrollbar {
-    display: none;
+
+/* Container yang di-scroll (disembunyiin scrollbarnya) */
+.wishes-scroller {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;         /* biar 1 baris terus */
+  width: 100%;
+    justify-content: center;
+  margin: 0 auto;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding: 8px 0 16px;
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* IE/Edge Lama */
 }
 
-/* Card */
+.wishes-scroller::-webkit-scrollbar {
+  display: none;              /* Chrome/Safari */
+}
+
+.wishes-row {
+  display: flex;        /* <<< PENTING: jangan sampai jadi 2 baris */
+  gap: 10px;
+  align-items: stretch;
+}
+
+/* kartu */
 .wish-card {
-    min-width: 260px;
-    max-width: 300px;
-    background: rgba(255,255,255,0.1);
-    padding: 20px;
-    border-radius: 16px;
-    backdrop-filter: blur(4px);
-    color: #fff;
+  min-width: 260px;
+  max-width: 320px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(0,0,0,0.10);
+  text-align: left;
 }
 
-.wish-message {
-    font-size: 16px;
-    line-height: 1.4;
-    margin-bottom: 12px;
+
+.wish-text {
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 0 0 10px;
 }
 
 .wish-name {
-    font-size: 14px;
-    opacity: 0.8;
+  font-size: 11px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  opacity: 0.8;
 }
 
-/* Empty fallback */
-.wish-empty {
-    color: #fff;
-    font-size: 16px;
-    opacity: 0.8;
-    margin-top: 20px;
+/* Pesan kosong */
+.wishes-empty {
+  font-size: 12px;
+  opacity: 0.8;
+  margin-bottom: 18px;
 }
 
-.wish-btn {
-    margin-top: 20px;
-    padding: 10px 22px;
-    border-radius: 20px;
-    background: #ffffff22;
-    border: 1px solid #ffffff55;
-    color: #fff;
-    cursor: pointer;
-    transition: 0.2s ease;
+/* Button di bawah wishes – biar center */
+.wishes-cta {
+  text-align: center;
+  margin-top: 12px;
 }
-.wish-btn:hover {
-    background: #ffffff44;
+
+.wishes-cta .btn {
+  padding: 10px 30px;
+  border-bottom: 1px solid #F3ECDC;
+  font-weight: 300; cursor: pointer;
+  color: #F3ECDC;
+  background-color: transparent;
+  text-transform: none;
 }
+.wishes-cta .btn:hover {
+  background: #F3ECDC;
+  color: #7E2625;
+  transition: background 0.3s ease;
+}
+
+/* Mobile: 1 card full width */
+@media (max-width: 640px) {
+  .wishes-section {
+    margin: 60px 0 40px;
+  }
+
+  .wish-card {
+    min-width: 80%;
+    max-width: 80%;
+    margin: 0 auto;
+  }
+
+  .wishes-row {
+    gap: 10px;
+  }
+}
+
+
 
 
 
@@ -453,7 +489,7 @@ img.gracias {
     overlay: white;
 }
 
-form { max-width: 600px; margin: 0 auto; display: grid; gap: 14px; }
+form { width: 600px; margin: 0 auto; display: grid; gap: 14px; }
 input, textarea, button {
   font: inherit; padding: 12px;
   border: none;
@@ -479,11 +515,10 @@ label {
     text-align: left;
 }
 
-.radios {
+.attendance {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 20px;
 }
 
 label.radio {
@@ -491,6 +526,7 @@ label.radio {
     align-items: center;
     gap: 10px;
     cursor: pointer;
+    margin-bottom: 20px;
 }
 
 input.radio {
@@ -511,17 +547,30 @@ input {
 textarea { min-height: 120px; resize: vertical; }
 
 button {
-  border-bottom: 1px solid var(--bg);
+  border-bottom: 1px solid #F3ECDC;
   font-weight: 300; cursor: pointer;
-  color: var(--bg);
+  color: #F3ECDC;
   background-color: transparent;
 }
-button:hover {
-    background: var(--bg);
-    color: #F3ECDC;
-  transition: background 0.3s ease;
-  color: #F3ECDC;}
 
+button.remove {
+    width: 100%;
+    background-color: #521817;
+    color: #F3ECDC;
+    border: none;
+  }
+button.remove:hover {
+    width: 100%;
+    background-color: #aa3735;
+    color: #F3ECDC;
+    border: none;
+  }
+
+button:hover {
+    background: #F3ECDC;
+    color: #7E2625;
+    transition: background 0.3s ease;
+}
 
   iframe {
     width: 100%;

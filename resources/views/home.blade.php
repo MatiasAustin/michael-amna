@@ -120,30 +120,35 @@
 
 
 <section class="wishes-section">
+    <h1 class="wishes-heading">Wishes From Our Loved Ones</h1>
+    <p class="wishes-subtitle">
+        Small notes, big love. Here are some of the words shared for our day.
+    </p>
 
-    <h2 class="wishes-title">Warm Wishes From Our Loved Ones</h2>
-
-    @if($wishes->count())
-        <div class="wish-slider" id="wishSlider">
-            @foreach($wishes as $wish)
-                <div class="wish-card">
-                    <p class="wish-message">“{{ $wish['message'] }}”</p>
-                    <p class="wish-name">— {{ $wish['name'] }}</p>
-                </div>
-            @endforeach
+    @if ($wishes->count())
+        <div class="wishes-scroller">
+            <div class="wishes-row">
+                @foreach ($wishes as $wish)
+                    <article class="wish-card">
+                        <p class="wish-text">“{{ $wish->message }}”</p>
+                        <p class="wish-name">— {{ $wish->full_name }}</p>
+                    </article>
+                @endforeach
+            </div>
         </div>
     @else
-        <div class="wish-empty">
-            <p>No wishes have been submitted yet.</p>
-            <p>Be the first to send your warm message ✨</p>
-
-            <button class="wish-btn" onclick="window.location.href='{{ url('/rsvp') }}'">
-                Send Your Message
-            </button>
-        </div>
+        <p class="wishes-empty">
+            No wishes have been written yet. Be the first one to leave a note for us.
+        </p>
     @endif
 
+    <div class="wishes-cta">
+        <a href="{{ url('/rsvp') }}" class="btn">Send Your Wishes</a>
+    </div>
 </section>
+
+
+
 
 
 
@@ -190,7 +195,7 @@
 
             </div>
         @else
-            <p class="text-center text-muted">Belum ada foto.</p>
+            <p class="text-center text-muted" style="width: 100%; margin: 0 auto; text-align: center;">Belum ada foto.</p>
         @endif
       </div>
   <div class="button-cont">
@@ -249,14 +254,68 @@
       </script>
 
       <script>
-        const slider = document.getElementById('wishSlider');
-        let autoScroll = setInterval(() => {
-            slider.scrollBy({ left: 300, behavior: 'smooth' });
-            if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth) {
-                slider.scrollTo({ left: 0, behavior: 'smooth' });
-            }
-        }, 4000);
-    </script>
+            (function () {
+                const scroller = document.querySelector('.wishes-scroller');
+                if (!scroller) return;
+
+                // Biat lebih smooth & nggak cepat banget
+                const speed = 0.2; // px per frame
+                let pos = 0;
+
+                // Duplikasi konten biar loopnya lebih halus
+                const row = scroller.querySelector('.wishes-row');
+                if (!row) return;
+
+                // Kalau card-nya kurang dari 3, nggak usah auto slide
+                const cards = row.children;
+                if (cards.length < 4) return;
+
+                const clone = row.cloneNode(true);
+                scroller.appendChild(clone);
+
+                function step() {
+                pos += speed;
+                // total scrollable width (2 row digabung)
+                const maxScroll = row.scrollWidth;
+
+                if (pos >= maxScroll) {
+                    pos = 0; // reset ke awal
+                }
+
+                scroller.scrollLeft = pos;
+                requestAnimationFrame(step);
+                }
+
+                // Start animasi
+                requestAnimationFrame(step);
+
+                // Pause animasi ketika user drag scroll (biar nggak annoying)
+                let isUserScrolling = false;
+                let scrollTimeout;
+
+                scroller.addEventListener('wheel', () => {
+                isUserScrolling = true;
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    isUserScrolling = false;
+                }, 1500);
+                }, { passive: true });
+
+                const oldStep = step;
+                function animatedStep() {
+                if (!isUserScrolling) {
+                    pos += speed;
+                    const maxScroll = row.scrollWidth;
+                    if (pos >= maxScroll) pos = 0;
+                    scroller.scrollLeft = pos;
+                }
+                requestAnimationFrame(animatedStep);
+                }
+                // override ke yang bisa pause
+                requestAnimationFrame(animatedStep);
+            })();
+            </script>
+
 
 
 

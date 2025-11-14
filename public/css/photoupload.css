@@ -1,0 +1,80 @@
+.simple {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.upload-form {
+    width: 100%;
+    max-width: 600px;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+.upload-form h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333333;
+}
+
+.upload-form h4 {
+    font-size: 14px;
+    font-weight: 400;
+    color: #666666;
+    margin-bottom: 20px;
+}
+
+/* Custom input file */
+#photoInput {
+    width: 100%;
+    padding: 12px;
+    border: 2px dashed #cccccc;
+    border-radius: 10px;
+    background: #fafafa;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+#photoInput:hover {
+    border-color: #7E2625;
+    background: #fff1f1;
+}
+
+/* Error message */
+#errorMsg {
+    margin-top: 8px;
+    color: #cc0000;
+    font-size: 13px;
+}
+
+/* Preview */
+#previewContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+#previewContainer img {
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+/* Upload button */
+button.upload-photo {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 30px;
+    cursor: pointer;
+    color: #7E2625;
+    border-bottom: 1px solid #7E2625;
+    background-color: transparent;
+    transition: 0.25s ease;
+}
+
+button.upload-photo:hover {
+    background: #7E2625;
+    color: #F3ECDC;
+}

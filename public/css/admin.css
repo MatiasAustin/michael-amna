@@ -44,18 +44,17 @@ p {
 
 .admin-dashboard-main {
     display: flex;
-    flex-wrap: wrap;
     padding: 20px 0;
     width: 100%;
     gap: 20px;
     box-sizing: border-box;
     position: fixed;
-    box-sizing: border-box;
 }
 
 .admin-dashboard-panel {
     overflow-y: auto;
     box-sizing: border-box;
+    width: 75%;
     height: 70vh;
     margin-bottom: 40px;
     box-sizing: border-box;

@@ -6,6 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Guest extends Model
 {
-    protected $fillable = ['rsvp_id','first_name','last_name','dietary','accessibility'];
-    public function rsvp(){ return $this->belongsTo(Rsvp::class); }
+    protected $fillable = [
+        'rsvp_id',
+        'full_name',
+        'email',
+        'table_number',
+        'seat_number',
+    ];
+
+    public function rsvp()
+    {
+        return $this->belongsTo(Rsvp::class);
+    }
 }

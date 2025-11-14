@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rsvps', function (Blueprint $t) {
-            $t->id();
-            $t->string('contact_name');
-            $t->string('contact_email')->nullable();
-            $t->enum('attend', ['yes','no']);
-            $t->text('message')->nullable();
-            $t->timestamps();
+        Schema::create('rsvps', function (Blueprint $table) {
+            $table->id();
+            $table->string('full_name');
+            $table->string('email')->nullable();
+            $table->enum('attend', ['yes', 'no']);
+            $table->text('message')->nullable();
+            $table->timestamps();
         });
     }
 

@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminRsvpController;
 use App\Http\Controllers\GuestPhotoController;
 use App\Http\Controllers\AdminDetailsController;
+use App\Http\Controllers\AdminSeatingController;
 use App\Http\Controllers\AdminCountdownController;
 use App\Http\Controllers\AdminDashboardController;
 
@@ -19,7 +20,11 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/details', function () {
     $venue = Venue::first();
-    return view('details', compact('venue'));
+    $countdown = Countdown::first();
+    $rsvps = \App\Models\Rsvp::with('guests')->get();
+    $guests = \App\Models\Guest::all();
+
+    return view('details', compact('venue', 'countdown', 'rsvps', 'guests'));
 })->name('details');
 
 Route::view('/rsvp', 'rsvp');
@@ -74,4 +79,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/rsvp', [AdminRsvpController::class, 'index'])
         ->name('admin.rsvp');
+
+    Route::post('/admin/seating', [AdminRsvpController::class, 'update'])->name('admin.rsvp.update');
+
+    Route::get('/admin/seating/export', [AdminRsvpController::class, 'exportCsv'])->name('admin.rsvp.export');
 });

@@ -1,43 +1,67 @@
-(() => {
-  const list = document.getElementById('guestList');
-  const add  = document.getElementById('addGuest');
 
-  function rowTemplate(i){
-    return `
-    <div class="guest-row" data-index="${i}">
-      <input name="guests[${i}][first_name]"    placeholder="First name" required>
-      <input name="guests[${i}][last_name]"     placeholder="Last name">
-      <input name="guests[${i}][dietary]"       placeholder="Dietary (optional)">
-      <input name="guests[${i}][accessibility]" placeholder="Accessibility needs (optional)">
-      <button type="button" class="remove">Remove</button>
-    </div>`;
-  }
+    // Biar bisa dipakai juga di luar IIFE (attend radios)
+    const guestList = document.getElementById('guestList');
+    const addGuestBtn = document.getElementById('addGuest');
 
-  add.addEventListener('click', () => {
-    const i = list.children.length;
-    list.insertAdjacentHTML('beforeend', rowTemplate(i));
-  });
-
-  list.addEventListener('click', (e) => {
-    if(e.target.classList.contains('remove')){
-      const row = e.target.closest('.guest-row');
-      row.remove();
-      // reindex names
-      [...list.children].forEach((el, idx) => {
-        el.dataset.index = idx;
-        el.querySelectorAll('input').forEach(inp => {
-          inp.name = inp.name.replace(/guests\[\d+\]/, `guests[${idx}]`);
-        });
-      });
+    // Template bikin row guest
+    function createGuestRow(index) {
+        const row = document.createElement('div');
+        row.className = 'guest-row';
+        row.dataset.index = index;
+        row.innerHTML = `
+            <input name="guests[${index}][full_name]" placeholder="Guest full name" required>
+            <input name="guests[${index}][email]" type="email" placeholder="Guest email (optional)">
+            <button type="button" class="remove">Remove</button>
+        `;
+        return row;
     }
-  });
 
-  // Optional: if "Decline", keep only contact + clear guests
-  document.querySelectorAll('input[name="attend"]').forEach(r => {
-    r.addEventListener('change', () => {
-      if(r.value === 'no'){
-        list.innerHTML = rowTemplate(0);
-      }
+    // Bind tombol remove di 1 row
+    function bindRemove(btn) {
+        btn.addEventListener('click', () => {
+            const rows = guestList.querySelectorAll('.guest-row');
+            // Kalau mau boleh hapus semua, hapus aja tanpa limit:
+            if (rows.length <= 1) {
+                // Kalau masih mau sisain 1, uncomment ini:
+                // return;
+            }
+            btn.closest('.guest-row').remove();
+        });
+    }
+
+    (function () {
+        // Bind remove ke row awal (yang udah ada di HTML)
+        guestList.querySelectorAll('.guest-row .remove').forEach(bindRemove);
+
+        // Tambah guest baru
+        addGuestBtn.addEventListener('click', () => {
+            const index = guestList.querySelectorAll('.guest-row').length;
+            const row = createGuestRow(index);
+            guestList.appendChild(row);
+            bindRemove(row.querySelector('.remove'));
+        });
+    })();
+
+    // Optional: if "Decline", clear all guests and disable section
+    document.querySelectorAll('input[name="attend"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+            if (radio.value === 'no') {
+                // Hapus semua guest
+                guestList.innerHTML = '';
+                // Matikan tombol tambah guest
+                addGuestBtn.disabled = true;
+                addGuestBtn.style.opacity = 0.5;
+            } else {
+                // Kalau yes: hidupkan lagi tombolnya
+                addGuestBtn.disabled = false;
+                addGuestBtn.style.opacity = 1;
+
+                // Kalau sebelumnya kosong, bikin minimal 1 row
+                if (guestList.querySelectorAll('.guest-row').length === 0) {
+                    const row = createGuestRow(0);
+                    guestList.appendChild(row);
+                    bindRemove(row.querySelector('.remove'));
+                }
+            }
+        });
     });
-  });
-})();

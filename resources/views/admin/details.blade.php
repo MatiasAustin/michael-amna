@@ -28,7 +28,7 @@
 
                             {{-- Preview (opsional) --}}
                             <div class="map-preview" style="margin-top:12px;">
-                            <iframe id="mapPreview" src="{{ $venue->venue_location ?? '' }}" width="100%" height="360"
+                            <iframe id="mapPreview" src="{{ $venue->venue_location ?? '' }}" width="75%" height="500"
                                     style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                             </div>
                         </div>

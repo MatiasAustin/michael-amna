@@ -45,11 +45,93 @@
 
       <div class="item">
           <h4>Saturday</h4>
-          <h1> 25 OCTOBER 2025</h1>
+        <h1>{{ optional($countdown->event_at_utc)->format('d M Y') }}</h1>
+        @php
+            $event = $countdown?->event_at_utc;
+            // fallback values
+            $evTitle = 'Ava & Mateo — The Promise';
+            $evLocation = $venue?->venue_name ? $venue->venue_name . ', ' . ($venue?->venue_location_text ?? '') : 'The Cathedral of the Annunciation of Our Lady, Surry Hills, NSW';
+            $evDesc = 'Ceremony — The Promise.';
+            // Google Calendar needs UTC timestamp in YYYYMMDDTHHMMSSZ
+            $startUtc = $event ? $event->format('Ymd\\THis\\Z') : null;
+            $endUtc = $event ? $event->copy()->addHours(3)->format('Ymd\\THis\\Z') : null; // default 3 hour duration
+            // URL-encoded pieces for direct links
+            $gText = urlencode($evTitle);
+            $gDetails = urlencode($evDesc);
+            $gLocation = urlencode($evLocation);
+            $googleHref = $startUtc && $endUtc
+                ? "https://www.google.com/calendar/render?action=TEMPLATE&text={$gText}&dates={$startUtc}/{$endUtc}&details={$gDetails}&location={$gLocation}"
+                : '#';
+        @endphp
+
+        <div class="add-to-calendar">
+            @if($event)
+                <button id="addCalBtn" type="button">Add to calendar ▾</button>
+
+                <div id="calMenu" style="display:none; margin-top:.5rem;">
+                    <a class="cal-link" href="{{ $googleHref }}" target="_blank" rel="noopener">Google Calendar</a>
+                    &nbsp;|&nbsp;
+                    <a class="cal-link" href="#" id="downloadIcs">Download .ics (Apple / Outlook / Phone)</a>
+                </div>
+
+                <script>
+                    (function(){
+                        const btn = document.getElementById('addCalBtn');
+                        const menu = document.getElementById('calMenu');
+                        btn.addEventListener('click', ()=> menu.style.display = menu.style.display === 'none' ? 'block' : 'none');
+
+                        const ev = {!! json_encode([
+                            'title' => $evTitle,
+                            'start' => $startUtc,
+                            'end' => $endUtc,
+                            'location' => $evLocation,
+                            'description' => $evDesc,
+                        ]) !!};
+
+                        document.getElementById('downloadIcs').addEventListener('click', function(e){
+                            e.preventDefault();
+                            // Build .ics content
+                            const now = new Date().toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z';
+                            const uid = Date.now() + '@ammamichael';
+                            const icsLines = [
+                                'BEGIN:VCALENDAR',
+                                'VERSION:2.0',
+                                'PRODID:-//AR//Wedding//EN',
+                                'CALSCALE:GREGORIAN',
+                                'BEGIN:VEVENT',
+                                'UID:' + uid,
+                                'DTSTAMP:' + now,
+                                'DTSTART:' + ev.start,
+                                'DTEND:' + ev.end,
+                                'SUMMARY:' + ev.title,
+                                'DESCRIPTION:' + ev.description,
+                                'LOCATION:' + ev.location,
+                                'END:VEVENT',
+                                'END:VCALENDAR'
+                            ];
+                            const icsContent = icsLines.join('\\r\\n');
+                            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+                            const url = URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = 'ava-mateo-event.ics';
+                            document.body.appendChild(a);
+                            a.click();
+                            a.remove();
+                            URL.revokeObjectURL(url);
+                        });
+                    })();
+                </script>
+            @else
+                <button disabled type="button">Add to calendar</button>
+            @endif
+        </div>
       </div>
+
+
       <div class="item">
           <h4>CEREMONY — THE PROMISE</h4>
-          <h1>2PM<br>
+          <h1>{{ optional($countdown->event_at_utc)->format('g A') }}<br><br>
             The Cathedral of the Annunciation of Our Lady<br>
             Surry Hills, NSW</h1>
             @if(!empty($venue?->venue_location))

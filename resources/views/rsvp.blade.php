@@ -57,35 +57,40 @@
 
     {{-- RSVP FORM --}}
     <form action="{{ route('rsvp.store') }}" method="POST" id="rsvpForm">
-    @csrf
+        @csrf
 
-    <h4>Reservation Contact</h4>
-    <input name="contact_name"  placeholder="Your name" required>
-    <input name="contact_email" placeholder="Email (optional)" type="email">
+        <h4>Reservation Contact</h4>
+        {{-- tamu utama / contact --}}
+        <input name="full_name"  placeholder="Your full name" required>
+        <input name="email"      placeholder="Email (optional)" type="email">
 
-    <fieldset>
-        <legend>Are you attending?</legend>
-        <label><input type="radio" name="attend" value="yes" required> Accept with pleasure</label>
-        <label><input type="radio" name="attend" value="no"  required> Decline with regret</label>
-    </fieldset>
+        <fieldset class="attendance">
+            <legend style="margin-bottom: 20px;">Are you attending?</legend>
+            <label class="radio">
+                <input class="radio" type="radio" name="attend" value="yes" required>
+                Accept with pleasure
+            </label>
+            <label class="radio">
+                <input class="radio" type="radio" name="attend" value="no" required>
+                Decline with regret
+            </label>
+        </fieldset>
 
-    <h4>Guests</h4>
-    <div id="guestList">
-        <!-- row template -->
-        <div class="guest-row" data-index="0">
-        <input name="guests[0][first_name]"     placeholder="First name" required>
-        <input name="guests[0][last_name]"      placeholder="Last name">
-        <input name="guests[0][dietary]"        placeholder="Dietary (optional)">
-        <input name="guests[0][accessibility]"  placeholder="Accessibility needs (optional)">
-        <button type="button" class="remove">Remove</button>
+        <h4 style="margin-top: 40px;">Additional Guests</h4>
+        <div id="guestList" style="display: flex; flex-direction: column; gap: 20px;">
+            {{-- row template pertama --}}
+            <div class="guest-row" data-index="0">
+                <input name="guests[0][full_name]" placeholder="Guest full name" required>
+                <input name="guests[0][email]"     placeholder="Guest email (optional)" type="email">
+                <button type="button" class="remove">Remove</button>
+            </div>
         </div>
-    </div>
-    <button type="button" id="addGuest">+ Add another guest</button>
+        <button type="button" id="addGuest">+ Add another guest</button>
 
-    <h4>Message for the couple (optional)</h4>
-    <textarea name="message" rows="3" placeholder="Write a short note…"></textarea>
+        <h4 style="margin-top: 40px;">Message for the couple (optional)</h4>
+        <textarea name="message" rows="3" placeholder="Write a short note…"></textarea>
 
-    <button type="submit">Send RSVP</button>
+        <button type="submit">'I DO'</button>
     </form>
 
     <script src="{{ asset('js/rsvp-form.js') }}"></script>
@@ -158,47 +163,6 @@
     panel.classList.remove('open');
     });
   </script>
-
-  <script>
-        const input = document.getElementById('photoInput');
-        const preview = document.getElementById('previewContainer');
-        const errorMsg = document.getElementById('errorMsg');
-        const maxSize = 5 * 1024 * 1024; // 5MB
-
-        input.addEventListener('change', function () {
-            preview.innerHTML = '';
-            errorMsg.textContent = '';
-
-            const file = this.files[0];
-            if (!file) return;
-
-            // Validasi ukuran
-            if (file.size > maxSize) {
-            errorMsg.textContent = 'Ukuran file terlalu besar. Maksimal 5MB.';
-            this.value = ''; // reset input
-            return;
-            }
-
-            // Validasi tipe
-            const allowedTypes = ['image/jpeg', 'image/png'];
-            if (!allowedTypes.includes(file.type)) {
-            errorMsg.textContent = 'Format file tidak didukung. Hanya JPG dan PNG.';
-            this.value = '';
-            return;
-            }
-
-            // Tampilkan preview
-            const reader = new FileReader();
-            reader.onload = function (e) {
-            const img = document.createElement('img');
-            img.src = e.target.result;
-            img.style.maxWidth = '300px';
-            img.style.marginTop = '10px';
-            preview.appendChild(img);
-            };
-            reader.readAsDataURL(file);
-        });
-    </script>
 
   <script src="{{ asset('js/custom.js') }}"></script>
 

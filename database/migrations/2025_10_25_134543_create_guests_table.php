@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('guests', function (Blueprint $t) {
-            $t->id();
-            $t->foreignId('rsvp_id')->constrained()->cascadeOnDelete();
-            $t->string('first_name');
-            $t->string('last_name')->nullable();
-            $t->string('dietary')->nullable();
-            $t->string('accessibility')->nullable();
-            $t->timestamps();
+        Schema::create('guests', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('rsvp_id')->constrained()->cascadeOnDelete();
+            $table->string('full_name');
+            $table->string('email')->nullable();
+            $table->timestamps();
         });
     }
 
