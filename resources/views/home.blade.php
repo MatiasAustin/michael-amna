@@ -120,7 +120,7 @@
 
 
 <section class="wishes-section">
-    
+
     <h2 class="wishes-title">Warm Wishes From Our Loved Ones</h2>
 
     @if($wishes->count())
@@ -144,7 +144,7 @@
     @endif
 
 </section>
-  
+
 
 
   <div class="our-gallery">
@@ -200,7 +200,7 @@
   <footer>All Right Reserved by @Freellab2025</footer>
 
 
-    <script src="{{ asset('js/app.js') }}"></script>
+    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
 
     <script src="{{ asset('js/hum-menu.js') }}"></script>
 
