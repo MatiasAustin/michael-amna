@@ -36,7 +36,7 @@
         <a href="{{ url('/details') }}">Details</a>
         <a href="{{ url('/rsvp') }}">RSVP</a>
       </div>
-      <button class="hamb" aria-label="Open menu" aria-controls="mPanel" aria-expanded="false"><span style="background: #3B1B0E;"></span></button>
+      <button class="hamb" aria-label="Open menu" aria-controls="mPanel" aria-expanded="false"><span></span></button>
     </div>
     <div id="mPanel" class="panel">
       <button class="close-btn" aria-label="Close menu" aria-controls="mPanel">&times;</button>
