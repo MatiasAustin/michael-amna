@@ -112,7 +112,7 @@
         });
     </script>
 
-
+    <script src="{{ asset('js/hum-menu.js') }}"></script>
 
 
 </body>
