@@ -31,7 +31,7 @@
     padding: 12px;
     border: 2px dashed #cccccc;
     border-radius: 10px;
-    background: #fafafa;
+    background: #F3ECDC;
     cursor: pointer;
     transition: 0.3s ease;
 }
@@ -77,4 +77,21 @@ button.upload-photo {
 button.upload-photo:hover {
     background: #7E2625;
     color: #F3ECDC;
+}
+
+/* Upload button admin */
+button.upload-photo-admin {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 30px;
+    cursor: pointer;
+    color: #F3ECDC;
+    border-bottom: 1px solid #F3ECDC;
+    background-color: transparent;
+    transition: 0.25s ease;
+}
+
+button.upload-photo-admin:hover {
+    background: #F3ECDC;
+    color: #7E2625;
 }

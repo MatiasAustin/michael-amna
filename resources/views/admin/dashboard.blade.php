@@ -61,14 +61,22 @@
 
                  <form action="{{ route('gallery.store') }}" method="POST" enctype="multipart/form-data" class="upload-form">
                     @csrf
-                    <input type="file" name="photo[]" multiple required><br>
-                    <button type="submit">Upload</button>
+                    <input id="photoInput" type="file" name="photo[]" multiple required accept="image/jpeg, image/png, image/webp" style="background: #F3ECDC; color: black;">
+
+
+                    <p id="errorMsg" style="color:#F3ECDC; font-size:14px; margin-top:5px;"></p>
+                    <div id="previewContainer" style="margin-top: 10px;"></div>
+
+                    <button class="upload-photo-admin" type="submit">
+                        Upload Photos
+                    </button>
                 </form>
+
 
                 <div class="admin-gallery">
                     @forelse ($photos as $photo)
                         <div class="pictures-card">
-                            <img src="{{ asset('storage/' . $photo->filename) }}" alt="Gallery Image" width="150px">
+                            <img src="{{ asset('/' . $photo->filename) }}" alt="Gallery Image" width="150px">
                             <form action="{{ route('gallery.destroy', $photo->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -83,6 +91,50 @@
         </div>
 
     </div>
+
+    <script>
+        const input = document.getElementById('photoInput');
+        const preview = document.getElementById('previewContainer');
+        const errorMsg = document.getElementById('errorMsg');
+        const maxSize = 20 * 1024 * 1024; // 20MB
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+        const maxFiles = 3;
+
+        input.addEventListener('change', function () {
+            preview.innerHTML = '';
+            errorMsg.textContent = '';
+
+            const files = Array.from(this.files);
+
+            if (files.length > maxFiles) {
+                errorMsg.textContent = `You can only upload up to ${maxFiles} photos.`;
+                return input.value = '';
+            }
+
+            files.forEach(file => {
+                if (file.size > maxSize) {
+                    errorMsg.textContent = 'One of the files is too large. Maximum allowed size is 20MB per photo.';
+                    return input.value = '';
+                }
+
+                if (!allowedTypes.includes(file.type)) {
+                    errorMsg.textContent = 'Unsupported file format. Only JPG, PNG, and WEBP are allowed.';
+                    return input.value = '';
+                }
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.maxWidth = '140px';
+                    img.style.margin = '10px';
+                    img.style.borderRadius = '10px';
+                    preview.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+    </script>
 
     </body>
 </html>

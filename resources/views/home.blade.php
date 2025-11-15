@@ -165,14 +165,14 @@
                 <div class="row-slider" id="rowTop">
                     @foreach($randomTop as $photo)
                         <div class="photo-card">
-                            <img src="{{ asset('storage/' . $photo->filename) }}" alt="">
+                            <img src="{{ asset('/' . $photo->filename) }}" alt="">
                         </div>
                     @endforeach
 
                     {{-- duplicate for seamless looping --}}
                     @foreach($randomTop as $photo)
                         <div class="photo-card">
-                            <img src="{{ asset('storage/' . $photo->filename) }}" alt="">
+                            <img src="{{ asset('/' . $photo->filename) }}" alt="">
                         </div>
                     @endforeach
                 </div>
@@ -181,14 +181,14 @@
                 <div class="row-slider reverse" id="rowBottom">
                     @foreach($randomBottom as $photo)
                         <div class="photo-card">
-                            <img src="{{ asset('storage/' . $photo->filename) }}" alt="">
+                            <img src="{{ asset('/' . $photo->filename) }}" alt="">
                         </div>
                     @endforeach
 
                     {{-- duplicate --}}
                     @foreach($randomBottom as $photo)
                         <div class="photo-card">
-                            <img src="{{ asset('storage/' . $photo->filename) }}" alt="">
+                            <img src="{{ asset('/' . $photo->filename) }}" alt="">
                         </div>
                     @endforeach
                 </div>
