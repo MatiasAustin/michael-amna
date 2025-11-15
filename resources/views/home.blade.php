@@ -50,7 +50,7 @@
       <p>Bound by Love, Laughter, and the memories we create together.</p>
       <h4>MORE LOVE.<br>MORE EVERYTHING.</h4>
 
-    <div class="countdown" style="display: flex; justify-content: center; gap: 20px; margin: 40px 0 80px 0;">
+    <div class="countdown" style="display: flex; justify-content: center;margin: 40px 0 80px 0;">
         <div class="count-box">
             <label>DAYS</label>
             <span id="days"></span>
