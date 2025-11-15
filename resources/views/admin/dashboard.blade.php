@@ -77,11 +77,21 @@
                     @forelse ($photos as $photo)
                         <div class="pictures-card">
                             <img src="{{ asset('/' . $photo->filename) }}" alt="Gallery Image" width="150px">
-                            <form action="{{ route('gallery.destroy', $photo->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="delete-button" type="submit">Delete</button>
-                            </form>
+
+                            <div class="picture-actions">
+                                {{-- Download button: prefer a named route if available, otherwise direct asset with download attribute --}}
+                                @if(\Illuminate\Support\Facades\Route::has('gallery.download'))
+                                    <a href="{{ route('gallery.download', $photo->id) }}" class="download-button" target="_blank" rel="noopener">Download</a>
+                                @else
+                                    <a href="{{ asset('/' . $photo->filename) }}" class="download-button" download target="_blank" rel="noopener">Download</a>
+                                @endif
+
+                                <form action="{{ route('gallery.destroy', $photo->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="delete-button" type="submit">Delete</button>
+                                </form>
+                            </div>
                         </div>
                     @empty
                         <p class="text-center text-muted">No photo yet.</p>

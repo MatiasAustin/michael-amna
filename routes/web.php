@@ -39,6 +39,7 @@ Route::get('/photoupload', [GuestPhotoController::class, 'index'])->name('photou
 Route::get('/admin/gallery', [PhotoController::class, 'index'])->name('gallery.index');
 Route::post('/admin/gallery', [PhotoController::class, 'store'])->name('gallery.store');
 Route::delete('/admin/gallery/{id}', [PhotoController::class, 'destroy'])->name('gallery.destroy');
+Route::get('/admin/gallery/{id}', [PhotoController::class, 'download'])->name('gallery.download');
 
 
 // Authentication Routes

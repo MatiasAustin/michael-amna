@@ -73,6 +73,18 @@ class PhotoController extends Controller
         return back()->with('success', 'Photos uploaded & optimized (<5MB).');
     }
 
+    public function download($id)
+    {
+        $photo = Photo::findOrFail($id);
+        $path = public_path($photo->filename);
+
+        if (file_exists($path)) {
+            return response()->download($path);
+        }
+
+        return back()->with('error', 'File not found.');
+    }
+
     public function destroy($id)
     {
         $photo = Photo::findOrFail($id);
