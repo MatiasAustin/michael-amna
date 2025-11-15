@@ -26,7 +26,7 @@
 
     </div>
 
-    <form action="{{ route('login.submit') }}" method="POST" style="display: flex; flex-direction: column; gap: 10px; max-width: 320px;">
+    <form action="{{ route('login.submit') }}" method="POST" style="display: flex; flex-direction: column; gap: 10px; min-width: 320px; max-width: 320px; width: 320px;">
     @csrf
 
         <input
