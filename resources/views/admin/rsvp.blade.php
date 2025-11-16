@@ -118,13 +118,13 @@
 
         {{-- EMAIL POPUP --}}
         <div id="sendCodeModal"
-            style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
-            <div style="background:#fff; padding:20px; border-radius:8px; width:320px; max-width:90%;">
+            style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center; ">
+            <div style="background:#fff; padding:20px; border-radius:8px; width:320px; max-width:90%; color:#7E2625;">
                 <h3 style="margin-top:0; margin-bottom:10px;">Send RSVP Code</h3>
 
                 <form id="sendCodeForm" method="POST">
                     @csrf
-                    <div style="margin-bottom:10px;">
+                    <div style="margin-bottom:10px; color:#7E2625">
                         <label for="send-code-email" style="display:block; font-size:13px; margin-bottom:4px;">
                             Email address
                         </label>
@@ -138,7 +138,7 @@
                     <div style="text-align:right; margin-top:15px;">
                         <button type="button"
                                 onclick="closeSendCodeModal()"
-                                style="padding:6px 10px; font-size:12px; margin-right:6px; background:#eee; border:none; border-radius:4px;">
+                                style="padding:6px 10px; font-size:12px; margin-right:6px; background:#eee; border:none; color:#7E2625; border-radius:4px;">
                             Cancel
                         </button>
                         <button type="submit"

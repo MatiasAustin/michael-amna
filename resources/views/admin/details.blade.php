@@ -32,7 +32,48 @@
                                     style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                             </div>
                         </div>
-                    </div>
+
+
+                        <div class="floor-map" style="margin-top:40px; border-top:1px solid #ccc; padding-top:20px;">
+                        <h3>Floor Map</h3>
+
+                        @if(session('success'))
+                            <div style="padding:8px 12px; background:#d1fae5; color:#065f46; margin-bottom:10px; border-radius:4px;">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        @if($errors->has('floor_map'))
+                            <div style="padding:8px 12px; background:#fee2e2; color:#b91c1c; margin-bottom:10px; border-radius:4px;">
+                                {{ $errors->first('floor_map') }}
+                            </div>
+                        @endif
+
+                        {{-- preview current floor map --}}
+                        @if(!empty($floorMapUrl))
+                            <p>Current floor map:</p>
+                            <img src="{{ $floorMapUrl }}" alt="Floor Map"
+                                style="max-width:400px; border:1px solid #ddd; margin-bottom:10px;">
+                        @else
+                            <p><em>Belum ada floor map.</em></p>
+                        @endif
+
+                        <form action="{{ url('/admin/details/floor-map') }}"
+                            method="POST"
+                            enctype="multipart/form-data"
+                            style="margin-top:10px;">
+                            @csrf
+                            <label for="floor_map">Upload Floor Map (JPG):</label><br>
+                            <input type="file" name="floor_map" id="floor_map" accept=".jpg,.jpeg" required>
+
+                            <br><br>
+
+                            <button type="submit"
+                                    style="padding:8px 16px; background:#7E2625; color:#F3ECDC; border:none; border-radius:4px;">
+                                Update Floor Map
+                            </button>
+                        </form>
+                </div>
 
                     <script>
                     const input = document.getElementById('venue_location');

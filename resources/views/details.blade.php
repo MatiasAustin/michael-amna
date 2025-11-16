@@ -128,11 +128,124 @@
         </div>
       </div>
 
+      {{-- FLOOR MAP --}}
+        @if($floorMapUrl)
+            <h1 style="margin-top:40px;">Floor Map</h1>
+
+            <div id="floorMapWrapper"
+                style="width:100%; height:400px; border:1px solid #ddd; border-radius:20px; overflow:hidden; position:relative; cursor:grab; background:#f5f5f5;">
+                <img id="floorMapImage"
+                    src="{{ $floorMapUrl }}"
+                    alt="Floor Map"
+                    style="user-select:none; -webkit-user-drag:none; max-width:none; position:absolute; top:0; left:0;">
+            </div>
+
+            <div style="margin-bottom:10px; width:100%; max-width:800px; display:flex; justify-content:end; gap:10px; margin-top:10px; margin-bottom:10px; margin-right:10%;">
+                <button type="button" id="zoomInBtn"
+                        style="padding:4px 8px; font-size:12px;">+</button>
+                <button type="button" id="zoomOutBtn"
+                        style="padding:4px 8px; font-size:12px;">−</button>
+                <button type="button" id="resetBtn"
+                        style="padding:4px 8px; font-size:12px;">Reset</button>
+                <button type="button" id="fullscreenBtn"
+                        style="padding:4px 8px; font-size:12px;">Fullscreen</button>
+            </div>
+
+        @endif
+
+        <script>
+            (function() {
+                const wrapper  = document.getElementById('floorMapWrapper');
+                const img      = document.getElementById('floorMapImage');
+                if (!wrapper || !img) return;
+
+                let scale = 1;
+                let originX = 0;
+                let originY = 0;
+                let isPanning = false;
+                let startX = 0;
+                let startY = 0;
+                let lastX = 0;
+                let lastY = 0;
+
+                function applyTransform() {
+                    img.style.transform = `translate(${originX}px, ${originY}px) scale(${scale})`;
+                }
+
+                // Zoom buttons
+                document.getElementById('zoomInBtn').addEventListener('click', () => {
+                    scale *= 1.2;
+                    applyTransform();
+                });
+
+                document.getElementById('zoomOutBtn').addEventListener('click', () => {
+                    scale /= 1.2;
+                    if (scale < 0.2) scale = 0.2;
+                    applyTransform();
+                });
+
+                document.getElementById('resetBtn').addEventListener('click', () => {
+                    scale = 1;
+                    originX = 0;
+                    originY = 0;
+                    applyTransform();
+                });
+
+                // Drag (pan)
+                wrapper.addEventListener('mousedown', e => {
+                    isPanning = true;
+                    wrapper.style.cursor = 'grabbing';
+                    startX = e.clientX - lastX;
+                    startY = e.clientY - lastY;
+                });
+
+                window.addEventListener('mousemove', e => {
+                    if (!isPanning) return;
+                    lastX = e.clientX - startX;
+                    lastY = e.clientY - startY;
+                    originX = lastX;
+                    originY = lastY;
+                    applyTransform();
+                });
+
+                window.addEventListener('mouseup', () => {
+                    isPanning = false;
+                    wrapper.style.cursor = 'grab';
+                });
+
+                // Scroll wheel zoom
+                wrapper.addEventListener('wheel', e => {
+                    e.preventDefault();
+                    const delta = e.deltaY < 0 ? 1.1 : 0.9;
+                    scale *= delta;
+                    if (scale < 0.2) scale = 0.2;
+                    applyTransform();
+                }, { passive: false });
+
+                // Fullscreen
+                const fullscreenBtn = document.getElementById('fullscreenBtn');
+                fullscreenBtn.addEventListener('click', () => {
+                    if (!document.fullscreenElement) {
+                        wrapper.requestFullscreen?.();
+                    } else {
+                        document.exitFullscreen?.();
+                    }
+                });
+
+                // initial
+                applyTransform();
+            })();
+        </script>
+        {{-- END FLOOR MAP --}}
+
+        <div class="divider" style="height: 0.5px; background-color: #F3ECDC10; margin: 20px 0; width: 100%;"></div>
 
       {{-- Search Bar --}}
-        <form action="{{ route('details') }}" method="GET">
-            <input type="text" name="code" placeholder="Masukkan kode unik" value="{{ request('code') }}">
-            <button type="submit">Cari</button>
+
+        <h3 style="text-align:left; width: 100%; font-weight: 300;">Find Your Invitation Details</h3>
+        <form action="{{ route('details') }}" method="GET" style="margin-bottom:20px; width: 100%; max-width:100%; min-width:100%; display:flex; gap:10px;">
+            <input type="text" name="code" placeholder="Enter unique code" value="{{ request('code') }}" style="padding: 10px; width: 100%; height: auto;" required>
+            <button type="submit">Search</button>
         </form>
 
         @if($errors->has('code'))
@@ -140,28 +253,50 @@
         @endif
 
         {{--  RSVP & GUEST DETAILS --}}
-        <h1>Detail Undangan</h1>
 
         @if($rsvp)
-            <h2>Detail Undangan</h2>
-            <p><strong>Nama utama:</strong> {{ $rsvp->full_name }}</p>
-            <p><strong>Email:</strong> {{ $rsvp->email }}</p>
-            <p><strong>Kode unik:</strong> {{ $rsvp->unique_code }}</p>
+        <h2 class="title" style="margin-top:40px;">INVITATION DETAILS</h2>
 
-            @if($rsvp->guests->count())
-                <h3>Guests</h3>
-                <ul>
-                    @foreach($rsvp->guests as $guest)
-                        <li>{{ $guest->full_name }} (Table {{ $guest->table_number ?? '-' }}, Seat {{ $guest->seat_number ?? '-' }})</li>
-                    @endforeach
-                </ul>
-            @endif
+        <table style="width:100%; border-collapse:collapse; margin-top:15px; text-align: left; font-size: 12px">
+            <thead style="font-weight: 300;">
+                <tr style="border-bottom:1px solid #F3ECDC;">
+                    <th style="text-align:left; padding:8px;">Type</th>
+                    <th style="text-align:left; padding:8px;">Name</th>
+                    <th style="text-align:left; padding:8px;">Email</th>
+                    <th style="text-align:left; padding:8px;">Table</th>
+                    <th style="text-align:left; padding:8px;">Seat</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{-- Row RSVP utama --}}
+                <tr>
+                    <td style="padding:8px;">RSVP</td>
+                    <td style="padding:8px;">{{ $rsvp->full_name }}</td>
+                    <td style="padding:8px;">{{ $rsvp->email }}</td>
+                    <td style="padding:8px;">{{ $rsvp->table_number ?? '-' }}</td>
+                    <td style="padding:8px;">{{ $rsvp->seat_number ?? '-' }}</td>
+                </tr>
+
+                {{-- Row semua guest --}}
+                @foreach($rsvp->guests as $guest)
+                    <tr>
+                        <td style="padding:8px;">Guest</td>
+                        <td style="padding:8px;">{{ $guest->full_name }}</td>
+                        <td style="padding:8px;">{{ $guest->email }}</td>
+                        <td style="padding:8px;">{{ $guest->table_number ?? '-' }}</td>
+                        <td style="padding:8px;">{{ $guest->seat_number ?? '-' }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+
         @else
-            <p>Please enter your unique code to view the invitation details.</p>
+            <p style="margin: 20px auto;">Please enter your unique code to view the invitation details here.</p>
         @endif
 
+        <div class="divider" style="height: 0.5px; background-color: #F3ECDC10; margin: 20px 0; width: 100%;"></div>
 
-      <div class="item">
+      <div class="item" style="margin-top:40px;">
           <h4>CEREMONY — THE PROMISE</h4>
           <h1>{{ optional($countdown->event_at_utc)->format('g A') }}<br><br>
             Doltone House - Jones Bay Wharf - Level 3, 26-32 Pirrama Road, Pyrmont NSW 2009</h1>
@@ -202,7 +337,7 @@
         <div class="faq-list" style="margin-top: 20px; width: 100%; margin-left: auto; margin-right: auto;">
             @foreach($faqs as $i => $item)
                 <div class="faq-item">
-                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-{{ $i }}" style="width:100%; text-align:left; padding:12px; font-size:16px; border:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-{{ $i }}" style="width:100%; text-align:left; padding:12px; font-size:16px; border:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; margin-top: 10px;">
                         {{ $item['q'] }} <span class="chev">▾</span>
                     </button>
                     <div id="faq-{{ $i }}" class="faq-content" hidden style="padding:12px; border-left:4px solid #3B1B0E; background:#F3ECDC20; margin-top:4px; text-align:left;">

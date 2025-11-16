@@ -552,6 +552,11 @@ button {
   color: #F3ECDC;
   background-color: transparent;
 }
+button:hover {
+    background: #F3ECDC;
+    color: #7E2625;
+    transition: background 0.3s ease;
+}
 
 button.remove {
     width: 100%;
@@ -566,11 +571,7 @@ button.remove:hover {
     border: none;
   }
 
-button:hover {
-    background: #F3ECDC;
-    color: #7E2625;
-    transition: background 0.3s ease;
-}
+
 
   iframe {
     width: 100%;

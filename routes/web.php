@@ -21,15 +21,6 @@ use App\Http\Controllers\AdminDashboardController;
 // Public Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Route::get('/details', function () {
-//     $venue = Venue::first();
-//     $countdown = Countdown::first();
-//     $rsvps = \App\Models\Rsvp::with('guests')->get();
-//     $guests = \App\Models\Guest::all();
-
-//     return view('details', compact('venue', 'countdown', 'rsvps', 'guests'));
-// })->name('details');
-
 Route::get('/details', function (Request $request) {
     $venue     = Venue::first();
     $countdown = Countdown::first();
@@ -37,7 +28,6 @@ Route::get('/details', function (Request $request) {
     $guests    = Guest::all();
 
     $rsvp = null;
-
     if ($request->filled('code')) {
         $code = strtoupper(trim($request->input('code')));
 
@@ -46,7 +36,17 @@ Route::get('/details', function (Request $request) {
             ->first();
     }
 
-    return view('details', compact('venue', 'countdown', 'rsvps', 'guests', 'rsvp'));
+    $floorMapExists = file_exists(public_path('floormap/floor-map.jpg'));
+    $floorMapUrl = $floorMapExists ? asset('floormap/floor-map.jpg') : null;
+
+    return view('details', [
+        'venue'       => $venue,
+        'countdown'   => $countdown,
+        'rsvps'       => $rsvps,
+        'guests'      => $guests,
+        'rsvp'        => $rsvp,
+        'floorMapUrl' => $floorMapUrl,
+    ]);
 })->name('details');
 
 
@@ -97,6 +97,11 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/admin/details',  [AdminDetailsController::class, 'index'])->name('admin.details');
     Route::post('/admin/details', [AdminDetailsController::class, 'update'])->name('admin.details.update');
+
+
+    // Floor Map upload (masih di controller yang sama)
+    Route::post('/admin/details/floor-map', [AdminDetailsController::class, 'updateFloorMap'])
+        ->name('admin.details.floorMap');
 });
 
 // RSVP Management

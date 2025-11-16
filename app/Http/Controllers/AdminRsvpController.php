@@ -220,30 +220,4 @@ class AdminRsvpController extends Controller
         return back()->with('success', 'Unique code has been sent to '.$targetEmail.'.');
     }
 
-    public function findForm()
-    {
-        // always pass $rsvp (null when no result) so the view can handle both cases
-        return view('details', ['rsvp' => null]);
-    }
-
-    public function findByCode(Request $request)
-    {
-        $request->validate([
-            'code' => 'required',
-        ]);
-
-        $code = strtoupper(trim($request->code));
-
-        $rsvp = Rsvp::with('guests')
-            ->where('unique_code', $code)
-            ->first();
-
-        if (!$rsvp) {
-            return back()->withErrors(['code' => 'Kode tidak ditemukan.']);
-        }
-
-        // PENTING: kirim variable $rsvp ke view
-        return view('details', compact('rsvp'));
-        // atau: return view('details', ['rsvp' => $rsvp]);
-    }
 }
