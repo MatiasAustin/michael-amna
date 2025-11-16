@@ -129,6 +129,38 @@
       </div>
 
 
+      {{-- Search Bar --}}
+        <form action="{{ route('details') }}" method="GET">
+            <input type="text" name="code" placeholder="Masukkan kode unik" value="{{ request('code') }}">
+            <button type="submit">Cari</button>
+        </form>
+
+        @if($errors->has('code'))
+            <p style="color:red;">{{ $errors->first('code') }}</p>
+        @endif
+
+        {{--  RSVP & GUEST DETAILS --}}
+        <h1>Detail Undangan</h1>
+
+        @if($rsvp)
+            <h2>Detail Undangan</h2>
+            <p><strong>Nama utama:</strong> {{ $rsvp->full_name }}</p>
+            <p><strong>Email:</strong> {{ $rsvp->email }}</p>
+            <p><strong>Kode unik:</strong> {{ $rsvp->unique_code }}</p>
+
+            @if($rsvp->guests->count())
+                <h3>Guests</h3>
+                <ul>
+                    @foreach($rsvp->guests as $guest)
+                        <li>{{ $guest->full_name }} (Table {{ $guest->table_number ?? '-' }}, Seat {{ $guest->seat_number ?? '-' }})</li>
+                    @endforeach
+                </ul>
+            @endif
+        @else
+            <p>Please enter your unique code to view the invitation details.</p>
+        @endif
+
+
       <div class="item">
           <h4>CEREMONY — THE PROMISE</h4>
           <h1>{{ optional($countdown->event_at_utc)->format('g A') }}<br><br>

@@ -1,7 +1,10 @@
 <?php
 
+use App\Models\Rsvp;
+use App\Models\Guest;
 use App\Models\Venue;
 use App\Models\Countdown;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RsvpController;
@@ -10,7 +13,7 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminRsvpController;
 use App\Http\Controllers\GuestPhotoController;
 use App\Http\Controllers\AdminDetailsController;
-use App\Http\Controllers\AdminSeatingController;
+// use App\Http\Controllers\AdminSeatingController;
 use App\Http\Controllers\AdminCountdownController;
 use App\Http\Controllers\AdminDashboardController;
 
@@ -18,14 +21,34 @@ use App\Http\Controllers\AdminDashboardController;
 // Public Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/details', function () {
-    $venue = Venue::first();
-    $countdown = Countdown::first();
-    $rsvps = \App\Models\Rsvp::with('guests')->get();
-    $guests = \App\Models\Guest::all();
+// Route::get('/details', function () {
+//     $venue = Venue::first();
+//     $countdown = Countdown::first();
+//     $rsvps = \App\Models\Rsvp::with('guests')->get();
+//     $guests = \App\Models\Guest::all();
 
-    return view('details', compact('venue', 'countdown', 'rsvps', 'guests'));
+//     return view('details', compact('venue', 'countdown', 'rsvps', 'guests'));
+// })->name('details');
+
+Route::get('/details', function (Request $request) {
+    $venue     = Venue::first();
+    $countdown = Countdown::first();
+    $rsvps     = Rsvp::with('guests')->get();
+    $guests    = Guest::all();
+
+    $rsvp = null;
+
+    if ($request->filled('code')) {
+        $code = strtoupper(trim($request->input('code')));
+
+        $rsvp = Rsvp::with('guests')
+            ->where('unique_code', $code)
+            ->first();
+    }
+
+    return view('details', compact('venue', 'countdown', 'rsvps', 'guests', 'rsvp'));
 })->name('details');
+
 
 Route::view('/rsvp', 'rsvp');
 Route::post('/rsvp', [RsvpController::class, 'store'])->name('rsvp.store');
@@ -85,3 +108,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin/seating/export', [AdminRsvpController::class, 'exportCsv'])->name('admin.rsvp.export');
 });
+
+// Generate and Send Unique Codes for RSVPs
+Route::post('/admin/rsvp/{rsvp}/generate-code', [AdminRsvpController::class, 'generateCode'])
+    ->name('admin.rsvp.generateCode');
+
+Route::post('/admin/rsvp/{rsvp}/send-code', [AdminRsvpController::class, 'sendCode'])
+    ->name('admin.rsvp.sendCode');
+

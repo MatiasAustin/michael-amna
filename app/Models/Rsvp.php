@@ -13,6 +13,7 @@ class Rsvp extends Model
         'message',
         'table_number',
         'seat_number',
+        'unique_code',
     ];
 
     public function guests()

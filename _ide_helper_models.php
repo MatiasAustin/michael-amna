@@ -40,6 +40,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $table_number
  * @property string|null $seat_number
+ * @property string|null $unique_code
  * @property-read \App\Models\Rsvp $rsvp
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Guest newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Guest newQuery()
@@ -51,6 +52,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Guest whereRsvpId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Guest whereSeatNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Guest whereTableNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Guest whereUniqueCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Guest whereUpdatedAt($value)
  */
 	class Guest extends \Eloquent {}
@@ -84,6 +86,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $table_number
  * @property string|null $seat_number
+ * @property string|null $unique_code
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Guest> $guests
  * @property-read int|null $guests_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Rsvp newModelQuery()
@@ -97,6 +100,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Rsvp whereMessage($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Rsvp whereSeatNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Rsvp whereTableNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Rsvp whereUniqueCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Rsvp whereUpdatedAt($value)
  */
 	class Rsvp extends \Eloquent {}
