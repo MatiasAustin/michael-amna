@@ -225,6 +225,7 @@ button:hover {
             border: none;
             cursor: pointer;
             width: 100%;
+
         }
         .admin-nav-toggle:hover {
             background: #e0d4b8;

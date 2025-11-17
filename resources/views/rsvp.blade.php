@@ -50,10 +50,8 @@
     {{-- RSVP FORM --}}
     <form action="{{ route('rsvp.store') }}" method="POST" id="rsvpForm">
         @csrf
-
-        <h4>Reservation Contact</h4>
         {{-- tamu utama / contact --}}
-        <input name="full_name"  placeholder="Your full name" required>
+        <input name="full_name"  placeholder="Your Full Name" required>
         <input name="email"      placeholder="Email (optional)" type="email">
 
         <fieldset class="attendance">
@@ -72,8 +70,8 @@
         <div id="guestList" style="display: flex; flex-direction: column; gap: 20px;">
             {{-- row template pertama --}}
             <div class="guest-row" data-index="0">
-                <input name="guests[0][full_name]" placeholder="Guest full name" required>
-                <input name="guests[0][email]"     placeholder="Guest email (optional)" type="email">
+                <input name="guests[0][full_name]" placeholder="Guest Full Name" required>
+                <input name="guests[0][email]"     placeholder="Guest Email (optional)" type="email">
                 <button type="button" class="remove">Remove</button>
             </div>
         </div>
@@ -95,13 +93,15 @@
         inset:0;
         z-index:9999;
         justify-content:center;
+        background-color: #0000009c;
         align-items:center;
-        background:rgba(0,0,0,.6);
         margin:0 auto;
     ">
-        <div style="background:#ffffffdc;color:#333;padding:20px 26px;max-width:320px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.25)">
-            <p style="margin:0 0 12px; font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont;">Thank you! Your RSVP has been recorded.</p>
-            <button id="closePopupBtn" style="padding:5px 30px;border:0;background:#df1e29;color:#fff;cursor:pointer">Close</button>
+        <div style="background:#F3ECDC; padding:20px 26px;max-width:320px; text-align:center;
+        border-radius: 20px;
+        border 1px solid #7E2625;">
+            <p style="margin:0 0 12px; color:#7E2625;">Thank you! Your RSVP has been recorded.</p>
+            <button id="closePopupBtn" style="padding:5px 30px;border:0;background:#7E2625;color:#F3ECDC;cursor:pointer">Close</button>
         </div>
     </div>
 

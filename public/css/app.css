@@ -17,7 +17,6 @@ body {
   line-height: 1.7;
   color: #F3ECDC;
   font-family: 'poppins', sans-serif;
-  text-transform: uppercase;
   font-weight: 300;
 }
 a { color: inherit; text-decoration: none; }
@@ -27,6 +26,7 @@ a { color: inherit; text-decoration: none; }
 .nav {
   position: absolute;
   width: 100%;
+  text-transform: uppercase;
   top: 0;
   z-index: 40;
   display: flex;
@@ -84,6 +84,7 @@ a { color: inherit; text-decoration: none; }
   background: #F3ECDC;
   position: absolute; top: 45px; right: 20px;
   z-index: 99;
+  text-transform: uppercase;
 }
 
 .hamb:hover { background: none; cursor: pointer; }
@@ -113,6 +114,7 @@ a { color: inherit; text-decoration: none; }
   z-index: 99;
   align-items: center;
   justify-content: center;
+  text-transform: uppercase;
 }
 
 .panel a {
@@ -160,6 +162,7 @@ header {
   position: relative;
   top: 0; height: 92vh; min-height: 520px;
   overflow: hidden;
+  text-transform: uppercase;
 }
 header video {
   position: relative; inset: 0;
@@ -187,6 +190,7 @@ h4 {
     font-weight: 300;
     font-size: 18px;
     margin: 0 0 20px 0;
+    text-transform: uppercase;
 }
 
 h1 {
@@ -194,12 +198,14 @@ h1 {
     font-size: 32px;
     margin: 0 0 20px 0;
     line-height: 1.2;
+    text-transform: uppercase;
 }
 
 p {
     font-size: 14px;
     margin: 0 0 20px 0;
     color: #cbb8a0;
+    text-transform: uppercase;
 }
 
 .btn {
@@ -227,6 +233,7 @@ p {
   margin: 0 auto;
   width: 100%;
   box-sizing: border-box;
+  text-transform: uppercase;
 }
 
 .count-box {
@@ -369,8 +376,12 @@ p {
 /* Gallery */
 
 /* ====== GALLERY BASE ====== */
+.gallery-scroll {
+    width: 100%;
+    white-space: nowrap;
+}
+
 .dual-gallery {
-    overflow: hidden;
     width: 100%;
     margin: 40px auto 0;
 }
@@ -380,6 +391,20 @@ p {
     gap: 20px;
     animation: marquee 22s linear infinite;
     margin-bottom: 20px;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+    cursor: grab;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.row-slider:hover {
+  animation-play-state: paused;
+}
+.row-slider::-webkit-scrollbar {
+  display: none;
+}
+.row-slider.dragging {
+  cursor: grabbing;
 }
 
 .row-slider.reverse {
@@ -392,6 +417,7 @@ p {
     border-radius: 20px;
     object-fit: cover;
 }
+
 
 /* animasi infinite tanpa putus (konten 2x = 200%) */
 @keyframes marquee {
@@ -478,6 +504,7 @@ section.simple {
 
 .item {
     margin-bottom: 40px;
+    text-transform: uppercase;
 }
 
 img.gracias {
@@ -494,6 +521,7 @@ input, textarea, button {
   font: inherit; padding: 12px;
   border: none;
   border-bottom: 1px solid var(--line);
+  text-transform: unset;
 }
 
 .name {
@@ -538,13 +566,13 @@ input.radio {
 
 input {
     width: 100%;
-    text-transform: uppercase;
+    text-transform: unset;
     font-size: 12px;
     letter-spacing: 2px;
     padding: 5px 5px;
 }
 
-textarea { min-height: 120px; resize: vertical; }
+textarea { min-height: 120px; resize: vertical; text-transform: unset; font-size: 12px; }
 
 button {
   border-bottom: 1px solid #F3ECDC;

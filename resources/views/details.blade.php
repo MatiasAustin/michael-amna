@@ -132,8 +132,8 @@
         @if($floorMapUrl)
             <h1 style="margin-top:40px;">Floor Map</h1>
 
-            <div id="floorMapWrapper"
-                style="width:100%; height:400px; border:1px solid #ddd; border-radius:20px; overflow:hidden; position:relative; cursor:grab; background:#f5f5f5;">
+            <div id="floorMapWrapper" style="width:100%; height:400px; border:1px solid #ddd; border-radius:20px; overflow:hidden; position:relative; cursor:grab; background:#f5f5f5; touch-action:none;">
+
                 <img id="floorMapImage"
                     src="{{ $floorMapUrl }}"
                     alt="Floor Map"
@@ -172,6 +172,28 @@
                     img.style.transform = `translate(${originX}px, ${originY}px) scale(${scale})`;
                 }
 
+                // helpers buat mulai / gerak / stop pan
+                function startPan(clientX, clientY) {
+                    isPanning = true;
+                    wrapper.style.cursor = 'grabbing';
+                    startX = clientX - lastX;
+                    startY = clientY - lastY;
+                }
+
+                function movePan(clientX, clientY) {
+                    if (!isPanning) return;
+                    lastX = clientX - startX;
+                    lastY = clientY - startY;
+                    originX = lastX;
+                    originY = lastY;
+                    applyTransform();
+                }
+
+                function endPan() {
+                    isPanning = false;
+                    wrapper.style.cursor = 'grab';
+                }
+
                 // Zoom buttons
                 document.getElementById('zoomInBtn').addEventListener('click', () => {
                     scale *= 1.2;
@@ -188,32 +210,48 @@
                     scale = 1;
                     originX = 0;
                     originY = 0;
+                    lastX = 0;
+                    lastY = 0;
                     applyTransform();
                 });
 
-                // Drag (pan)
+                // 🔹 Desktop: mouse drag
                 wrapper.addEventListener('mousedown', e => {
-                    isPanning = true;
-                    wrapper.style.cursor = 'grabbing';
-                    startX = e.clientX - lastX;
-                    startY = e.clientY - lastY;
+                    e.preventDefault();
+                    startPan(e.clientX, e.clientY);
                 });
 
                 window.addEventListener('mousemove', e => {
-                    if (!isPanning) return;
-                    lastX = e.clientX - startX;
-                    lastY = e.clientY - startY;
-                    originX = lastX;
-                    originY = lastY;
-                    applyTransform();
+                    movePan(e.clientX, e.clientY);
                 });
 
                 window.addEventListener('mouseup', () => {
-                    isPanning = false;
-                    wrapper.style.cursor = 'grab';
+                    endPan();
                 });
 
-                // Scroll wheel zoom
+                // 🔹 Mobile: touch drag
+                wrapper.addEventListener('touchstart', e => {
+                    if (e.touches.length !== 1) return; // single finger only
+                    const t = e.touches[0];
+                    startPan(t.clientX, t.clientY);
+                }, { passive: true });
+
+                wrapper.addEventListener('touchmove', e => {
+                    if (!isPanning || e.touches.length !== 1) return;
+                    const t = e.touches[0];
+                    movePan(t.clientX, t.clientY);
+                    e.preventDefault(); // cegah scroll page
+                }, { passive: false });
+
+                wrapper.addEventListener('touchend', () => {
+                    endPan();
+                });
+
+                wrapper.addEventListener('touchcancel', () => {
+                    endPan();
+                });
+
+                // Scroll wheel zoom (desktop)
                 wrapper.addEventListener('wheel', e => {
                     e.preventDefault();
                     const delta = e.deltaY < 0 ? 1.1 : 0.9;
@@ -236,6 +274,7 @@
                 applyTransform();
             })();
         </script>
+
         {{-- END FLOOR MAP --}}
 
         <div class="divider" style="height: 0.5px; background-color: #F3ECDC10; margin: 20px 0; width: 100%;"></div>
@@ -255,7 +294,7 @@
         {{--  RSVP & GUEST DETAILS --}}
 
         @if($rsvp)
-        <table style="width:100%; border-collapse:collapse; text-align: left; font-size: 12px">
+        <table style="width:100%; border-collapse:collapse; text-align: left; font-size: 10px">
             <thead style="font-weight: 300;">
                 <tr style="border-bottom:1px solid #F3ECDC;">
                     <th style="text-align:left; padding:8px;">Type</th>

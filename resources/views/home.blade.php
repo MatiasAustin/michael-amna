@@ -148,11 +148,7 @@
 </section>
 
 
-
-
-
-
-  <div class="our-gallery">
+    <div class="our-gallery">
         @if($photos->count())
             @php
                 $randomTop = $photos->shuffle()->take(5);
@@ -197,10 +193,11 @@
         @else
             <p class="text-center text-muted" style="width: 100%; margin: 0 auto; text-align: center;">No photos yet.</p>
         @endif
-      </div>
-  <div class="button-cont">
-    <button class="btn" style="margin-top: 20px;" onclick="window.location.href='{{ url('/photoupload') }}'">Upload Your Best Picture</button>
-  </div>
+    </div>
+
+    <div class="button-cont">
+        <button class="btn" style="margin-top: 20px;" onclick="window.location.href='{{ url('/photoupload') }}'">Upload Your Best Picture</button>
+    </div>
 
   <footer>All Right Reserved by @Freellab2025</footer>
 
@@ -211,47 +208,68 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 
+
+    {{-- Our Gallery JS --}}
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-          const allPhotos = [...document.querySelectorAll(".photo-card")];
+    document.addEventListener("DOMContentLoaded", () => {
+        const rows = document.querySelectorAll(".row-slider"); // #rowTop & #rowBottom
 
-          if (allPhotos.length === 0) return;
+        if (!rows.length) return;
 
-          // Shuffle (Fisher-Yates)
-          function shuffle(arr) {
-              let i = arr.length;
-              while (i > 0) {
-                  const j = Math.floor(Math.random() * i--);
-                  [arr[i], arr[j]] = [arr[j], arr[i]];
-              }
-              return arr;
-          }
+        function enableDragScroll(container) {
+            let isDown = false;
+            let startX;
+            let scrollLeft;
 
-          const shuffled = shuffle([...allPhotos]);
+            // Desktop: mouse drag
+            container.addEventListener("mousedown", (e) => {
+                isDown = true;
+                container.classList.add("dragging");
+                startX = e.pageX - container.offsetLeft;
+                scrollLeft = container.scrollLeft;
+            });
 
-          // Ambil 5 random untuk masing-masing baris
-          const top5 = shuffled.slice(0, 5);
-          const bottom5 = shuffled.slice(5, 10);
+            container.addEventListener("mouseleave", () => {
+                isDown = false;
+                container.classList.remove("dragging");
+            });
 
-          const rowTop = document.getElementById("rowTop");
-          const rowBottom = document.getElementById("rowBottom");
+            container.addEventListener("mouseup", () => {
+                isDown = false;
+                container.classList.remove("dragging");
+            });
 
-          // Kosongkan row
-          rowTop.innerHTML = "";
-          rowBottom.innerHTML = "";
+            container.addEventListener("mousemove", (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - container.offsetLeft;
+                const walk = x - startX;
+                container.scrollLeft = scrollLeft - walk;
+            });
 
-          // Masukkan 5 photo
-          top5.forEach(p => rowTop.appendChild(p.cloneNode(true)));
-          bottom5.forEach(p => rowBottom.appendChild(p.cloneNode(true)));
+            // Mobile: touch drag
+            container.addEventListener("touchstart", (e) => {
+                isDown = true;
+                startX = e.touches[0].pageX;
+                scrollLeft = container.scrollLeft;
+            }, { passive: true });
 
-          // Duplikasi untuk loop animasi
-          top5.forEach(p => rowTop.appendChild(p.cloneNode(true)));
-          bottom5.forEach(p => rowBottom.appendChild(p.cloneNode(true)));
+            container.addEventListener("touchend", () => {
+                isDown = false;
+            });
 
-          // Tambah efek zig-zag
-          rowBottom.classList.add("reverse");
-      });
-      </script>
+            container.addEventListener("touchmove", (e) => {
+                if (!isDown) return;
+                const x = e.touches[0].pageX;
+                const walk = x - startX;
+                container.scrollLeft = scrollLeft - walk;
+            }, { passive: true });
+        }
+
+        rows.forEach(enableDragScroll);
+    });
+    </script>
+
 
       <script>
             (function () {
@@ -314,7 +332,7 @@
                 // override ke yang bisa pause
                 requestAnimationFrame(animatedStep);
             })();
-            </script>
+        </script>
 
 
 
