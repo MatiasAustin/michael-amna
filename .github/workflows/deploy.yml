@@ -32,7 +32,7 @@ jobs:
           protocol: sftp
           port: 22  # kalau Hostinger lu pakai port lain, ganti di sini
           local-dir: ./   # folder yang di-upload (root repo)
-          server-dir: /home/u488664459/domains/foreverkhoury.com/michael-amna/
+          server-dir: /home/u488664459/domains/foreverkhoury.com
           dangerous-clean-slate: false
           exclude: |
             **/.git*
