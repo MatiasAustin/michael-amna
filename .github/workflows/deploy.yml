@@ -29,7 +29,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: sftps
+          protocol: ftp
           port: 21  # kalau Hostinger lu pakai port lain, ganti di sini
           local-dir: ./   # folder yang di-upload (root repo)
           server-dir: /home/u488664459/domains/foreverkhoury.com/michael-amna
