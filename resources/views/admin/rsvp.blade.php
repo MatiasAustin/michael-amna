@@ -100,7 +100,8 @@
                                             <span>{{ $person['unique_code'] ?? '-' }}</span>
                                             @if(!empty($person['unique_code']))
                                                 <button type="button"
-                                                    onclick="copyCode('{{ $person['unique_code'] }}')"
+                                                    onclick="copyCode(this.dataset.code)"
+                                                    data-code="{{ $person['unique_code'] }}"
                                                     aria-label="Copy code"
                                                     style="padding:4px; background:#F3ECDC; color:#7E2625; border:1px solid #7E2625; border-radius:3px; display:flex; align-items:center; justify-content:center;">
                                                     <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -124,7 +125,8 @@
 
                                             {{-- Send Email via popup --}}
                                             <button type="button"
-                                                onclick="openSendCodeModal(this, '{{ $person['rsvp_id'] }}')"
+                                                onclick="openSendCodeModal(this)"
+                                                data-rsvp-id="{{ $person['rsvp_id'] }}"
                                                 data-email="{{ $person['email'] }}"
                                                 data-name="{{ $person['contact_name'] }}"
                                                 data-code="{{ $person['unique_code'] }}"
@@ -228,13 +230,14 @@
 
         {{-- JS EMAIL POPUP --}}
         <script>
-        function openSendCodeModal(button, rsvpId) {
+        function openSendCodeModal(button) {
             const modal   = document.getElementById('sendCodeModal');
             const form    = document.getElementById('sendCodeForm');
             const emailEl = document.getElementById('send-code-email');
             const name    = button?.dataset?.name || 'Guest';
             const code    = button?.dataset?.code || '';
             const defaultEmail = button?.dataset?.email || '';
+            const rsvpId  = button?.dataset?.rsvpId || '';
 
             // set action form ke route /admin/rsvp/{rsvp}/send-code
             form.action = "{{ url('/admin/rsvp') }}/" + rsvpId + "/send-code";
@@ -290,8 +293,7 @@
             codeEl.textContent = code || '(will be generated)';
         }
 
-
-        //COPY UNIQUE BUTTON
+        // COPY UNIQUE BUTTON
         function copyCode(code) {
             const onFail = () => {
                 window.prompt('Copy this code:', code);
@@ -306,15 +308,18 @@
                 onFail();
             }
         }
+        </script>
 
-        document.addEventListener('DOMContentLoaded', function () {
-            @if(session('success'))
-                openSuccessModal(@json(session('success')));
-            @endif
-        });
-    </script>
-
-
+        {{-- trigger success popup kalau ada session("success") --}}
+        @if(session('success'))
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    openSuccessModal('{{ addslashes(session("success")) }}');
+                });
+            </script>
+        @endif
 
     </body>
 </html>
+
+
