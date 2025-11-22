@@ -104,59 +104,13 @@
 
     </script>
 
-      <h4>Not Just a Celebration</h4>
-      <h1>A Story of 2 Hearts</h1>
-      <p>Bound by Love, Laughter, and the memories we create together.</p>
-      <h4>MORE LOVE.<br>MORE EVERYTHING.</h4>
-
-    <h4>Together with their family</h4>
-    <h1>Michael Khoury & Amna Yang</h1>
-    <p>Michael and Amna, together with our families invite you to celebrate our forever chapter.</p>
+    <h1>Amna & Michael</h1>
+    <h4>We can't wait to celebrate our special day with you.</h4>
+    <p>Along with your formal invitation, please enjoy this extension filled with all the little details we've planned.</p>
     <br>
-    <h4>Forever Khoury’s</h4>
-
       <a class="btn" href="{{ url('/details') }}" style="margin-bottom: 20px;">See Details</a>
       <a class="btn" style="color:#F3ECDC;margin-left:8px" href="{{ url('/rsvp') }}">RSVP</a>
   </section>
-
-
-    {{-- WISHES SECTION --}}
-    <section class="wishes-section">
-        <h1 class="wishes-heading">Wishes From Our Loved Ones</h1>
-        <p class="wishes-subtitle">
-            Small notes, big love. Here are some of the words shared for our day.
-        </p>
-
-        @if ($wishes->count())
-            <div class="wishes-scroller">
-                <div class="wishes-track">
-                    {{-- TRACK A --}}
-                    @foreach ($wishes as $wish)
-                        <article class="wish-card">
-                            <p class="wish-text">“{{ $wish->message }}”</p>
-                            <p class="wish-name">— {{ $wish->full_name }}</p>
-                        </article>
-                    @endforeach
-
-                    {{-- TRACK A (CLONE) --}}
-                    @foreach ($wishes as $wish)
-                        <article class="wish-card">
-                            <p class="wish-text">“{{ $wish->message }}”</p>
-                            <p class="wish-name">— {{ $wish->full_name }}</p>
-                        </article>
-                    @endforeach
-                </div>
-            </div>
-        @else
-            <p class="wishes-empty">
-                No wishes have been written yet. Be the first one to leave a note for us.
-            </p>
-        @endif
-
-        <div class="wishes-cta">
-            <a href="{{ url('/rsvp') }}" class="btn">Send Your Wishes</a>
-        </div>
-    </section>
 
 
 
@@ -210,8 +164,47 @@
     </div>
 
     <div class="button-cont">
-        <button class="btn" style="margin-top: 20px;" onclick="window.location.href='{{ url('/photoupload') }}'">Upload Your Best Picture</button>
+        <button class="btn" onclick="window.location.href='{{ url('/photoupload') }}'">Upload Your Best Picture</button>
     </div>
+
+
+    {{-- WISHES SECTION --}}
+    <section class="wishes-section">
+        <h1 class="wishes-heading">Wishes From Our Loved Ones</h1>
+        <p class="wishes-subtitle">
+            Small notes, big love. Here are some of the words shared for our day.
+        </p>
+
+        @if ($wishes->count())
+            <div class="wishes-scroller">
+                <div class="wishes-track">
+                    {{-- TRACK A --}}
+                    @foreach ($wishes as $wish)
+                        <article class="wish-card">
+                            <p class="wish-text">“{{ $wish->message }}”</p>
+                            <p class="wish-name">— {{ $wish->full_name }}</p>
+                        </article>
+                    @endforeach
+
+                    {{-- TRACK A (CLONE) --}}
+                    @foreach ($wishes as $wish)
+                        <article class="wish-card">
+                            <p class="wish-text">“{{ $wish->message }}”</p>
+                            <p class="wish-name">— {{ $wish->full_name }}</p>
+                        </article>
+                    @endforeach
+                </div>
+            </div>
+        @else
+            <p class="wishes-empty">
+                No wishes have been written yet. Be the first one to leave a note for us.
+            </p>
+        @endif
+
+        <div class="wishes-cta">
+            <a href="{{ url('/rsvp') }}" class="btn">Send Your Wishes</a>
+        </div>
+    </section>
 
   <footer>All Right Reserved by @Freellab2025</footer>
 
