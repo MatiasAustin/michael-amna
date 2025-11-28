@@ -34,7 +34,7 @@ a { color: inherit; text-decoration: none; }
   justify-content: center;
   padding: 40px 0;
   width: 100%;
-  backdrop-filter: blur(3px) saturate(150%);
+  /* backdrop-filter: blur(3px) saturate(150%); */
   transition: transform 0.3s ease-in-out; /* animasi hide/show */
 }
 
