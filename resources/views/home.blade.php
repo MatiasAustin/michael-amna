@@ -6,7 +6,7 @@
     <title>@yield('title', 'Home')</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
-    <link rel="icon" href="{{ asset('media/anm-logo.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('media/MA-favicon-beige.png') }}" type="image/png">
 
 </head>
 <body>
@@ -14,11 +14,13 @@
     <nav class="nav">
     <div class="nav-inner">
       <div class="brand">
-        <img src="{{ asset('media/anm-logo.png') }}" alt="">
+        <img src="{{ asset('media/MA-favicon-beige.png') }}" alt="">
       </div>
       <div class="links">
         <a href="{{ url('/') }}">Home</a>
         <a href="{{ url('/details') }}">Finer Details</a>
+        <a href="{{ url('/day-at-a-glance') }}">Our Day at a Glance</a>
+        <a href="{{ url('/floormap') }}">Floor Map</a>
         <a href="{{ url('/rsvp') }}">RSVP</a>
       </div>
       <button class="hamb" aria-label="Open menu" aria-controls="mPanel" aria-expanded="false"><span></span></button>
@@ -27,13 +29,15 @@
       <button class="close-btn" aria-label="Close menu" aria-controls="mPanel">&times;</button>
       <a href="{{ url('/') }}">Home</a>
       <a href="{{ url('/details') }}">Finer Details</a>
+      <a href="{{ url('/day-at-a-glance') }}">Our Day at a Glance</a>
+      <a href="{{ url('/floormap') }}">Floor Map</a>
       <a href="{{ url('/rsvp') }}">RSVP</a>
     </div>
   </nav>
 
   <header>
     <video autoplay muted loop playsinline preload="auto">
-      <source src="{{ asset('media/dark-wine.mp4') }}" type="video/mp4">
+      <source src="{{ asset('media/michael-amna-video.mp4') }}" type="video/mp4">
       Your browser does not support the video tag.
     </video>
     <div class="veil"></div>
@@ -108,7 +112,7 @@
     <h4>We can't wait to celebrate our special day with you.</h4>
     <p>Along with your formal invitation, please enjoy this extension filled with all the little details we've planned.</p>
     <br>
-      <a class="btn" href="{{ url('/details') }}" style="margin-bottom: 20px;">See Finer Details</a>
+      <a class="btn" href="{{ url('/details') }}" style="margin-bottom: 20px;">Click Here to Unveil That Magic</a>
       <a class="btn" style="margin-left:8px" href="{{ url('/rsvp') }}">RSVP</a>
   </section>
 

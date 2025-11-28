@@ -6,7 +6,7 @@
   <title>Ava & Mateo — RSVP</title>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
-  <link rel="icon" href="{{ asset('media/anm-logo.png') }}" type="image/png">
+  <link rel="icon" href="{{ asset('media/MA-favicon-beige.png') }}" type="image/png">
 
   <style>
     .nav {
@@ -21,11 +21,13 @@
   <nav class="nav">
     <div class="nav-inner">
       <div class="brand">
-        <img src="{{ asset('media/anm-logo.png') }}" alt="">
+        <img src="{{ asset('media/MA-favicon-beige.png') }}" alt="">
       </div>
       <div class="links">
         <a href="{{ url('/') }}">Home</a>
         <a href="{{ url('/details') }}">Finer Details</a>
+        <a href="{{ url('/day-at-a-glance') }}">Our Day at a Glance</a>
+        <a href="{{ url('/floormap') }}">Floor Map</a>
         <a href="{{ url('/rsvp') }}">RSVP</a>
       </div>
       <button class="hamb" aria-label="Open menu" aria-controls="mPanel" aria-expanded="false"><span></span></button>
@@ -34,6 +36,8 @@
       <button class="close-btn" aria-label="Close menu" aria-controls="mPanel">&times;</button>
       <a href="{{ url('/') }}">Home</a>
       <a href="{{ url('/details') }}">Finer Details</a>
+      <a href="{{ url('/day-at-a-glance') }}">Our Day at a Glance</a>
+      <a href="{{ url('/floormap') }}">Floor Map</a>
       <a href="{{ url('/rsvp') }}">RSVP</a>
     </div>
   </nav>

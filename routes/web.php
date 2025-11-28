@@ -16,6 +16,8 @@ use App\Http\Controllers\AdminDetailsController;
 // use App\Http\Controllers\AdminSeatingController;
 use App\Http\Controllers\AdminCountdownController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\DayGlanceController;
+use App\Http\Controllers\AdminDayGlanceController;
 
 
 // Public Routes
@@ -49,12 +51,33 @@ Route::get('/details', function (Request $request) {
     ]);
 })->name('details');
 
+Route::get('/floormap', function (Request $request) {
+    $rsvp = null;
+    if ($request->filled('code')) {
+        $code = strtoupper(trim($request->input('code')));
+
+        $rsvp = Rsvp::with('guests')
+            ->where('unique_code', $code)
+            ->first();
+    }
+
+    $floorMapExists = file_exists(public_path('floormap/floor-map.jpg'));
+    $floorMapUrl = $floorMapExists ? asset('floormap/floor-map.jpg') : null;
+
+    return view('floormap', [
+        'rsvp'        => $rsvp,
+        'floorMapUrl' => $floorMapUrl,
+    ]);
+})->name('floormap');
+
 
 Route::view('/rsvp', 'rsvp')->name('rsvp');
 Route::post('/rsvp', [RsvpController::class, 'store'])->name('rsvp.store');
 
 
 Route::get('/photoupload', [GuestPhotoController::class, 'index'])->name('photoupload');
+
+Route::get('/day-at-a-glance', [DayGlanceController::class, 'index'])->name('dayglance');
 
 
 // Admin Routes
@@ -102,6 +125,13 @@ Route::middleware('auth')->group(function () {
     // Floor Map upload (masih di controller yang sama)
     Route::post('/admin/details/floor-map', [AdminDetailsController::class, 'updateFloorMap'])
         ->name('admin.details.floorMap');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/admin/day-at-a-glance', [AdminDayGlanceController::class, 'index'])->name('admin.dayglance.index');
+    Route::post('/admin/day-at-a-glance', [AdminDayGlanceController::class, 'store'])->name('admin.dayglance.store');
+    Route::put('/admin/day-at-a-glance/{item}', [AdminDayGlanceController::class, 'update'])->name('admin.dayglance.update');
+    Route::delete('/admin/day-at-a-glance/{item}', [AdminDayGlanceController::class, 'destroy'])->name('admin.dayglance.destroy');
 });
 
 // RSVP Management

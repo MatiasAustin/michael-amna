@@ -642,6 +642,101 @@ position: relative;
 
 
 
+/* DAY AT A GLANCE */
+.glance-list {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.glance-card {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 24px;
+  align-items: stretch;
+  padding: 22px;
+  border: 1px solid rgba(243,236,220,0.24);
+  border-radius: 16px;
+  background: rgba(0,0,0,0.12);
+}
+
+.glance-card.reverse {
+  grid-template-columns: 0.85fr 1.15fr;
+}
+
+.glance-card.reverse .glance-photo {
+  order: 2;
+}
+
+.glance-card.reverse .glance-copy {
+  order: 1;
+}
+
+.glance-photo {
+  width: 100%;
+  min-height: 220px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(243,236,220,0.14);
+  border: 1px dashed rgba(243,236,220,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #cbb8a0;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.glance-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.glance-copy {
+  text-align: left;
+}
+
+.glance-title {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #F3ECDC;
+}
+
+.glance-title .accent {
+  color: #ff9f8e;
+  font-weight: 600;
+}
+
+.glance-title .time {
+  color: #F3ECDC;
+  font-weight: 600;
+}
+
+.glance-headline {
+  font-size: 20px;
+  margin: 6px 0 4px;
+}
+
+.glance-caption {
+  color: #cbb8a0;
+  margin: 0;
+  text-transform: none;
+}
+
+.glance-photo.placeholder {
+  background: linear-gradient(135deg, rgba(243,236,220,0.16), rgba(243,236,220,0.06));
+}
+
 @media (max-width: 800px) {
   .links { display: none; }
   .hamb { display: flex;
@@ -668,6 +763,21 @@ position: relative;
 
     section.simple {
     padding: 50px 5%;
+    }
+
+    .glance-card,
+    .glance-card.reverse {
+      grid-template-columns: 1fr !important;
+      gap: 14px;
+    }
+
+    .glance-photo {
+      min-height: 240px;
+    }
+
+    .glance-card.reverse .glance-photo,
+    .glance-card.reverse .glance-copy {
+      order: 0;
     }
 
 }
