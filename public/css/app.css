@@ -650,10 +650,10 @@ position: relative;
 /* DAY AT A GLANCE */
 .glance-list {
   width: 100%;
-  max-width: 1200px;
   display: flex;
   flex-direction: column;
   gap: 22px;
+  margin-top: 40px;
 }
 
 .glance-card {
@@ -663,9 +663,9 @@ position: relative;
   gap: 24px;
   align-items: stretch;
   padding: 22px;
-  border: 1px solid rgba(243,236,220,0.24);
+  /* border: 1px solid rgba(243,236,220,0.24);
   border-radius: 16px;
-  background: rgba(0,0,0,0.12);
+  background: rgba(0,0,0,0.12); */
 }
 
 .glance-card.reverse {
@@ -683,10 +683,10 @@ position: relative;
 .glance-photo {
   width: 100%;
   min-height: 220px;
-  border-radius: 12px;
+  border-radius: 20px;
   overflow: hidden;
   background: rgba(243,236,220,0.14);
-  border: 1px dashed rgba(243,236,220,0.4);
+  border: 1px dashed rgba(243, 236, 220, 0.116);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -705,6 +705,7 @@ position: relative;
 
 .glance-copy {
   text-align: left;
+  padding: 20px;
 }
 
 .glance-title {
