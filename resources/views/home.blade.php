@@ -108,7 +108,7 @@
 
     </script>
 
-    <h1>Amna & Michael</h1>
+    <h1 style="font-family: 'Kunstler Script Local', cursive; text-transform:capitalize; font-size: 72px;">Michael & Amna</h1>
     <h4>We can't wait to celebrate our special day with you.</h4>
     <p>Along with your formal invitation, please enjoy this extension filled with all the little details we've planned.</p>
     <br>

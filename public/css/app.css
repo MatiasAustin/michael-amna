@@ -7,6 +7,14 @@
   --line: #F3ECDC;
 }
 
+@font-face {
+  font-family: 'Kunstler Script Local';
+  src: url('/font/KunstlerScript/kunstlerscript.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 * { box-sizing: border-box; }
 html, body { height: 100%; }
 body {
