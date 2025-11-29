@@ -61,8 +61,9 @@ Route::get('/floormap', function (Request $request) {
             ->first();
     }
 
-    $floorMapExists = file_exists(public_path('floormap/floor-map.jpg'));
-    $floorMapUrl = $floorMapExists ? asset('floormap/floor-map.jpg') : null;
+    $floorMapExists = file_exists(public_path('floorplans/floor-map.jpg'));
+    $floorMapUrl = $floorMapExists ? asset('floorplans/floor-map.jpg') : null;
+
 
     return view('floormap', [
         'rsvp'        => $rsvp,
