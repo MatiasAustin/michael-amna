@@ -14,10 +14,10 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::updateOrInsert(
-            ['email' => 'admin@example.com'], // kunci unik
+            ['email' => 'admin@michaelamna.com'], // kunci unik
             [
                 'name' => 'Admin User',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('MichaelAmna374*'), // pastikan untuk meng-hash password
             ]
         );
     }

@@ -10,7 +10,7 @@
 <p>You can use this link to see details:</p>
 
 <p>
-    <a href="{{ route('details') }}">Click here to check invitation details</a>
+    <a href="{{ route('floormap', ['code' => $rsvp->unique_code]) }}#find">Click here to check invitation details</a>
 </p>
 
 <p>Thank You 🤍</p>

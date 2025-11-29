@@ -48,7 +48,7 @@
     </div> -->
   </header>
 
-  <section class="simple" style="text-align: center; margin-top: 60px; background-image: url({{ asset('media/anm-pattern-bg.png') }}); background-size: contain; background-repeat: no-repeat; background-position: center; background-size: 50% auto;">
+  <section class="simple" style="text-align: center; margin-top: 60px; background-image: url({{ asset('media/MA-favicon-trans.png') }}); background-size: contain; background-repeat: no-repeat; background-position: center; background-opacity: 0.1;">
 
     <div class="countdown" style="display: flex; justify-content: center;margin: 40px 0 80px 0;">
         <div class="count-box">

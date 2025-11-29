@@ -13,6 +13,11 @@ class AdminAuthController extends Controller
 {
     public function showLoginForm()
     {
+        // Jika sudah login (termasuk dari remember-me), langsung ke dashboard
+        if (Auth::check()) {
+            return redirect()->route('admin.dashboard');
+        }
+
         return view('auth.login');
     }
 
@@ -23,7 +28,7 @@ class AdminAuthController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials, $request->filled('remember'))) {
+        if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
             return redirect()->route('admin.dashboard');
         }

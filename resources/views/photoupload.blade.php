@@ -24,9 +24,47 @@
         content: ""; position: absolute; left: 0;
         width: 18px; height: 1px; background: #3B1B0E;
         transition: all 0.3s ease;}
+
+    .flash-toast {
+        position: fixed;
+        top: 18px;
+        left: 50%;
+        transform: translateX(-50%) translateY(-10px);
+        padding: 12px 16px;
+        border-radius: 10px;
+        color: #F3ECDC;
+        background: #1a7f37;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        font-size: 14px;
+        z-index: 9999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease, transform 0.25s ease;
+        min-width: 240px;
+        text-align: center;
+    }
+    .flash-toast.error { background: #b00020; }
+    .flash-toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
   </style>
 </head>
 <body style="background-color: #F3ECDC; color: black;">
+  @if (session('success'))
+    <div id="flash-toast" class="flash-toast" data-type="success">
+        {{ session('success') }}
+    </div>
+  @elseif (session('error'))
+    <div id="flash-toast" class="flash-toast error" data-type="error">
+        {{ session('error') }}
+    </div>
+  @elseif ($errors->any())
+    <div id="flash-toast" class="flash-toast error" data-type="error">
+        {{ $errors->first() }}
+    </div>
+  @endif
+
   <nav class="nav">
     <div class="nav-inner">
       <div class="brand">
@@ -76,7 +114,7 @@
         const input = document.getElementById('photoInput');
         const preview = document.getElementById('previewContainer');
         const errorMsg = document.getElementById('errorMsg');
-        const maxSize = 20 * 1024 * 1024; // 20MB
+        const maxSize = 20 * 1024 * 1024; // 20MB per file (before backend compresses to <5MB)
         const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
         const maxFiles = 3;
 
@@ -114,6 +152,20 @@
                 reader.readAsDataURL(file);
             });
         });
+    </script>
+
+    <script>
+      const toast = document.getElementById('flash-toast');
+      if (toast) {
+        const type = toast.dataset.type;
+        if (type === 'error') {
+          toast.classList.add('error');
+        }
+        // trigger entrance
+        requestAnimationFrame(() => toast.classList.add('show'));
+        // auto hide
+        setTimeout(() => toast.classList.remove('show'), 4000);
+      }
     </script>
 
     <script src="{{ asset('js/hum-menu.js') }}"></script>

@@ -1,5 +1,30 @@
 @extends('admin.layout.structure')
 @include('admin.layout.header')
+    <style>
+        .flash-toast {
+            position: fixed;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            padding: 12px 16px;
+            border-radius: 10px;
+            color: #F3ECDC;
+            background: #1a7f37;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+            font-size: 14px;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            min-width: 240px;
+            text-align: center;
+        }
+        .flash-toast.error { background: #b00020; }
+        .flash-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
     <div class="admin-dashboard-content">
         <h1>Admin Dashboard</h1>
         <p>Amma & Michael</p>
@@ -12,6 +37,20 @@
                 <div class="details-section">
                     <h3>Our Day at a Glance</h3>
                     <p style="margin-top:4px;">Manage the timeline blocks and drop in photos that match the sequence.</p>
+
+                    @if(session('success'))
+                        <div id="flash-toast" class="flash-toast" data-type="success">
+                            {{ session('success') }}
+                        </div>
+                    @elseif(session('error'))
+                        <div id="flash-toast" class="flash-toast error" data-type="error">
+                            {{ session('error') }}
+                        </div>
+                    @elseif($errors->any())
+                        <div id="flash-toast" class="flash-toast error" data-type="error">
+                            {{ $errors->first() }}
+                        </div>
+                    @endif
 
                     @if(session('success'))
                         <div style="padding:8px 12px; background:#d1fae5; color:#065f46; margin-bottom:10px; border-radius:4px;">
@@ -30,7 +69,7 @@
                     @endif
 
                     <div style="display:grid; margin-top: 40px; gap:20px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-                        <div style="border:1px solid #ddd; border-radius:8px; padding:16px;">
+                        <div style="border:1px solid #F3ECDC; border-radius:8px; padding:16px;">
                             <h4 style="margin-top:0;">Add entry</h4>
                             <form action="{{ route('admin.dayglance.store') }}" method="POST" enctype="multipart/form-data" style="display:grid; gap:10px;">
                                 @csrf
@@ -48,17 +87,18 @@
                                 </label>
                                 <label>Photo (optional)
                                     <input type="file" name="photo" accept=".jpg,.jpeg,.png,.webp">
+                                    <small style="color:#666;">Up to 20MB; auto-compresses to <5MB</small>
                                 </label>
                                 <button type="submit" style="padding:10px 14px; background:#7E2625; color:#F3ECDC; border:none; border-radius:4px;">Add</button>
                             </form>
                         </div>
 
-                        <div style="border:1px solid #ddd; border-radius:8px; padding:16px; grid-column: span 2;">
+                        <div style="border:1px solid #F3ECDC; border-radius:8px; padding:16px;">
                             <h4 style="margin-top:0;">Existing entries</h4>
                             <div style="display:flex; flex-direction:column; gap:12px;">
                                 @forelse($items as $item)
-                                    <div style="border:1px solid #eee; border-radius:8px; padding:12px; display:grid; grid-template-columns: 160px 1fr; gap:12px; align-items:start; background:#fafafa;">
-                                        <div style="border:1px dashed #ccc; border-radius:8px; overflow:hidden; min-height:120px; display:flex; align-items:center; justify-content:center; background:#f9f9f9;">
+                                    <div style="border:1px solid #F3ECDC30; border-radius:8px; padding:12px;grid-template-columns: 160px 1fr; gap:12px; align-items:start; background: #00000036">
+                                        <div style="border:1px dashed #ccc; border-radius:8px; overflow:hidden; min-height:120px; display:flex; align-items:center; justify-content:center; margin-bottom: 20px;">
                                             @if($item->photo_path)
                                                 <img src="{{ asset($item->photo_path) }}" alt="Photo {{ $item->id }}" style="width:100%; height:100%; object-fit:cover;">
                                             @else
@@ -83,6 +123,7 @@
                                                 </label>
                                                 <label>Replace Photo
                                                     <input type="file" name="photo" accept=".jpg,.jpeg,.png,.webp">
+                                                    <small style="color:#666;">Up to 20MB; auto-compresses to <5MB</small>
                                                 </label>
                                                 <div style="display:flex; gap:10px; align-items:center;">
                                                     <button type="submit" style="padding:8px 12px; background:#7E2625; color:#F3ECDC; border:none; border-radius:4px;">Update</button>
@@ -106,4 +147,15 @@
         </div>
 
     </body>
+    <script>
+        const toast = document.getElementById('flash-toast');
+        if (toast) {
+            const type = toast.dataset.type;
+            if (type === 'error') {
+                toast.classList.add('error');
+            }
+            requestAnimationFrame(() => toast.classList.add('show'));
+            setTimeout(() => toast.classList.remove('show'), 4000);
+        }
+    </script>
 </html>

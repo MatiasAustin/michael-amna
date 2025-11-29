@@ -204,7 +204,7 @@
         {{-- EMAIL POPUP --}}
         <div id="sendCodeModal"
             style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center; ">
-            <div style="background:#fff; padding:20px; border-radius:8px; width:320px; max-width:90%; color:#7E2625;">
+            <div style="background:#fff; padding:20px; border-radius:8px; width:420px; max-width:500px; color:#7E2625; box-sizing:border-box;">
                 <h3 style="margin-top:0; margin-bottom:10px;">Send RSVP Code</h3>
 
                 <form id="sendCodeForm" method="POST">
@@ -231,7 +231,7 @@
                             </p>
                             <p style="margin:0 0 8px 0;">You can use this link to see details:</p>
                             <p style="margin:0 0 8px 0;">
-                                <a href="{{ route('details') }}" target="_blank" style="color:#7E2625; text-decoration:underline;">
+                                <a id="previewLink" href="{{ route('floormap') }}#find" target="_blank" style="color:#7E2625; text-decoration:underline;">
                                     Click here to check invitation details
                                 </a>
                             </p>
@@ -239,16 +239,32 @@
                         </div>
                     </div>
 
-                    <div style="text-align:right; margin-top:15px;">
-                        <button type="button"
-                                onclick="closeSendCodeModal()"
-                                style="padding:6px 10px; font-size:12px; margin-right:6px; background:#eee; border:none; color:#7E2625; border-radius:4px;">
-                            Cancel
-                        </button>
-                        <button type="submit"
-                                style="padding:6px 10px; font-size:12px; background:#7E2625; color:#F3ECDC; border:none; border-radius:4px;">
-                            Send
-                        </button>
+                    <div style="display:flex; gap:8px; margin-top:15px;">
+                        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                            <a id="sendGmailBtn"
+                               href="#"
+                               target="_blank" rel="noopener"
+                               style="padding:6px 10px; font-size:12px; background:#7E2625; color:#F3ECDC; border:none; border-radius:4px; text-decoration:none;">
+                                Send by Email
+                            </a>
+                            <a id="sendOutlookBtn"
+                               href="#"
+                               target="_blank" rel="noopener"
+                               style="padding:6px 10px; font-size:12px; background:#7E2625; color:#F3ECDC; border:none; border-radius:4px; text-decoration:none;">
+                                Send by Outlook
+                            </a>
+                        </div>
+                        <div style="display:flex; gap:8px; justify-content:flex-end;">
+                            <button type="button"
+                                    onclick="closeSendCodeModal()"
+                                    style="padding:6px 10px; font-size:12px; background:#eee; border:none; color:#7E2625; border-radius:4px;">
+                                Cancel
+                            </button>
+                            <button type="submit"
+                                    style="padding:6px 10px; font-size:12px; background:#7E2625; color:#F3ECDC; border:none; border-radius:4px;">
+                                Send with Official Domain
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -316,8 +332,31 @@
         function renderEmailPreview(name, code) {
             const nameEl = document.getElementById('previewName');
             const codeEl = document.getElementById('previewCode');
+            const linkEl = document.getElementById('previewLink');
+            const baseUrl = "{{ route('floormap') }}";
+            const emailInput = document.getElementById('send-code-email');
+            const gmailBtn = document.getElementById('sendGmailBtn');
+            const outlookBtn = document.getElementById('sendOutlookBtn');
+
             nameEl.textContent = name || 'Guest';
             codeEl.textContent = code || '(will be generated)';
+
+            if (linkEl) {
+                const url = code ? `${baseUrl}?code=${encodeURIComponent(code)}#find` : `${baseUrl}#find`;
+                linkEl.href = url;
+            }
+
+            const email = emailInput?.value || '';
+            const inviteLink = code ? `${baseUrl}?code=${encodeURIComponent(code)}#find` : `${baseUrl}#find`;
+            const subject = 'Your RSVP Code';
+            const body = `Halo ${name || 'Guest'},%0D%0A%0D%0AThis is your invitation code: ${code || '(generate code first)'}%0D%0A%0D%0AOpen details: ${inviteLink}%0D%0A%0D%0AThank You`;
+
+            if (gmailBtn) {
+                gmailBtn.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent(subject)}&body=${body}`;
+            }
+            if (outlookBtn) {
+                outlookBtn.href = `https://outlook.office.com/mail/deeplink/compose?to=${encodeURIComponent(email)}&subject=${encodeURIComponent(subject)}&body=${body}`;
+            }
         }
 
         // COPY UNIQUE BUTTON
@@ -355,7 +394,7 @@
         @if(session('success'))
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
-                    openSuccessModal('{{ addslashes(session("success")) }}');
+                    openSuccessModal(@json(session('success')));
                 });
             </script>
         @endif

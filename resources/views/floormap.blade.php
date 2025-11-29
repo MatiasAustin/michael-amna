@@ -265,7 +265,7 @@
 
             {{-- END FLOOR MAP --}}
 
-            <div class="divider" style="height: 0.5px; background-color: #F3ECDC10; margin: 20px 0; width: 100%;"></div>
+            <div class="divider" id="find" style="height: 0.5px; background-color: #F3ECDC10; margin: 20px 0; width: 100%;"></div>
 
         {{-- Search Bar --}}
 
@@ -282,6 +282,7 @@
             {{--  RSVP & GUEST DETAILS --}}
 
             @if($rsvp)
+            <div id="search-result"></div>
             <table style="width:100%; border-collapse:collapse; text-align: left; font-size: 10px">
                 <thead style="font-weight: 300;">
                     <tr style="border-bottom:1px solid #F3ECDC;">
@@ -322,5 +323,58 @@
     </section>
 
     <footer>All Right Reserved by @Freellab2025</footer>
+
+    <script>
+        // If a code was searched and results exist, auto-scroll to the table
+        (function() {
+            const hasQuery = '{{ request("code") }}'.trim().length > 0;
+            const resultEl = document.getElementById('search-result');
+            const findAnchor = document.getElementById('find');
+
+            if (hasQuery && resultEl) {
+                requestAnimationFrame(() => {
+                    resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            } else if (hasQuery && findAnchor) {
+                requestAnimationFrame(() => {
+                    findAnchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            }
+        })();
+    </script>
+
+    <script>
+        // Hamburger toggle for this page
+        const hamb = document.querySelector('.hamb');
+        const panel = document.getElementById('mPanel');
+        const closeBtn = document.querySelector('.close-btn');
+
+        function closePanel() {
+            panel?.classList.remove('open');
+            hamb?.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+        }
+
+        function togglePanel() {
+            const open = panel?.classList.toggle('open');
+            hamb?.setAttribute('aria-expanded', open ? 'true' : 'false');
+            document.body.style.overflow = open ? 'hidden' : '';
+        }
+
+        if (hamb && panel) {
+            hamb.addEventListener('click', togglePanel);
+            panel.querySelectorAll('a').forEach(a => a.addEventListener('click', closePanel));
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closePanel);
+        }
+
+        window.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && panel?.classList.contains('open')) {
+                closePanel();
+            }
+        });
+    </script>
 </body>
 </html>

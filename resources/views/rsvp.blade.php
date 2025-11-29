@@ -44,10 +44,10 @@
 
   <section class="simple">
     <div class="item">
-        <h1>NOW TELL US WHO’S COMING.</h1>
+        <h1>WE CAN’T WAIT TO CELEBRATE WITH YOU</h1>
         <h4>
-            RSVP BY 18 SEPTEMBER 2025<br>
-            IT’S ADULTS ONLY — SO PLEASE BOOK THE BABY SITTER.
+            Please let us know if you’ll be joining us for the magic.<br>
+            Kindly respond by 14 of March 2026.
         </h4>
     </div>
 
@@ -127,13 +127,12 @@
         </script>
     @endif
 
-    <iframe width="560" height="315"
-            src="https://www.youtube.com/embed/3wDnIk5tuwY?si=DiGfxUGE2-Sxleod"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen></iframe>
+    <div style="margin-top: 60px; width: 100%; max-width: 900px; border-radius: 16px; overflow: hidden;">
+        <video autoplay muted loop playsinline preload="auto" style="width:100%; height:auto; display:block; border-radius:16px;">
+            <source src="{{ asset('media/michael-amna-video.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
   </section>
 
   <footer>All Right Reserved by @Freellab2025</footer>

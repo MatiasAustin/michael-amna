@@ -38,16 +38,26 @@
             style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;"
         >
 
-        <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            required
-            style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;"
-        >
+        <div style="position: relative; display: flex; align-items: center;">
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                required
+                style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; width: 100%; padding-right: 82px;"
+            >
+            <button
+                type="button"
+                id="togglePassword"
+                style="position: absolute; right: 8px; background: transparent; border: 1px solid #7E2625; color: #7E2625; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;"
+            >
+                Show
+            </button>
+        </div>
 
         <label style="font-size: 13px; display: flex; align-items: center; gap: 6px; margin-top: 4px; width:100%; justify-content: flex-start;">
-            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} style="width: auto;"> Remember Me
+            <input type="checkbox" name="remember" value="1" {{ old('remember') ? 'checked' : '' }} style="width: auto;"> Remember Me
         </label>
 
         @if ($errors->any())
@@ -64,6 +74,20 @@
         </button>
     </form>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+
+    if (togglePassword && passwordInput) {
+        togglePassword.addEventListener('click', function () {
+            const isHidden = passwordInput.type === 'password';
+            passwordInput.type = isHidden ? 'text' : 'password';
+            togglePassword.textContent = isHidden ? 'Hide' : 'Show';
+        });
+    }
+});
+</script>
 
 </body>
 </html>

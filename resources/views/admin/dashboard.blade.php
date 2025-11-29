@@ -106,7 +106,7 @@
         const input = document.getElementById('photoInput');
         const preview = document.getElementById('previewContainer');
         const errorMsg = document.getElementById('errorMsg');
-        const maxSize = 20 * 1024 * 1024; // 20MB
+        const maxSize = 20 * 1024 * 1024; // 20MB per file (before backend compresses to <5MB)
         const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
         const maxFiles = 3;
 
@@ -142,6 +142,17 @@
                     preview.appendChild(img);
                 };
                 reader.readAsDataURL(file);
+            });
+        });
+    </script>
+
+    <script>
+        document.querySelectorAll('.delete-form').forEach(form => {
+            form.addEventListener('submit', function (e) {
+                const ok = confirm('Delete this photo? This cannot be undone.');
+                if (!ok) {
+                    e.preventDefault();
+                }
             });
         });
     </script>
