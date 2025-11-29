@@ -147,8 +147,7 @@
 
       <div class="item">
           <h4>DRESS CODE</h4>
-          <h1>Formal Black-Tie Optional</h1>
-          <h4>(Dress like you’re entering a vogue dinner, and might end up on a dance floor in Beirut)</h4>
+          <h1>Black-Tie</h1>
       </div>
       <div class="item">
           <h4>After we say “I DO” we will celebrate with drinks and canapés during cocktail hour, before moving inside for dinner.</h4>

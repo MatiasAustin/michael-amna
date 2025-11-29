@@ -18,6 +18,8 @@ use App\Http\Controllers\AdminCountdownController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\DayGlanceController;
 use App\Http\Controllers\AdminDayGlanceController;
+use App\Http\Controllers\FloorMapController;
+use App\Http\Controllers\AdminFloorMapController;
 
 
 // Public Routes
@@ -38,38 +40,16 @@ Route::get('/details', function (Request $request) {
             ->first();
     }
 
-    $floorMapExists = file_exists(public_path('floormap/floor-map.jpg'));
-    $floorMapUrl = $floorMapExists ? asset('floormap/floor-map.jpg') : null;
-
     return view('details', [
         'venue'       => $venue,
         'countdown'   => $countdown,
         'rsvps'       => $rsvps,
         'guests'      => $guests,
         'rsvp'        => $rsvp,
-        'floorMapUrl' => $floorMapUrl,
     ]);
 })->name('details');
 
-Route::get('/floormap', function (Request $request) {
-    $rsvp = null;
-    if ($request->filled('code')) {
-        $code = strtoupper(trim($request->input('code')));
-
-        $rsvp = Rsvp::with('guests')
-            ->where('unique_code', $code)
-            ->first();
-    }
-
-    $floorMapExists = file_exists(public_path('floorplans/floor-map.jpg'));
-    $floorMapUrl = $floorMapExists ? asset('floorplans/floor-map.jpg') : null;
-
-
-    return view('floormap', [
-        'rsvp'        => $rsvp,
-        'floorMapUrl' => $floorMapUrl,
-    ]);
-})->name('floormap');
+Route::get('/floormap', [FloorMapController::class, 'show'])->name('floormap');
 
 
 Route::view('/rsvp', 'rsvp')->name('rsvp');
@@ -124,7 +104,7 @@ Route::middleware('auth')->group(function () {
 
 
     // Floor Map upload (masih di controller yang sama)
-    Route::post('/admin/details/floor-map', [AdminDetailsController::class, 'updateFloorMap'])
+    Route::post('/admin/details/floor-map', [AdminFloorMapController::class, 'update'])
         ->name('admin.details.floorMap');
 });
 

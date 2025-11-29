@@ -47,7 +47,7 @@
       <h4>Our Day at a Glance</h4>
       <h1>Amna drawing of timeline with our photos in sequence</h1>
       <p style="max-width: 720px; margin: 0 auto; text-transform: none;">
-        A photo-led rundown of the day. Replace each placeholder with your chosen shots in the admin panel.
+        A photo-led rundown of the day.
       </p>
     </div>
 

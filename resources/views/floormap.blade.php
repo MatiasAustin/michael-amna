@@ -52,7 +52,7 @@
             @if($floorMapUrl)
                 <h1 style="margin-top:40px;">Floor Map</h1>
 
-                <div id="floorMapWrapper" style="width:100%; height:400px; border:1px solid #ddd; border-radius:20px; overflow:hidden; position:relative; cursor:grab; background:#f5f5f5; touch-action:none;">
+                <div id="floorMapWrapper" style="width:100%; height:500px; border:1px solid #ddd; border-radius:20px; overflow:hidden; position:relative; cursor:grab; background:#f5f5f5; touch-action:none;">
 
                     <img id="floorMapImage"
                         src="{{ $floorMapUrl }}"
