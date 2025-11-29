@@ -1,5 +1,5 @@
 {{-- resources/views/emails/rsvp_code.blade.php --}}
-<p>Halo {{ $rsvp->full_name }},</p>
+<p>Hello {{ $rsvp->full_name }},</p>
 
 <p>This is your unique code for your invitation / RSVP:</p>
 

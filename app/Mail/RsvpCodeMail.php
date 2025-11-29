@@ -20,7 +20,7 @@ class RsvpCodeMail extends Mailable
 
     public function build()
     {
-        return $this->subject('Kode Undangan / RSVP')
+        return $this->subject('Michael & Amna RSVP Details')
             ->view('email.rsvp_code');
     }
 }

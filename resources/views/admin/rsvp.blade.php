@@ -224,7 +224,7 @@
                         <p style="margin:0 0 6px 0; font-size:12px; color:#7E2625; font-weight:bold;">Preview email</p>
                         <div id="emailPreview"
                             style="border:1px solid #eee; background:#F9F6F0; padding:10px; border-radius:6px; font-size:12px; color:#7E2625;">
-                            <p style="margin:0 0 8px 0;">Halo <strong id="previewName"></strong>,</p>
+                            <p style="margin:0 0 8px 0;">Hello <strong id="previewName"></strong>,</p>
                             <p style="margin:0 0 8px 0;">This is your unique code for your invitation / RSVP:</p>
                             <p style="margin:0 0 8px 0; font-size:16px; font-weight:bold;">
                                 <span id="previewCode"></span>
