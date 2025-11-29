@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class AdminFloorMapController extends Controller
 {
-    // upload / update floor map
+    // update floor map
     public function update(Request $request)
     {
         $request->validate([

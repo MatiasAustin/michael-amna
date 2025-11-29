@@ -50,6 +50,7 @@ Route::get('/details', function (Request $request) {
 })->name('details');
 
 Route::get('/floormap', [FloorMapController::class, 'show'])->name('floormap');
+// validate and store floor map upload handled in AdminFloorMapController
 
 
 Route::view('/rsvp', 'rsvp')->name('rsvp');
