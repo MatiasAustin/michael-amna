@@ -44,11 +44,8 @@
 
   <section class="simple">
     <div class="item" style="margin-bottom: 24px;">
-      <h4>Our Day at a Glance</h4>
-      <h1>Amna drawing of timeline with our photos in sequence</h1>
-      <p style="max-width: 720px; margin: 0 auto; text-transform: none;">
-        A photo-led rundown of the day.
-      </p>
+      <h4>A photo-led rundown of the day</h4>
+      <h1>Our Day at a Glance</h1>
     </div>
 
     <div class="glance-list">
