@@ -13,7 +13,7 @@ class AdminFloorMapController extends Controller
             'floor_map' => ['required', 'image', 'mimes:jpg,jpeg', 'max:4096'], // max 4 MB
         ]);
 
-        $dir = public_path('floorplans');
+        $dir = public_path('floormap');
         if (!is_dir($dir)) {
             mkdir($dir, 0755, true);
         }
