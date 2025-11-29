@@ -68,7 +68,9 @@
   <nav class="nav">
     <div class="nav-inner">
       <div class="brand">
-        <img src="{{ asset('media/MA-favicon-red.png') }}" alt="">
+        <a href="{{ url('/') }}">
+          <img src="{{ asset('media/MA-favicon-red.png') }}" alt="">
+        </a>
       </div>
       <div class="links">
         <a href="{{ url('/') }}" style="color: #3B1B0E;">Home</a>

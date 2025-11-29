@@ -21,7 +21,9 @@
     <div class="header" style="padding: 20px; text-align: center;">
 
           <div class="brand">
-            <img src="{{ asset('media/anm-logo.png') }}" alt="">
+            <a href="{{ url('/') }}">
+              <img src="{{ asset('media/anm-logo.png') }}" alt="">
+            </a>
           </div>
 
     </div>
