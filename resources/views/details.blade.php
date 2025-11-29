@@ -55,7 +55,7 @@
         @php
             $event = $countdown?->event_at_utc;
             // fallback values
-            $evTitle = 'Ava & Mateo — The Promise';
+            $evTitle = 'Michael & Amna — The Promise';
             $evLocation = $venue?->venue_name ? $venue->venue_name . ', ' . ($venue?->venue_location_text ?? '') : 'The Cathedral of the Annunciation of Our Lady, Surry Hills, NSW';
             $evDesc = 'Ceremony — The Promise.';
             // Google Calendar needs UTC timestamp in YYYYMMDDTHHMMSSZ
