@@ -231,7 +231,7 @@
                             </p>
                             <p style="margin:0 0 8px 0;">You can use this link to see details:</p>
                             <p style="margin:0 0 8px 0;">
-                                <a id="previewLink" href="{{ route('floormap') }}#find" target="_blank" style="color:#7E2625; text-decoration:underline;">
+                                <a id="previewLink" href="{{ url('/floor-map') }}#find" target="_blank" style="color:#7E2625; text-decoration:underline;">
                                     Click here to check invitation details
                                 </a>
                             </p>
@@ -333,7 +333,7 @@
             const nameEl = document.getElementById('previewName');
             const codeEl = document.getElementById('previewCode');
             const linkEl = document.getElementById('previewLink');
-            const baseUrl = "{{ route('floormap') }}";
+            const baseUrl = "{{ url('/floor-map') }}";
             const emailInput = document.getElementById('send-code-email');
             const gmailBtn = document.getElementById('sendGmailBtn');
             const outlookBtn = document.getElementById('sendOutlookBtn');
