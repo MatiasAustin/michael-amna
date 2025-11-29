@@ -76,14 +76,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-
-// Home Route with Countdown
-// Route::get('/', function () {
-//     $countdown = \App\Models\Countdown::first();
-//     return view('home', compact('countdown'));
-// })->name('home');
-
-
 // Details Management
 Route::middleware('auth')->group(function () {
     Route::get('/admin/details',  [AdminDetailsController::class, 'index'])->name('admin.details');
