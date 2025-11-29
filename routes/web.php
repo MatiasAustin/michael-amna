@@ -35,7 +35,7 @@ Route::get('/details', function (Request $request) {
     ]);
 })->name('details');
 
-Route::get('/floormap', [FloorMapController::class, 'show'])->name('floormap');
+Route::get('/floor-map', [FloorMapController::class, 'show'])->name('floormap');
 // Route to display the floor map
 
 

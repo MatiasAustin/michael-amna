@@ -31,7 +31,7 @@
         <a href="{{ url('/') }}">Home</a>
         <a href="{{ url('/details') }}">Finer Details</a>
         <a href="{{ url('/day-at-a-glance') }}">Our Day at a Glance</a>
-        <a href="{{ url('/floormap') }}">Floor Map</a>
+        <a href="{{ route('floormap') }}">Floor Map</a>
         <a href="{{ url('/rsvp') }}">RSVP</a>
       </div>
       <button class="hamb" aria-label="Open menu" aria-controls="mPanel" aria-expanded="false"><span></span></button>
@@ -41,7 +41,7 @@
       <a href="{{ url('/') }}">Home</a>
       <a href="{{ url('/details') }}">Finer Details</a>
       <a href="{{ url('/day-at-a-glance') }}">Our Day at a Glance</a>
-      <a href="{{ url('/floormap') }}">Floor Map</a>
+      <a href="{{ route('floormap') }}">Floor Map</a>
       <a href="{{ url('/rsvp') }}">RSVP</a>
     </div>
   </nav>
