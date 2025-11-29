@@ -80,9 +80,9 @@
 
                             <div class="picture-actions">
                                 {{-- Download button: prefer a named route if available, otherwise direct asset with download attribute --}}
-                                @if(\Illuminate\Support\Facades\Route::has('gallery.download'))
-                                    <a href="{{ route('gallery.download', $photo->id) }}" class="download-button" target="_blank" rel="noopener">Download</a>
-                                @else
+                                @if(\Illuminate\Support\Facades\Route::has('gallery.download') && !empty($photo->id))
+                                    <a href="{{ route('gallery.download', ['id' => $photo->id]) }}" class="download-button" target="_blank" rel="noopener">Download</a>
+                                @elseif(!empty($photo->filename))
                                     <a href="{{ asset('/' . $photo->filename) }}" class="download-button" download target="_blank" rel="noopener">Download</a>
                                 @endif
 
