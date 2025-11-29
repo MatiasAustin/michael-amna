@@ -324,6 +324,8 @@
 
     <footer>All Right Reserved by @Freellab2025</footer>
 
+    {{-- Auto-scroll to results if applicable --}}
+
     <script>
         // If a code was searched and results exist, auto-scroll to the table
         (function() {
