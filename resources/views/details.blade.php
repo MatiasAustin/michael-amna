@@ -56,7 +56,7 @@
             $event = $countdown?->event_at_utc;
             // fallback values
             $evTitle = 'Michael & Amna — The Promise';
-            $evLocation = $venue?->venue_name ? $venue->venue_name . ', ' . ($venue?->venue_location_text ?? '') : 'The Cathedral of the Annunciation of Our Lady, Surry Hills, NSW';
+            $evLocation = $venue?->venue_name ? $venue->venue_name . ', ' . ($venue?->venue_location_text ?? '') : 'Doltone House - Jones Bay Wharf - Level 3, 26-32 Pirrama Road, Pyrmont NSW 2009';
             $evDesc = 'Ceremony — The Promise.';
             // Google Calendar needs UTC timestamp in YYYYMMDDTHHMMSSZ
             $startUtc = $event ? $event->format('Ymd\\THis\\Z') : null;
