@@ -48,11 +48,13 @@
 
 
     <section class="simple">
-
+        <div class="item">
+          <h4>Find Your Invitation Details Here</h4>
+          <h1>Floor Map</h1>
+        </div>
 
         {{-- FLOOR MAP --}}
             @if($floorMapUrl)
-                <h1 style="margin-top:40px;">Floor Map</h1>
 
                 <div id="floorMapWrapper" style="width:100%; height:500px; border:1px solid #ddd; border-radius:20px; overflow:hidden; position:relative; cursor:grab; background:#f5f5f5; touch-action:none;">
 
