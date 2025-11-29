@@ -28,24 +28,10 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/details', function (Request $request) {
     $venue     = Venue::first();
     $countdown = Countdown::first();
-    $rsvps     = Rsvp::with('guests')->get();
-    $guests    = Guest::all();
-
-    $rsvp = null;
-    if ($request->filled('code')) {
-        $code = strtoupper(trim($request->input('code')));
-
-        $rsvp = Rsvp::with('guests')
-            ->where('unique_code', $code)
-            ->first();
-    }
 
     return view('details', [
         'venue'       => $venue,
         'countdown'   => $countdown,
-        'rsvps'       => $rsvps,
-        'guests'      => $guests,
-        'rsvp'        => $rsvp,
     ]);
 })->name('details');
 
