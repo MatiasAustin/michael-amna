@@ -43,6 +43,12 @@
                             </thead>
                             <tbody>
                             @foreach($people as $i => $person)
+                                @php
+                                    $rsvpId = $person['rsvp_id'] ?? null;
+                                    if (empty($rsvpId) && !empty($person['row_id']) && strpos($person['row_id'], 'rsvp-') === 0) {
+                                        $rsvpId = substr($person['row_id'], 5);
+                                    }
+                                @endphp
                                 <tr>
                                     <td style="padding:6px; border:1px solid #F3ECDC;">
                                         {{ $person['source_type'] }}
@@ -114,11 +120,11 @@
                                     </td>
 
                                     <td style="padding:6px; border:1px solid #F3ECDC;">
-                                        @if($person['source_type'] === 'RSVP' && !empty($person['rsvp_id']))
+                                        @if($person['source_type'] === 'RSVP' && !empty($rsvpId))
                                             <div style="display:flex; flex-wrap:wrap; gap:6px; align-items:center;     justify-content: center;">
                                                 {{-- Generate Code (tetap submit langsung) --}}
                                                 <button type="submit"
-                                                    formaction="{{ route('admin.rsvp.generateCode', ['rsvp' => $person['rsvp_id']]) }}"
+                                                    formaction="{{ route('admin.rsvp.generateCode', ['rsvp' => $rsvpId]) }}"
                                                     formmethod="POST"
                                                     style="padding:4px 8px; font-size:11px; background:#F3ECDC; color:#7E2625; border:none; border-radius:3px;">
                                                     Generate Code
@@ -127,7 +133,7 @@
                                                 {{-- Send Email via popup --}}
                                                 <button type="button"
                                                     onclick="openSendCodeModal(this)"
-                                                    data-rsvp-id="{{ $person['rsvp_id'] }}"
+                                                    data-rsvp-id="{{ $rsvpId }}"
                                                     data-email="{{ $person['email'] }}"
                                                     data-name="{{ $person['contact_name'] }}"
                                                     data-code="{{ $person['unique_code'] }}"
@@ -137,7 +143,7 @@
 
                                                 {{-- Delete RSVP + guests --}}
                                                 <button type="button"
-                                                    onclick="confirmDeleteRsvp('{{ $person['rsvp_id'] }}')"
+                                                    onclick="confirmDeleteRsvp('{{ $rsvpId }}')"
                                                     aria-label="Delete RSVP and guests"
                                                     style="padding:4px; background:#F3ECDC; color:#7E2625; border:1px solid #7E2625; border-radius:3px; display:flex; align-items:center; justify-content:center;">
                                                     <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -173,9 +179,15 @@
                 </form>
 
                 @foreach($people as $person)
-                    @if($person['source_type'] === 'RSVP' && !empty($person['rsvp_id']))
-                        <form id="delete-form-{{ $person['rsvp_id'] }}"
-                            action="{{ route('admin.rsvp.destroy', ['rsvp' => $person['rsvp_id']]) }}"
+                    @php
+                        $rsvpId = $person['rsvp_id'] ?? null;
+                        if (empty($rsvpId) && !empty($person['row_id']) && strpos($person['row_id'], 'rsvp-') === 0) {
+                            $rsvpId = substr($person['row_id'], 5);
+                        }
+                    @endphp
+                    @if($person['source_type'] === 'RSVP' && !empty($rsvpId))
+                        <form id="delete-form-{{ $rsvpId }}"
+                            action="{{ route('admin.rsvp.destroy', ['rsvp' => $rsvpId]) }}"
                             method="POST"
                             style="display:none;">
                             @csrf
