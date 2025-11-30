@@ -114,7 +114,7 @@
                                     </td>
 
                                     <td style="padding:6px; border:1px solid #F3ECDC;">
-                                        @if($person['source_type'] === 'RSVP')
+                                        @if($person['source_type'] === 'RSVP' && !empty($person['rsvp_id']))
                                             <div style="display:flex; flex-wrap:wrap; gap:6px; align-items:center;     justify-content: center;">
                                                 {{-- Generate Code (tetap submit langsung) --}}
                                                 <button type="submit"
@@ -173,7 +173,7 @@
                 </form>
 
                 @foreach($people as $person)
-                    @if($person['source_type'] === 'RSVP')
+                    @if($person['source_type'] === 'RSVP' && !empty($person['rsvp_id']))
                         <form id="delete-form-{{ $person['rsvp_id'] }}"
                             action="{{ route('admin.rsvp.destroy', ['rsvp' => $person['rsvp_id']]) }}"
                             method="POST"
