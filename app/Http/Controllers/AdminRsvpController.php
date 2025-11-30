@@ -72,9 +72,10 @@ class AdminRsvpController extends Controller
         $data = $request->validate([
             'rows'                 => ['required', 'array'],
             'rows.*.row_id'        => ['required', 'string'],
-            'rows.*.email'         => ['nullable', 'email'],
-            'rows.*.table_number'  => ['nullable', 'string', 'max:50'],
-            'rows.*.seat_number'   => ['nullable', 'string', 'max:50'],
+            'rows.*.email'         => ['nullable', 'email', 'max:40'],
+            // DB columns are tinyint; keep values small and numeric
+            'rows.*.table_number'  => ['nullable', 'integer', 'between:0,255'],
+            'rows.*.seat_number'   => ['nullable', 'integer', 'between:0,255'],
         ]);
 
         foreach ($data['rows'] as $row) {
@@ -90,10 +91,18 @@ class AdminRsvpController extends Controller
                 continue;
             }
 
+            $tableNumber = isset($row['table_number']) && $row['table_number'] !== ''
+                ? (int) $row['table_number']
+                : null;
+            $seatNumber  = isset($row['seat_number']) && $row['seat_number'] !== ''
+                ? (int) $row['seat_number']
+                : null;
+            $email       = $row['email'] ?? $model->email;
+
             $model->update([
-                'email'        => $row['email'] ?? $model->email,
-                'table_number' => $row['table_number'] ?? null,
-                'seat_number'  => $row['seat_number'] ?? null,
+                'email'        => $email,
+                'table_number' => $tableNumber,
+                'seat_number'  => $seatNumber,
             ]);
         }
 

@@ -45,8 +45,10 @@
                             @foreach($people as $i => $person)
                                 @php
                                     $rsvpId = $person['rsvp_id'] ?? null;
-                                    if (empty($rsvpId) && !empty($person['row_id']) && strpos($person['row_id'], 'rsvp-') === 0) {
-                                        $rsvpId = substr($person['row_id'], 5);
+                                    if (empty($rsvpId) && !empty($person['row_id'])) {
+                                        if (preg_match('/rsvp-?([0-9]+)/i', $person['row_id'], $m)) {
+                                            $rsvpId = $m[1];
+                                        }
                                     }
                                 @endphp
                                 <tr>
@@ -88,17 +90,19 @@
                                             name="rows[{{ $i }}][row_id]"
                                             value="{{ $person['row_id'] }}">
 
-                                        <input type="text"
+                                        <input type="number"
                                             name="rows[{{ $i }}][table_number]"
                                             value="{{ $person['table_number'] }}"
-                                            style="width:80px; background: #F3ECDC">
+                                            min="0" max="255"
+                                            style="width:90px; background: #F3ECDC">
                                     </td>
 
                                     <td style="padding:6px; border:1px solid #F3ECDC;">
-                                        <input type="text"
+                                        <input type="number"
                                             name="rows[{{ $i }}][seat_number]"
                                             value="{{ $person['seat_number'] }}"
-                                            style="width:80px; background: #F3ECDC">
+                                            min="0" max="255"
+                                            style="width:90px; background: #F3ECDC">
                                     </td>
 
                                     <td style="padding:6px; border:1px solid #F3ECDC; text-align:center;">
@@ -181,8 +185,10 @@
                 @foreach($people as $person)
                     @php
                         $rsvpId = $person['rsvp_id'] ?? null;
-                        if (empty($rsvpId) && !empty($person['row_id']) && strpos($person['row_id'], 'rsvp-') === 0) {
-                            $rsvpId = substr($person['row_id'], 5);
+                        if (empty($rsvpId) && !empty($person['row_id'])) {
+                            if (preg_match('/rsvp-?([0-9]+)/i', $person['row_id'], $m)) {
+                                $rsvpId = $m[1];
+                            }
                         }
                     @endphp
                     @if($person['source_type'] === 'RSVP' && !empty($rsvpId))
