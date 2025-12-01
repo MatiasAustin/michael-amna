@@ -6,5 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Photo extends Model
 {
-    protected $fillable = ['filename'];
+    protected $table = 'photos';
+
+    protected $fillable = [
+        'filename',
+    ];
+
+    public $timestamps = true;
 }

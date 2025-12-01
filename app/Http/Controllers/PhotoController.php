@@ -18,37 +18,31 @@ class PhotoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'photo.*' => 'required|image|mimes:jpg,jpeg,png,webp,avif|max:20480', // 20MB per file (before compress)
+            'photo.*' => 'required|image|mimes:jpg,jpeg,png,webp,avif|max:20480',
         ]);
 
-        // Pakai driver GD
         $manager = new ImageManager(new Driver());
-        $targetSizeBytes = 5 * 1024 * 1024; // final target: <5MB
-        $maxDimensions = [2400, 2000, 1600, 1400, 1200, 1000, 800]; // try larger first, then step down
-        $qualitySteps  = [85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30]; // try higher quality first
+        $targetSizeBytes = 5 * 1024 * 1024;
+        $maxDimensions = [2400, 2000, 1600, 1400, 1200, 1000, 800];
+        $qualitySteps  = [85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30];
 
         foreach ($request->file('photo') as $file) {
 
-            // Baca gambar
             $img = $manager->read($file->getRealPath());
-
-            // Cari kombinasi dimensi/quality terbaik agar < 5MB
             $binary = null;
+
             foreach ($maxDimensions as $maxDim) {
                 $working = clone $img;
                 $working->scaleDown(width: $maxDim, height: $maxDim);
 
                 foreach ($qualitySteps as $quality) {
                     $encoded = $working->toWebp($quality);
-                    $binary  = (string) $encoded;
+                    $binary = (string) $encoded;
 
-                    if (strlen($binary) <= $targetSizeBytes) {
-                        break 2; // keluar dua loop: sudah < 5MB
-                    }
+                    if (strlen($binary) <= $targetSizeBytes) break 2;
                 }
             }
 
-            // Fallback: jika masih terlalu besar, pakai kualitas minimal supaya pasti tersimpan
             if ($binary === null || strlen($binary) > $targetSizeBytes) {
                 $fallback = clone $img;
                 $fallback->scaleDown(width: 800, height: 800);
@@ -56,24 +50,22 @@ class PhotoController extends Controller
             }
 
             // Nama file
-            $filename = uniqid('img_') . '.webp';
+            // $filename = uniqid('img_') . '.webp';
+            $filename = substr(uniqid(), -8) . '.webp';
 
-            // Path relatif dari public
+
+            // Path
             $relativePath = 'gallery/' . $filename;
-
-            // Path penuh di server (public/gallery/...)
             $fullPath = public_path($relativePath);
 
-            // Pastikan folder public/gallery ada
+            // Folder
             $dir = dirname($fullPath);
-            if (!is_dir($dir)) {
-                mkdir($dir, 0755, true);
-            }
+            if (!is_dir($dir)) mkdir($dir, 0755, true);
 
-            // Simpan ke public/gallery
+            // Save file
             file_put_contents($fullPath, $binary);
 
-            // Simpan ke database -> simpan path relatifnya aja
+            // DB insert
             Photo::create([
                 'filename' => $relativePath,
             ]);
@@ -100,10 +92,7 @@ class PhotoController extends Controller
 
         if ($photo->filename) {
             $path = public_path($photo->filename);
-
-            if (file_exists($path)) {
-                unlink($path);
-            }
+            if (file_exists($path)) unlink($path);
         }
 
         $photo->delete();
