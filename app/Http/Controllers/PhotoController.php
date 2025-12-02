@@ -9,6 +9,22 @@ use Intervention\Image\Drivers\Gd\Driver;
 
 class PhotoController extends Controller
 {
+    /**
+     * Resolve public-facing photo base path.
+     * Override via PHOTO_PUBLIC_BASE in .env for shared hosting.
+     */
+    protected function photoBasePath(): string
+    {
+        $base = env('PHOTO_PUBLIC_BASE');
+
+        return rtrim($base ?: public_path(), DIRECTORY_SEPARATOR);
+    }
+
+    protected function absolutePhotoPath(string $relativePath): string
+    {
+        return $this->photoBasePath() . DIRECTORY_SEPARATOR . ltrim($relativePath, '/\\');
+    }
+
     public function index()
     {
         $pictures = Photo::all();
@@ -56,7 +72,8 @@ class PhotoController extends Controller
 
             // Path
             $relativePath = 'gallery/' . $filename;
-            $fullPath = public_path($relativePath);
+            // $fullPath = public_path($relativePath); // old behavior
+            $fullPath = $this->absolutePhotoPath($relativePath);
 
             // Folder
             $dir = dirname($fullPath);
@@ -77,7 +94,8 @@ class PhotoController extends Controller
     public function download($id)
     {
         $photo = Photo::findOrFail($id);
-        $path = public_path($photo->filename);
+        // $path = public_path($photo->filename); // old behavior
+        $path = $this->absolutePhotoPath($photo->filename);
 
         if (file_exists($path)) {
             return response()->download($path);
@@ -91,7 +109,8 @@ class PhotoController extends Controller
         $photo = Photo::findOrFail($id);
 
         if ($photo->filename) {
-            $path = public_path($photo->filename);
+            // $path = public_path($photo->filename); // old behavior
+            $path = $this->absolutePhotoPath($photo->filename);
             if (file_exists($path)) unlink($path);
         }
 

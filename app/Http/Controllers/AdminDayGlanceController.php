@@ -52,8 +52,11 @@ class AdminDayGlanceController extends Controller
         $data['display_order'] = $data['display_order'] ?? 0;
 
         if ($request->hasFile('photo')) {
-            if ($item->photo_path && file_exists(public_path($item->photo_path))) {
-                @unlink(public_path($item->photo_path));
+            // if ($item->photo_path && file_exists(public_path($item->photo_path))) { // old behavior
+            //     @unlink(public_path($item->photo_path));
+            // }
+            if ($item->photo_path && file_exists($this->absolutePublicPath($item->photo_path))) {
+                @unlink($this->absolutePublicPath($item->photo_path));
             }
             $data['photo_path'] = $this->storePhoto($request->file('photo'));
         }
@@ -65,8 +68,11 @@ class AdminDayGlanceController extends Controller
 
     public function destroy(DayGlanceItem $item)
     {
-        if ($item->photo_path && file_exists(public_path($item->photo_path))) {
-            @unlink(public_path($item->photo_path));
+        // if ($item->photo_path && file_exists(public_path($item->photo_path))) { // old behavior
+        //     @unlink(public_path($item->photo_path));
+        // }
+        if ($item->photo_path && file_exists($this->absolutePublicPath($item->photo_path))) {
+            @unlink($this->absolutePublicPath($item->photo_path));
         }
 
         $item->delete();
@@ -76,7 +82,8 @@ class AdminDayGlanceController extends Controller
 
     private function storePhoto($file): string
     {
-        $dir = public_path('day-glance');
+        // $dir = public_path('day-glance'); // old behavior
+        $dir = $this->absolutePublicPath('day-glance');
         if (!is_dir($dir)) {
             mkdir($dir, 0755, true);
         }
