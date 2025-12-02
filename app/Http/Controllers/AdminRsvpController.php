@@ -73,9 +73,9 @@ class AdminRsvpController extends Controller
             'rows'                 => ['required', 'array'],
             'rows.*.row_id'        => ['required', 'string'],
             'rows.*.email'         => ['nullable', 'email', 'max:40'],
-            // DB columns are tinyint; keep values small and numeric
-            'rows.*.table_number'  => ['nullable', 'integer', 'between:0,255'],
-            'rows.*.seat_number'   => ['nullable', 'integer', 'between:0,255'],
+            // allow mixed text/number labels
+            'rows.*.table_number'  => ['nullable', 'string', 'max:50'],
+            'rows.*.seat_number'   => ['nullable', 'string', 'max:50'],
         ]);
 
         foreach ($data['rows'] as $row) {
@@ -92,10 +92,10 @@ class AdminRsvpController extends Controller
             }
 
             $tableNumber = isset($row['table_number']) && $row['table_number'] !== ''
-                ? (int) $row['table_number']
+                ? $row['table_number']
                 : null;
             $seatNumber  = isset($row['seat_number']) && $row['seat_number'] !== ''
-                ? (int) $row['seat_number']
+                ? $row['seat_number']
                 : null;
             $email       = $row['email'] ?? $model->email;
 
