@@ -812,3 +812,10 @@ position: relative;
   }
 
 }
+
+/* ADD TO CALENDAR BUTTON */
+
+a.cal-link:hover {
+    opacity: 30%;
+    transition: 300ms;
+}
