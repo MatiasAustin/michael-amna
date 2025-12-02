@@ -99,7 +99,7 @@
         @csrf
         {{-- tamu utama / contact --}}
         <input name="full_name"  placeholder="Your Full Name" required>
-        <input name="email"      placeholder="Email (optional)" type="email">
+        <input name="email"      placeholder="Email (Required)" type="email" required>
 
         <fieldset class="attendance">
             <legend style="margin-bottom: 20px;">Are you attending?</legend>
