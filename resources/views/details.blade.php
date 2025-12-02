@@ -138,8 +138,8 @@
 
       <div class="item" style="margin-top:40px;">
           <h4>CEREMONY — THE PROMISE</h4>
-          <h1>Our ceremony will begin at {{ optional($countdown->event_at_utc)->format('g A') }}<br><br>
-            Doltone House - Jones Bay Wharf - Level 3, 26-32 Pirrama Road, Pyrmont NSW 2009</h1>
+          <p>Our ceremony will begin at {{ optional($countdown->event_at_utc)->format('g A') }}<br><br>
+            Doltone House - Jones Bay Wharf - Level 3, 26-32 Pirrama Road, Pyrmont NSW 2009</p>
             @if(!empty($venue?->venue_location))
                 <iframe src="{{ $venue->venue_location }}" width="100%" style="min-height:500px; border:0; border-radius: 20px; margin: 0 auto" allowfullscreen="" loading="lazy"></iframe>
             @else
@@ -149,17 +149,17 @@
 
       <div class="item">
           <h4>DRESS CODE</h4>
-          <h1>Black-Tie</h1>
+          <p>Black-Tie</p>
       </div>
       <div class="item">
-          <h4>After we say “I DO” we will celebrate with drinks and canapés during cocktail hour, before moving inside for dinner.</h4>
+          <p>After we say “I DO” we will celebrate with drinks and canapés during cocktail hour, before moving inside for dinner.</p>
       </div>
 
 
     <div class="divider" style="height: 0.5px; background-color: #F3ECDC10; margin: 20px 0; width: 100%;"></div>
 
     <div class="faq" style="width: 100%; margin-left: auto; margin-right: auto; padding: 0 16px;">
-        <h1>FAQ</h1>
+        <h4>FAQ</h4>
 
         @php
             $faqs = [

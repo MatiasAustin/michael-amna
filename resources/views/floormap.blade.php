@@ -49,8 +49,7 @@
 
     <section class="simple">
         <div class="item">
-          <h4>Find Your Invitation Details Here</h4>
-          <h1>Floor Map</h1>
+          <h4>Floor Map</h4>
         </div>
 
         {{-- FLOOR MAP --}}
@@ -273,7 +272,7 @@
 
         {{-- Search Bar --}}
 
-            <h3 style="text-align:left; width: 100%; font-weight: 300;">Find Your Invitation Details</h3>
+            <h4 style="text-align:left; width: 100%; font-weight: 300;">Find Your Invitation Details</h4>
             <form action="{{ route('floormap') }}" method="GET" style="margin-bottom:20px; width: 100%; max-width:100%; min-width:100%; display:flex; gap:10px;">
                 <input type="text" name="code" placeholder="Enter unique code" value="{{ request('code') }}" style="padding: 10px; width: 100%; height: auto;" required>
                 <button type="submit">Search</button>

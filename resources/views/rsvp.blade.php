@@ -46,11 +46,11 @@
 
   <section class="simple">
     <div class="item">
-        <h1>WE CAN’T WAIT TO CELEBRATE WITH YOU</h1>
-        <h4>
+        <h4>WE CAN’T WAIT TO CELEBRATE WITH YOU</h4>
+        <p>
             Please let us know if you’ll be joining us for the magic.<br>
             Kindly respond by 14 of March 2026.
-        </h4>
+        </p>
     </div>
 
     {{-- RSVP FORM --}}
@@ -72,7 +72,7 @@
             </label>
         </fieldset>
 
-        <h4 style="margin-top: 40px;">Additional Guests</h4>
+        <h5 style="margin-top: 40px;">Additional Guests</h5>
         <div id="guestList" style="display: flex; flex-direction: column; gap: 20px;">
             {{-- row template pertama --}}
             <div class="guest-row" data-index="0">
@@ -83,7 +83,7 @@
         </div>
         <button type="button" id="addGuest">+ Add another guest</button>
 
-        <h4 style="margin-top: 40px;">Message for the couple (optional)</h4>
+        <h5 style="margin-top: 40px;">Message for the couple (optional)</h5>
         <textarea name="message" rows="3" placeholder="Write a short note…"></textarea>
 
         <button type="submit">I DO</button>

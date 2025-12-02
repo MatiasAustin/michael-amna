@@ -197,8 +197,8 @@ header .veil {
 }
 
 /* BODY */
-h4 {
-    font-weight: 600;
+h4, h5, h3, h2 {
+    font-weight: 300;
     font-weight: 300;
     font-size: 18px;
     margin: 0 0 20px 0;
@@ -660,9 +660,11 @@ position: relative;
   width: 100%;
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
-  gap: 24px;
+  gap: 20px;
   align-items: stretch;
   padding: 22px;
+  justify-content: center;
+  margin-bottom: -10%;
   /* border: 1px solid rgba(243,236,220,0.24);
   border-radius: 16px;
   background: rgba(0,0,0,0.12); */
@@ -704,8 +706,12 @@ position: relative;
 }
 
 .glance-copy {
-  text-align: left;
-  padding: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
 }
 
 .glance-title {
@@ -726,6 +732,11 @@ position: relative;
 .glance-title .time {
   color: #F3ECDC;
   font-weight: 600;
+  font-size: 24px;
+  padding: 0 30px;
+  border-left:1px solid;
+  border-right: 1px solid;
+  border-color: #F3ECDC;
 }
 
 .glance-headline {
