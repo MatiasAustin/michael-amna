@@ -113,8 +113,8 @@ class AdminRsvpController extends Controller
      public function exportCsv(): StreamedResponse
     {
         // Ambil data yang sama kayak di index()
-        $rsvps  = Rsvp::select(['id','full_name','email','attend','message'])->get();
-        $guests = Guest::select(['id','rsvp_id','full_name','email'])->get();
+        $rsvps  = Rsvp::select(['id','full_name','email','attend','message','table_number','seat_number'])->get();
+        $guests = Guest::select(['id','rsvp_id','full_name','email','table_number','seat_number'])->get();
 
         $people = collect();
 
@@ -125,8 +125,8 @@ class AdminRsvpController extends Controller
                 'email'       => $rsvp->email,
                 'attend'      => $rsvp->attend,
                 'message'     => $rsvp->message,
-                'table'       => $rsvp->table ?? null, // kalau nanti kamu tambah kolom table/seat
-                'seat'        => $rsvp->seat ?? null,
+                'table'       => $rsvp->table_number,
+                'seat'        => $rsvp->seat_number,
             ]);
         }
 
@@ -137,8 +137,8 @@ class AdminRsvpController extends Controller
                 'email'       => $guest->email,
                 'attend'      => null,
                 'message'     => null,
-                'table'       => $guest->table ?? null,
-                'seat'        => $guest->seat ?? null,
+                'table'       => $guest->table_number,
+                'seat'        => $guest->seat_number,
             ]);
         }
 

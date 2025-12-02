@@ -90,18 +90,16 @@
                                             name="rows[{{ $i }}][row_id]"
                                             value="{{ $person['row_id'] }}">
 
-                                        <input type="number"
+                                        <input type="text"
                                             name="rows[{{ $i }}][table_number]"
                                             value="{{ $person['table_number'] }}"
-                                            min="0" max="255"
                                             style="width:90px; background: #F3ECDC">
                                     </td>
 
                                     <td style="padding:6px; border:1px solid #F3ECDC;">
-                                        <input type="number"
+                                        <input type="text"
                                             name="rows[{{ $i }}][seat_number]"
                                             value="{{ $person['seat_number'] }}"
-                                            min="0" max="255"
                                             style="width:90px; background: #F3ECDC">
                                     </td>
 
