@@ -125,8 +125,8 @@ class AdminRsvpController extends Controller
                 'email'       => $rsvp->email,
                 'attend'      => $rsvp->attend,
                 'message'     => $rsvp->message,
-                'table'       => $rsvp->table_number,
-                'seat'        => $rsvp->seat_number,
+                'table'       => (string) ($rsvp->table_number ?? ''),
+                'seat'        => (string) ($rsvp->seat_number ?? ''),
             ]);
         }
 
@@ -137,8 +137,8 @@ class AdminRsvpController extends Controller
                 'email'       => $guest->email,
                 'attend'      => null,
                 'message'     => null,
-                'table'       => $guest->table_number,
-                'seat'        => $guest->seat_number,
+                'table'       => (string) ($guest->table_number ?? ''),
+                'seat'        => (string) ($guest->seat_number ?? ''),
             ]);
         }
 
