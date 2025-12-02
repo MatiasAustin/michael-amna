@@ -182,7 +182,7 @@
                     <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-{{ $i }}" style="width:100%; text-align:left; padding:12px; font-size:16px; border:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; margin-top: 10px;">
                         {{ $item['q'] }} <span class="chev">▾</span>
                     </button>
-                    <div id="faq-{{ $i }}" class="faq-content" hidden style="padding:12px; border-left:4px solid #3B1B0E; background:#F3ECDC20; margin-top:4px; text-align:left;">
+                    <div id="faq-{{ $i }}" class="faq-content" hidden style="padding:12px; border-left:4px solid #2b0f10; background:#F3ECDC20; margin-top:4px; text-align:left;">
                         <p>{{ $item['a'] }}</p>
                     </div>
                 </div>

@@ -69,7 +69,7 @@
                             <br><br>
 
                             <button type="submit"
-                                    style="padding:8px 16px; background:#7E2625; color:#F3ECDC; border:none; border-radius:4px;">
+                                    style="padding:8px 16px; background:#3d1516; color:#F3ECDC; border:none; border-radius:4px;">
                                 Update Floor Map
                             </button>
                         </form>

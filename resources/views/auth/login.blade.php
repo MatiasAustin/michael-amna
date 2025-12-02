@@ -17,7 +17,7 @@
     </style>
 
 </head>
-<body style="background-color: #7E2625; color: #F3ECDC;">
+<body style="background-color: #3d1516; color: #F3ECDC;">
     <div class="header" style="padding: 20px; text-align: center;">
 
           <div class="brand">
@@ -52,7 +52,7 @@
             <button
                 type="button"
                 id="togglePassword"
-                style="position: absolute; right: 8px; background: transparent; border: 1px solid #7E2625; color: #7E2625; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;"
+                style="position: absolute; right: 8px; background: transparent; border: 1px solid #3d1516; color: #3d1516; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;"
             >
                 Show
             </button>
@@ -70,7 +70,7 @@
 
         <button
             type="submit"
-            style="background-color: #F3ECDC; color: #7E2625; padding: 10px; border: none; border-radius: 4px; cursor: pointer;"
+            style="background-color: #F3ECDC; color: #3d1516; padding: 10px; border: none; border-radius: 4px; cursor: pointer;"
         >
             Login
         </button>

@@ -89,7 +89,7 @@
                                     <input type="file" name="photo" accept=".jpg,.jpeg,.png,.webp">
                                     <small style="color:#666;">Up to 20MB; auto-compresses to <5MB</small>
                                 </label>
-                                <button type="submit" style="padding:10px 14px; background:#7E2625; color:#F3ECDC; border:none; border-radius:4px;">Add</button>
+                                <button type="submit" style="padding:10px 14px; background:#3d1516; color:#F3ECDC; border:none; border-radius:4px;">Add</button>
                             </form>
                         </div>
 
@@ -126,7 +126,7 @@
                                                     <small style="color:#666;">Up to 20MB; auto-compresses to <5MB</small>
                                                 </label>
                                                 <div style="display:flex; gap:10px; align-items:center;">
-                                                    <button type="submit" style="padding:8px 12px; background:#7E2625; color:#F3ECDC; border:none; border-radius:4px;">Update</button>
+                                                    <button type="submit" style="padding:8px 12px; background:#3d1516; color:#F3ECDC; border:none; border-radius:4px;">Update</button>
                                                 </div>
                                             </form>
                                             <form action="{{ route('admin.dayglance.destroy', $item) }}" method="POST" onsubmit="return confirm('Delete this entry?');" style="margin-top:6px;">

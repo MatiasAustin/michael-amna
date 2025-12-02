@@ -105,9 +105,9 @@
     ">
         <div style="background:#F3ECDC; padding:20px 26px;max-width:320px; text-align:center;
         border-radius: 20px;
-        border 1px solid #7E2625;">
-            <p style="margin:0 0 12px; color:#7E2625;">Thank you! Your RSVP has been recorded.</p>
-            <button id="closePopupBtn" style="padding:5px 30px;border:0;background:#7E2625;color:#F3ECDC;cursor:pointer">Close</button>
+        border 1px solid #3d1516;">
+            <p style="margin:0 0 12px; color:#3d1516;">Thank you! Your RSVP has been recorded.</p>
+            <button id="closePopupBtn" style="padding:5px 30px;border:0;background:#3d1516;color:#F3ECDC;cursor:pointer">Close</button>
         </div>
     </div>
 

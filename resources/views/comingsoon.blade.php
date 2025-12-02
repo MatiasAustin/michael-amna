@@ -22,7 +22,7 @@
         }
 
         body {
-            background-color: #7E2625;
+            background-color: #3d1516;
             color: #F3ECDC;
             margin: 0 auto;
             width: 100%;

@@ -22,7 +22,7 @@
 
     .hamb span::before, .hamb span::after {
         content: ""; position: absolute; left: 0;
-        width: 18px; height: 1px; background: #3B1B0E;
+        width: 18px; height: 1px; background: #2b0f10;
         transition: all 0.3s ease;}
 
     .flash-toast {
@@ -73,13 +73,13 @@
         </a>
       </div>
       <div class="links">
-        <a href="{{ url('/') }}" style="color: #3B1B0E;">Home</a>
-        <a href="{{ url('/details') }}" style="color: #3B1B0E;">Finer Details</a>
-        <a href="{{ url('/day-at-a-glance') }}" style="color: #3B1B0E;">Our Day at a Glance</a>
-        <a href="{{ route('floormap') }}" style="color: #3B1B0E;">Floor Map</a>
-        <a href="{{ url('/rsvp') }}" style="color: #3B1B0E;">RSVP</a>
+        <a href="{{ url('/') }}" style="color: #3d1516;">Home</a>
+        <a href="{{ url('/details') }}" style="color: #3d1516;">Finer Details</a>
+        <a href="{{ url('/day-at-a-glance') }}" style="color: #3d1516;">Our Day at a Glance</a>
+        <a href="{{ route('floormap') }}" style="color: #3d1516;">Floor Map</a>
+        <a href="{{ url('/rsvp') }}" style="color: #3d1516;">RSVP</a>
       </div>
-      <button class="hamb" aria-label="Open menu" aria-controls="mPanel" aria-expanded="false"><span style="background: #3B1B0E;"></span></button>
+      <button class="hamb" aria-label="Open menu" aria-controls="mPanel" aria-expanded="false"><span style="background: #2b0f10;"></span></button>
     </div>
     <div id="mPanel" class="panel">
       <button class="close-btn" aria-label="Close menu" aria-controls="mPanel">&times;</button>
