@@ -165,7 +165,12 @@
         </div>
     </div>
     <div class="loading-overlay" id="uploadOverlay">
-        <div class="loading-spinner" aria-label="Uploading"></div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:14px;">
+            <div class="loading-spinner" aria-label="Uploading"></div>
+            <p style="margin:0; color:#F3ECDC; font-size:14px; letter-spacing:0.5px; text-align:center;">
+                Uploading & compressing to under 5MB. This may take a moment if your files are large.
+            </p>
+        </div>
     </div>
 
     </body>
