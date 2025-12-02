@@ -8,7 +8,7 @@
         <title>Ava & Mateo — Admin Dashboard</title>
         <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/admin.css') }}" />
-        <link rel="icon" href="{{ asset('media/anm-logo.png') }}" type="image/png">
+        <link rel="icon" href="{{ asset('media/MA-favicon-beige.png') }}" type="image/png">
         <link rel="stylesheet" href="{{ asset('css/photoupload.css') }}" />
 
 

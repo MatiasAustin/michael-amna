@@ -175,11 +175,11 @@ button {
     background-color: transparent;
     font-weight: 300; cursor: pointer;
     color: #F3ECDC;
-    background-color: #3B1B0E;
+    background-color: #2b0f10;
     transition: 300ms;
 }
 button:hover {
-    color: #3B1B0E;
+    color: #3d1516;
     background-color: #F3ECDC;
 }
 
@@ -220,7 +220,7 @@ button:hover {
             display: block;
             padding: 10px;
             background: #F3ECDC;
-            color: #7E2625;
+            color: #3d1516;
             border: none;
             cursor: pointer;
             width: 100%;

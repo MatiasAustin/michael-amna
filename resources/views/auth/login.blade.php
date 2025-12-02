@@ -8,7 +8,7 @@
   <title>Ava & Mateo — Admin Login</title>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
-  <link rel="icon" href="{{ asset('media/anm-logo.png') }}" type="image/png">
+  <link rel="icon" href="{{ asset('media/MA-favicon-beige.png') }}" type="image/png">
 
     <style>
     * {
@@ -22,7 +22,7 @@
 
           <div class="brand">
             <a href="{{ url('/') }}">
-              <img src="{{ asset('media/anm-logo.png') }}" alt="">
+              <img src="{{ asset('media/MA-favicon-beige.png') }}" alt="">
             </a>
           </div>
 

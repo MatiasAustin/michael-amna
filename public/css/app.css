@@ -104,7 +104,7 @@ a { color: inherit; text-decoration: none; }
   width: 100%;
   background: #F3ECDC;
   backdrop-filter: blur(50px);
-  color: #7E2625;
+  color: #3d1516;
   position: absolute;
   top: 0;
   left: 0;
@@ -151,13 +151,13 @@ a { color: inherit; text-decoration: none; }
   font-size: 28px;
   background: none;
   border: none;
-  color: #7E2625;
+  color: #3d1516;
   cursor: pointer;
   z-index: 101;
 }
 
 .close-btn:hover {
-  color: #7E2625;
+  color: #3d1516;
   background-color: transparent;
 }
 
@@ -231,7 +231,7 @@ p {
 .btn:hover {
   background: #F3ECDC;
   border: none;
-  color: #7E2625;
+  color: #3d1516;
   transition: background 0.3s ease;
 }
 
@@ -372,7 +372,7 @@ p {
 
 .wishes-cta .btn:hover {
   background: #F3ECDC;
-  color: #7E2625;
+  color: #3d1516;
   transition: background 0.3s ease;
 }
 
@@ -504,7 +504,7 @@ p {
   align-items: center;
 }
 .button-cont .btn:hover {
-  color: #7E2625;
+  color: #3d1516;
   background-color: #F3ECDC;
   transition: 300ms;
 }
@@ -604,19 +604,19 @@ button {
 }
 button:hover {
     background: #F3ECDC;
-    color: #7E2625;
+    color: #3d1516;
     transition: background 0.3s ease;
 }
 
 button.remove {
     width: 100%;
-    background-color: #521817;
+    background-color: #2b0f10;
     color: #F3ECDC;
     border: none;
   }
 button.remove:hover {
     width: 100%;
-    background-color: #aa3735;
+    background-color: #5a2021;
     color: #F3ECDC;
     border: none;
   }
@@ -719,7 +719,7 @@ position: relative;
 }
 
 .glance-title .accent {
-  color: #ff9f8e;
+  color: #5a2021;
   font-weight: 600;
 }
 

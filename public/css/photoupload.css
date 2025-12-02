@@ -15,7 +15,7 @@
 .upload-form h1 {
     font-size: 24px;
     font-weight: 600;
-    color: #333333;
+    color: #3d1516;
 }
 
 .upload-form h4 {
@@ -37,14 +37,14 @@
 }
 
 #photoInput:hover {
-    border-color: #7E2625;
-    background: #fff1f1;
+    border-color: #3d1516;
+    background: #F3ECDC;
 }
 
 /* Error message */
 #errorMsg {
     margin-top: 8px;
-    color: #cc0000;
+    color: #5a2021;
     font-size: 13px;
 }
 
@@ -68,14 +68,14 @@ button.upload-photo {
     margin-top: 15px;
     padding: 10px 30px;
     cursor: pointer;
-    color: #7E2625;
-    border-bottom: 1px solid #7E2625;
+    color: #3d1516;
+    border-bottom: 1px solid #3d1516;
     background-color: transparent;
     transition: 0.25s ease;
 }
 
 button.upload-photo:hover {
-    background: #7E2625;
+    background: #3d1516;
     color: #F3ECDC;
 }
 
@@ -93,5 +93,5 @@ button.upload-photo-admin {
 
 button.upload-photo-admin:hover {
     background: #F3ECDC;
-    color: #7E2625;
+    color: #3d1516;
 }
