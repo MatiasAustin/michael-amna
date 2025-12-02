@@ -13,6 +13,17 @@
                         <div class="maps">
                             <h3>Venue Location</h3>
 
+                             @if(session('success'))
+                                <div style="padding:8px 12px; background:#d1fae5; color:#065f46; margin-bottom:10px; border-radius:4px;">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+
+                            @if($errors->has('floor_map'))
+                                <div style="padding:8px 12px; background:#fee2e2; color:#b91c1c; margin-bottom:10px; border-radius:4px;">
+                                    {{ $errors->first('floor_map') }}
+                                </div>
+                            @endif
                             @if(session('success'))
                             <p class="text-success">{{ session('success') }}</p>
                             @endif
@@ -27,27 +38,17 @@
                             </form>
 
                             {{-- Preview (opsional) --}}
-                            <div class="map-preview" style="margin-top:12px;">
+                            {{-- <div class="map-preview" style="margin-top:12px;">
                             <iframe id="mapPreview" src="{{ $venue->venue_location ?? '' }}" width="100%" height="500"
                                     style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                            </div>
+                            </div> --}}
                         </div>
 
 
                         <div class="floor-map" style="margin-top:40px; border-top:1px solid #ccc; padding-top:20px;">
                         <h3>Floor Map</h3>
 
-                        @if(session('success'))
-                            <div style="padding:8px 12px; background:#d1fae5; color:#065f46; margin-bottom:10px; border-radius:4px;">
-                                {{ session('success') }}
-                            </div>
-                        @endif
 
-                        @if($errors->has('floor_map'))
-                            <div style="padding:8px 12px; background:#fee2e2; color:#b91c1c; margin-bottom:10px; border-radius:4px;">
-                                {{ $errors->first('floor_map') }}
-                            </div>
-                        @endif
 
                         {{-- preview current floor map --}}
                         @if(!empty($floorMapUrl))
