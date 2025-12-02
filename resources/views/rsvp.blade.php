@@ -15,6 +15,47 @@
     .brand img {
         mix-blend-mode: screen;
     }
+    .video-wrapper {
+        margin-top: 60px;
+        width: 100%;
+        max-width: 900px;
+        border-radius: 16px;
+        overflow: hidden;
+        background: #000;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.24);
+        position: relative;
+    }
+    .video-wrapper video {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 16px;
+    }
+    .video-controls {
+        position: absolute;
+        right: 12px;
+        bottom: 12px;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+    .video-controls button {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: none;
+        background: transparent;
+        color: #F3ECDC;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        font-size: 16px;
+        transition: transform 0.15s ease, color 0.15s ease;
+    }
+    .video-controls button:hover {
+        transform: scale(1.08);
+        color: #ffffff;
+    }
   </style>
 </head>
 <body>
@@ -129,11 +170,16 @@
         </script>
     @endif
 
-    <div style="margin-top: 60px; width: 100%; max-width: 900px; border-radius: 16px; overflow: hidden;">
-        <video autoplay muted loop playsinline preload="auto" style="width:100%; height:auto; display:block; border-radius:16px;">
+    <div class="video-wrapper" id="rsvpVideoWrapper">
+        <video id="rsvpVideo" autoplay muted loop playsinline preload="auto">
             <source src="{{ asset('media/michael-amna-video.mp4') }}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
+        <div class="video-controls">
+            <button type="button" id="playPauseBtn" aria-label="Play or Pause">❚❚</button>
+            <button type="button" id="muteBtn" aria-label="Mute or Unmute">🔇</button>
+            <button type="button" id="fullscreenBtn" aria-label="Fullscreen">⛶</button>
+        </div>
     </div>
   </section>
 
@@ -163,6 +209,63 @@
         hamb.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
     });
+
+    // Video controls (play/pause/fullscreen)
+    const videoEl = document.getElementById('rsvpVideo');
+    const wrapperEl = document.getElementById('rsvpVideoWrapper');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const muteBtn = document.getElementById('muteBtn');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+
+    function updatePlayLabel() {
+        if (!playPauseBtn) return;
+        playPauseBtn.textContent = videoEl.paused ? '▶' : '❚❚';
+    }
+
+    function updateMuteLabel() {
+        if (!muteBtn) return;
+        muteBtn.textContent = videoEl.muted ? '🔇' : '🔊';
+    }
+
+    function togglePlayPause() {
+        if (videoEl.paused) {
+            videoEl.play();
+        } else {
+            videoEl.pause();
+        }
+    }
+
+    function toggleMute() {
+        videoEl.muted = !videoEl.muted;
+        updateMuteLabel();
+    }
+
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            (wrapperEl.requestFullscreen || wrapperEl.webkitRequestFullscreen || wrapperEl.msRequestFullscreen)?.call(wrapperEl);
+            // Attempt to lock to landscape on supported mobile browsers
+            if (screen.orientation?.lock) {
+                screen.orientation.lock('landscape').catch(() => {});
+            }
+        } else {
+            (document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen)?.call(document);
+            if (screen.orientation?.unlock) {
+                screen.orientation.unlock();
+            }
+        }
+    }
+
+    playPauseBtn?.addEventListener('click', togglePlayPause);
+    muteBtn?.addEventListener('click', toggleMute);
+    fullscreenBtn?.addEventListener('click', toggleFullscreen);
+    videoEl.addEventListener('play', updatePlayLabel);
+    videoEl.addEventListener('pause', updatePlayLabel);
+    videoEl.addEventListener('volumechange', updateMuteLabel);
+    document.addEventListener('fullscreenchange', () => {
+        fullscreenBtn.textContent = document.fullscreenElement ? '↙↗' : '⛶';
+    });
+    updatePlayLabel();
+    updateMuteLabel();
   </script>
 
   <script src="{{ asset('js/custom.js') }}"></script>
