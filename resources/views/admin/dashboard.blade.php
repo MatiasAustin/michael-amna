@@ -1,5 +1,26 @@
 @extends('admin.layout.structure')
 @include('admin.layout.header')
+    <style>
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.65);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 12000;
+        }
+        .loading-overlay.show { display: flex; }
+        .loading-spinner {
+            width: 64px;
+            height: 64px;
+            border: 4px solid rgba(243,236,220,0.25);
+            border-top-color: #F3ECDC;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
     <div class="admin-dashboard-content">
         <h1>Admin Dashboard</h1>
         <p>Amma & Michael</p>
@@ -59,7 +80,7 @@
                 <h3>Gallery</h3>
                 <p>Manage gallery photos here.</p>
 
-                 <form action="{{ route('gallery.store') }}" method="POST" enctype="multipart/form-data" class="upload-form">
+                 <form action="{{ route('gallery.store') }}" method="POST" enctype="multipart/form-data" class="upload-form" id="galleryUploadForm">
                     @csrf
                     <input id="photoInput" type="file" name="photo[]" multiple required accept="image/jpeg, image/png, image/webp" style="background: #F3ECDC; color: black;">
 
@@ -101,6 +122,9 @@
         </div>
 
     </div>
+    <div class="loading-overlay" id="uploadOverlay">
+        <div class="loading-spinner" aria-label="Uploading"></div>
+    </div>
 
     <script>
         const input = document.getElementById('photoInput');
@@ -109,6 +133,8 @@
         const maxSize = 20 * 1024 * 1024; // 20MB per file (before backend compresses to <5MB)
         const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
         const maxFiles = 3;
+        const overlay = document.getElementById('uploadOverlay');
+        const uploadForm = document.getElementById('galleryUploadForm');
 
         input.addEventListener('change', function () {
             preview.innerHTML = '';
@@ -143,6 +169,10 @@
                 };
                 reader.readAsDataURL(file);
             });
+        });
+
+        uploadForm?.addEventListener('submit', function() {
+            overlay?.classList.add('show');
         });
     </script>
 

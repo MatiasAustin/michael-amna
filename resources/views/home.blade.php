@@ -159,7 +159,7 @@
 
 
   {{-- OUR GALLERY SECTION --}}
-    <div class="our-gallery">
+    <div class="our-gallery" id="gallery">
         @if($photos->count())
             @php
                 $randomTop = $photos->shuffle()->take(5);

@@ -48,6 +48,25 @@
         opacity: 1;
         transform: translateX(-50%) translateY(0);
     }
+    .loading-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.65);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 12000;
+    }
+    .loading-overlay.show { display: flex; }
+    .loading-spinner {
+        width: 64px;
+        height: 64px;
+        border: 4px solid rgba(243,236,220,0.25);
+        border-top-color: #F3ECDC;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
 <body style="background-color: #F3ECDC; color: black;">
@@ -55,6 +74,14 @@
     <div id="flash-toast" class="flash-toast" data-type="success">
         {{ session('success') }}
     </div>
+    <script>
+      // Redirect to home and scroll to gallery after successful upload
+      window.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+          window.location.href = "{{ url('/') }}#gallery";
+        }, 600);
+      });
+    </script>
   @elseif (session('error'))
     <div id="flash-toast" class="flash-toast error" data-type="error">
         {{ session('error') }}
@@ -110,6 +137,9 @@
             </button>
         </form>
     </section>
+    <div class="loading-overlay" id="uploadOverlay">
+        <div class="loading-spinner" aria-label="Uploading"></div>
+    </div>
 
 
     <script>
@@ -119,6 +149,8 @@
         const maxSize = 20 * 1024 * 1024; // 20MB per file (before backend compresses to <5MB)
         const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
         const maxFiles = 3;
+        const overlay = document.getElementById('uploadOverlay');
+        const form = document.querySelector('form.upload-form');
 
         input.addEventListener('change', function () {
             preview.innerHTML = '';
@@ -153,6 +185,10 @@
                 };
                 reader.readAsDataURL(file);
             });
+        });
+
+        form?.addEventListener('submit', function() {
+            overlay?.classList.add('show');
         });
     </script>
 

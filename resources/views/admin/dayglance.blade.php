@@ -24,6 +24,25 @@
             opacity: 1;
             transform: translateX(-50%) translateY(0);
         }
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.65);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 12000;
+        }
+        .loading-overlay.show { display: flex; }
+        .loading-spinner {
+            width: 64px;
+            height: 64px;
+            border: 4px solid rgba(243,236,220,0.25);
+            border-top-color: #F3ECDC;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
     <div class="admin-dashboard-content">
         <h1>Admin Dashboard</h1>
@@ -71,7 +90,7 @@
                     <div style="display:grid; margin-top: 40px; gap:20px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
                         <div style="border:1px solid #F3ECDC; border-radius:8px; padding:16px;">
                             <h4 style="margin-top:0;">Add entry</h4>
-                            <form action="{{ route('admin.dayglance.store') }}" method="POST" enctype="multipart/form-data" style="display:grid; gap:10px;">
+                            <form action="{{ route('admin.dayglance.store') }}" method="POST" enctype="multipart/form-data" style="display:grid; gap:10px;" class="glance-upload-form">
                                 @csrf
                                 <label>Time Label
                                     <input type="text" name="time_label" placeholder="e.g. 4:45 PM" required>
@@ -106,7 +125,7 @@
                                             @endif
                                         </div>
                                         <div>
-                                            <form action="{{ route('admin.dayglance.update', $item) }}" method="POST" enctype="multipart/form-data" style="display:grid; gap:10px;">
+                                            <form action="{{ route('admin.dayglance.update', $item) }}" method="POST" enctype="multipart/form-data" style="display:grid; gap:10px;" class="glance-upload-form">
                                                 @csrf
                                                 @method('PUT')
                                                 <label>Time Label
@@ -143,8 +162,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
+    </div>
+    <div class="loading-overlay" id="uploadOverlay">
+        <div class="loading-spinner" aria-label="Uploading"></div>
+    </div>
 
     </body>
     <script>
@@ -157,5 +179,12 @@
             requestAnimationFrame(() => toast.classList.add('show'));
             setTimeout(() => toast.classList.remove('show'), 4000);
         }
+
+        const overlay = document.getElementById('uploadOverlay');
+        document.querySelectorAll('.glance-upload-form').forEach(form => {
+            form.addEventListener('submit', () => {
+                overlay?.classList.add('show');
+            });
+        });
     </script>
 </html>
