@@ -17,6 +17,23 @@
     .brand img {
             mix-blend-mode: screen;
         }
+    .map-btn {
+        display: inline-block;
+        margin-top: 12px;
+        padding: 12px 20px;
+        border-bottom: 1px solid #F3ECDC;
+        color: #F3ECDC;
+        background: transparent;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 16px;
+        transition: all 0.2s ease;
+    }
+    .map-btn:hover {
+        background: #F3ECDC;
+        color: #3d1516;
+        border-color: #F3ECDC;
+    }
   </style>
 </head>
 <body>
@@ -134,25 +151,27 @@
         </div>
       </div>
 
-        <div class="divider" style="height: 0.5px; background-color: #F3ECDC10; margin: 20px 0; width: 100%;"></div>
+        {{-- <div class="divider" style="height: 0.5px; background-color: #F3ECDC10; margin: 20px 0; width: 100%;"></div> --}}
 
       <div class="item" style="margin-top:40px;">
         <h4>Our ceremony will begin at {{ optional($countdown->event_at_utc)->format('g A') }}</h4>
 
         <p>Doltone House - Jones Bay Wharf - Level 3, 26-32 Pirrama Road, Pyrmont NSW 2009</p>
             @if(!empty($venue?->venue_location))
-                <iframe src="{{ $venue->venue_location }}" width="100%" style="min-height:500px; border:0; border-radius: 20px; margin: 0 auto" allowfullscreen="" loading="lazy"></iframe>
+                <a href="{{ $venue->venue_location }}" target="_blank" rel="noopener" class="map-btn">
+                    Open in Google Maps
+                </a>
             @else
                 <p>Venue location not set yet.</p>
   @endif
       </div>
 
-      <div class="item">
+      <div class="item" style="margin-top:40px;">
           <h4>DRESS CODE</h4>
           <p>Black-Tie</p>
       </div>
-      <div class="item">
-          <p>After we say “I DO” we will celebrate with drinks and canapés during cocktail hour, before moving inside for dinner.</p>
+      <div class="item" style="padding: 20px 10%; border: 1px solid #F3ECDC10; border-radius: 20px;">
+          <p style="margin:0;">After we say “I DO” we will celebrate with drinks and canapés during cocktail hour, before moving inside for dinner.</p>
       </div>
 
 

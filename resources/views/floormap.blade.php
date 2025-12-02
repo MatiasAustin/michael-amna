@@ -3,20 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ava & Mateo — Floor Map</title>
+  <title>Ava & Mateo - Floor Map</title>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
   <link rel="icon" href="{{ asset('media/MA-favicon-beige.png') }}" type="image/png">
-
-
 
   <style>
     .nav {
         backdrop-filter: blur(0px);
     }
     .brand img {
-            mix-blend-mode: screen;
-        }
+        mix-blend-mode: screen;
+    }
+    .map-btn {
+        display: inline-block;
+        padding: 12px 20px;
+        border-bottom: 1px solid #F3ECDC;
+        color: #F3ECDC;
+        background: transparent;
+        font-size: 16px;
+        transition: all 0.2s ease;
+    }
+    .map-btn:hover {
+        background: #F3ECDC;
+        color: #3d1516;
+        border-color: #F3ECDC;
+    }
   </style>
 </head>
 <body>
@@ -50,223 +62,20 @@
     <section class="simple">
         <div class="item">
           <h4>Floor Map</h4>
+
+            {{-- FLOOR MAP --}}
+            @if($floorMapUrl)
+                <a href="{{ $floorMapUrl }}" class="map-btn" target="_blank" rel="noopener" download>
+                    View / Download Floor Map
+                </a>
+            @else
+                <p>Floor map is not available yet.</p>
+            @endif
+        {{-- END FLOOR MAP --}}
+
         </div>
 
-        {{-- FLOOR MAP --}}
-            @if($floorMapUrl)
-
-                <div id="floorMapWrapper" style="width:100%; height:500px; border:1px solid #ddd; border-radius:20px; overflow:hidden; position:relative; cursor:grab; background:#f5f5f5; touch-action:none;">
-
-                    <img id="floorMapImage"
-                        src="{{ $floorMapUrl }}"
-                        alt="Floor Map"
-                        style="user-select:none; -webkit-user-drag:none; max-width:none; position:absolute; top:0; left:0; transform-origin: top left;">
-                </div>
-
-                <div style="margin-bottom:10px; width:100%; max-width:800px; display:flex; justify-content:end; gap:10px; margin-top:10px; margin-bottom:10px; margin-right:10%;">
-                    <button type="button" id="zoomInBtn"
-                            style="padding:4px 8px; font-size:12px;">+</button>
-                    <button type="button" id="zoomOutBtn"
-                            style="padding:4px 8px; font-size:12px;">−</button>
-                    <button type="button" id="resetBtn"
-                            style="padding:4px 8px; font-size:12px;">Reset</button>
-                    <button type="button" id="fullscreenBtn"
-                            style="padding:4px 8px; font-size:12px;">Fullscreen</button>
-                </div>
-
-            @endif
-
-            <script>
-                (function() {
-                    const wrapper  = document.getElementById('floorMapWrapper');
-                    const img      = document.getElementById('floorMapImage');
-                    if (!wrapper || !img) return;
-
-                    let scale = 1;
-                    let minScale = 1;
-                    let originX = 0;
-                    let originY = 0;
-                    let isPanning = false;
-                    let startX = 0;
-                    let startY = 0;
-                    let lastX = 0;
-                    let lastY = 0;
-
-                    function clampPosition() {
-                        const w = wrapper.clientWidth;
-                        const h = wrapper.clientHeight;
-                        const iwScaled = (img.naturalWidth || img.width) * scale;
-                        const ihScaled = (img.naturalHeight || img.height) * scale;
-
-                        const minX = iwScaled <= w ? (w - iwScaled) / 2 : w - iwScaled;
-                        const maxX = iwScaled <= w ? (w - iwScaled) / 2 : 0;
-                        const minY = ihScaled <= h ? (h - ihScaled) / 2 : h - ihScaled;
-                        const maxY = ihScaled <= h ? (h - ihScaled) / 2 : 0;
-
-                        originX = Math.min(maxX, Math.max(minX, originX));
-                        originY = Math.min(maxY, Math.max(minY, originY));
-                        lastX = originX;
-                        lastY = originY;
-                    }
-
-                    function centerImage() {
-                        const w = wrapper.clientWidth;
-                        const h = wrapper.clientHeight;
-                        const iwScaled = (img.naturalWidth || img.width) * scale;
-                        const ihScaled = (img.naturalHeight || img.height) * scale;
-
-                        originX = (w - iwScaled) / 2;
-                        originY = (h - ihScaled) / 2;
-                        lastX = originX;
-                        lastY = originY;
-                        applyTransform();
-                    }
-
-                    function computeMinScale(center = false) {
-                        const w = wrapper.clientWidth;
-                        const h = wrapper.clientHeight;
-                        const iw = img.naturalWidth || img.width;
-                        const ih = img.naturalHeight || img.height;
-                        if (!iw || !ih) return;
-
-                        minScale = Math.min(w / iw, h / ih); // fit entire image inside frame
-                        if (scale < minScale) scale = minScale;
-
-                        if (center) {
-                            const scaledW = iw * scale;
-                            const scaledH = ih * scale;
-                            originX = (w - scaledW) / 2;
-                            originY = (h - scaledH) / 2;
-                            lastX = originX;
-                            lastY = originY;
-                        }
-
-                        clampPosition();
-                        applyTransform();
-                    }
-
-                    function applyTransform() {
-                        clampPosition();
-                        img.style.transform = `translate(${originX}px, ${originY}px) scale(${scale})`;
-                    }
-
-                    // helpers buat mulai / gerak / stop pan
-                    function startPan(clientX, clientY) {
-                        isPanning = true;
-                        wrapper.style.cursor = 'grabbing';
-                        startX = clientX - lastX;
-                        startY = clientY - lastY;
-                    }
-
-                    function movePan(clientX, clientY) {
-                        if (!isPanning) return;
-                        lastX = clientX - startX;
-                        lastY = clientY - startY;
-                        originX = lastX;
-                        originY = lastY;
-                        applyTransform();
-                    }
-
-                    function endPan() {
-                        isPanning = false;
-                        wrapper.style.cursor = 'grab';
-                    }
-
-                    // Zoom buttons
-                    document.getElementById('zoomInBtn').addEventListener('click', () => {
-                        scale *= 1.2;
-                        if (scale < minScale) scale = minScale;
-                        applyTransform();
-                    });
-
-                    document.getElementById('zoomOutBtn').addEventListener('click', () => {
-                        scale /= 1.2;
-                        if (scale < minScale) scale = minScale;
-                        applyTransform();
-                    });
-
-                    document.getElementById('resetBtn').addEventListener('click', () => {
-                        scale = minScale;
-                        originX = 0;
-                        originY = 0;
-                        lastX = 0;
-                        lastY = 0;
-                        computeMinScale(true); // center on reset
-                        centerImage();
-                    });
-
-                    // 🔹 Desktop: mouse drag
-                    wrapper.addEventListener('mousedown', e => {
-                        e.preventDefault();
-                        startPan(e.clientX, e.clientY);
-                    });
-
-                    window.addEventListener('mousemove', e => {
-                        movePan(e.clientX, e.clientY);
-                    });
-
-                    window.addEventListener('mouseup', () => {
-                        endPan();
-                    });
-
-                    // 🔹 Mobile: touch drag
-                    wrapper.addEventListener('touchstart', e => {
-                        if (e.touches.length !== 1) return; // single finger only
-                        const t = e.touches[0];
-                        startPan(t.clientX, t.clientY);
-                    }, { passive: true });
-
-                    wrapper.addEventListener('touchmove', e => {
-                        if (!isPanning || e.touches.length !== 1) return;
-                        const t = e.touches[0];
-                        movePan(t.clientX, t.clientY);
-                        e.preventDefault(); // cegah scroll page
-                    }, { passive: false });
-
-                    wrapper.addEventListener('touchend', () => {
-                        endPan();
-                    });
-
-                    wrapper.addEventListener('touchcancel', () => {
-                        endPan();
-                    });
-
-                    // Scroll wheel zoom (desktop)
-                    wrapper.addEventListener('wheel', e => {
-                        e.preventDefault();
-                        const delta = e.deltaY < 0 ? 1.02 : 0.98; // even slower zoom
-                        scale *= delta;
-                        if (scale < minScale) scale = minScale;
-                        applyTransform();
-                    }, { passive: false });
-
-                    // Fullscreen
-                    const fullscreenBtn = document.getElementById('fullscreenBtn');
-                    fullscreenBtn.addEventListener('click', () => {
-                        if (!document.fullscreenElement) {
-                            wrapper.requestFullscreen?.();
-                        } else {
-                            document.exitFullscreen?.();
-                        }
-                    });
-
-                    // initial
-                    const init = () => {
-                        computeMinScale(true); // center on load
-                        centerImage();
-                    };
-
-                    if (img.complete) {
-                        init();
-                    } else {
-                        img.addEventListener('load', init);
-                    }
-
-                    window.addEventListener('resize', () => computeMinScale(false));
-                })();
-            </script>
-
-            {{-- END FLOOR MAP --}}
+        
 
             <div class="divider" id="find" style="height: 0.5px; background-color: #F3ECDC10; margin: 20px 0; width: 100%;"></div>
 

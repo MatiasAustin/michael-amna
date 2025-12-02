@@ -10,7 +10,7 @@ class AdminFloorMapController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'floor_map' => ['required', 'image', 'mimes:jpg,jpeg', 'max:4096'], // max 4 MB
+            'floor_map' => ['required', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:8192'], // up to ~8MB, allows JPG/PNG/PDF
         ]);
 
         // $dir = public_path('floormap'); // old behavior
@@ -20,7 +20,23 @@ class AdminFloorMapController extends Controller
         }
 
         $file = $request->file('floor_map');
-        $file->move($dir, 'floor-map.jpg'); // overwrite existing file
+        $allowedExts = ['jpg', 'png', 'pdf']; // normalize jpeg -> jpg
+        $ext = strtolower($file->getClientOriginalExtension());
+        $ext = $ext === 'jpeg' ? 'jpg' : $ext;
+        if (!in_array($ext, $allowedExts, true)) {
+            $ext = 'jpg';
+        }
+
+        // delete older floor-map.* files
+        foreach ($allowedExts as $allowed) {
+            $candidate = $dir . DIRECTORY_SEPARATOR . "floor-map.{$allowed}";
+            if (file_exists($candidate)) {
+                @unlink($candidate);
+            }
+        }
+
+        $targetName = "floor-map.{$ext}";
+        $file->move($dir, $targetName); // overwrite existing file
 
         return back()->with('success', 'Floor map berhasil diupdate.');
     }

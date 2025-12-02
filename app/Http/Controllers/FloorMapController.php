@@ -19,13 +19,24 @@ class FloorMapController extends Controller
                 ->first();
         }
 
-        // $floorMapExists = file_exists(public_path('floormap/floor-map.jpg')); // old behavior
-        $floorMapExists = file_exists($this->absolutePublicPath('floormap/floor-map.jpg'));
-        $floorMapUrl = $floorMapExists ? asset('floormap/floor-map.jpg') : null;
+        $floorMapUrl = $this->resolveFloorMapUrl();
 
         return view('floormap', [
             'rsvp'        => $rsvp,
             'floorMapUrl' => $floorMapUrl,
         ]);
+    }
+
+    protected function resolveFloorMapUrl(): ?string
+    {
+        $candidates = ['jpg', 'png', 'pdf'];
+        foreach ($candidates as $ext) {
+            $name = "floor-map.{$ext}";
+            if (file_exists($this->absolutePublicPath('floormap/' . $name))) {
+                return asset('floormap/' . $name);
+            }
+        }
+
+        return null;
     }
 }

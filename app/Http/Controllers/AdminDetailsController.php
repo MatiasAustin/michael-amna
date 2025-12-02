@@ -12,9 +12,7 @@ class AdminDetailsController extends Controller
         $venue = Venue::first(); // ambil record pertama
 
         // floor map
-        // $floorMapExists = file_exists(public_path('floormap/floor-map.jpg')); // old behavior
-        $floorMapExists = file_exists($this->absolutePublicPath('floormap/floor-map.jpg'));
-        $floorMapUrl = $floorMapExists ? asset('floormap/floor-map.jpg') : null;
+        $floorMapUrl = $this->resolveFloorMapUrl();
 
         return view('admin.details', compact('venue', 'floorMapUrl'));
     }
@@ -30,5 +28,18 @@ class AdminDetailsController extends Controller
         $venue ? $venue->update($data) : Venue::create($data);
 
         return back()->with('success', 'Venue location updated.');
+    }
+
+    protected function resolveFloorMapUrl(): ?string
+    {
+        $candidates = ['jpg', 'png', 'pdf'];
+        foreach ($candidates as $ext) {
+            $name = "floor-map.{$ext}";
+            if (file_exists($this->absolutePublicPath('floormap/' . $name))) {
+                return asset('floormap/' . $name);
+            }
+        }
+
+        return null;
     }
 }
