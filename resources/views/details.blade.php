@@ -225,7 +225,7 @@
 
     <div class="divider" style="height: 0.5px; background-color: #F3ECDC10; margin: 20px 0; width: 100%;"></div>
 
-      <img src="../../media/ForeverKhoury.png" alt="" class="gracias">
+      <img src="{{ asset('media/Foreverkhoury.png') }}" alt="" class="gracias">
     </section>
 
   <footer>All Right Reserved by @Freellab2025</footer>
