@@ -213,7 +213,7 @@
 
     {{-- WISHES SECTION --}}
     <section class="wishes-section">
-        <h1 class="wishes-heading">Wishes From Our Loved Ones</h1>
+        <h4 class="wishes-heading">Wishes From Our Loved Ones</h4>
         <p class="wishes-subtitle">
             Small notes, big love. Here are some of the words shared for our day.
         </p>
