@@ -137,9 +137,9 @@
         <div class="divider" style="height: 0.5px; background-color: #F3ECDC10; margin: 20px 0; width: 100%;"></div>
 
       <div class="item" style="margin-top:40px;">
-          <h4>CEREMONY — THE PROMISE</h4>
-          <p>Our ceremony will begin at {{ optional($countdown->event_at_utc)->format('g A') }}<br><br>
-            Doltone House - Jones Bay Wharf - Level 3, 26-32 Pirrama Road, Pyrmont NSW 2009</p>
+        <h4>Our ceremony will begin at {{ optional($countdown->event_at_utc)->format('g A') }}</h4>
+
+        <p>Doltone House - Jones Bay Wharf - Level 3, 26-32 Pirrama Road, Pyrmont NSW 2009</p>
             @if(!empty($venue?->venue_location))
                 <iframe src="{{ $venue->venue_location }}" width="100%" style="min-height:500px; border:0; border-radius: 20px; margin: 0 auto" allowfullscreen="" loading="lazy"></iframe>
             @else
