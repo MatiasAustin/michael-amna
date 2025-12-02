@@ -67,7 +67,7 @@
     </video>
     <div class="veil"></div>
     <!-- <div class="hero-txt">
-      <h1 class="names">Ava & Mateo</h1>
+      <h1 class="names">Michael & Amna</h1>
       <p class="tag">Not a tradition—our tradition. Food, music, and the people we love.</p>
       <p class="date">Saturday · 18 April 2026 · Bandung</p>
     </div> -->
