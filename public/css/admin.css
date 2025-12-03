@@ -31,6 +31,7 @@ p {
     background-color: transparent;
     font-weight: 300; cursor: pointer;
     color: #F3ECDC;
+    text-transform: uppercase;
 }
 .logout-button:hover {
     border-bottom: 1px solid #F3ECDC;
@@ -154,13 +155,14 @@ form.upload-form {
 
 a.download-button {
     font: inherit;
-    font-size: 10px;
+    font-size: 14px;
     border: none;
     border-bottom: 1px solid var(--bg);
     background-color: transparent;
     font-weight: 300; cursor: pointer;
     color: #F3ECDC;
     transition: 300ms;
+    text-transform: uppercase;
 }
 a.download-button:hover {
     color: #f3ecdc7e;
@@ -169,7 +171,7 @@ a.download-button:hover {
 button {
     font: inherit;
     padding: 6px 20px;
-    font-size: 12px;
+    font-size: 14px;
     border: none;
     border-bottom: 1px solid var(--bg);
     background-color: transparent;
@@ -177,6 +179,7 @@ button {
     color: #F3ECDC;
     background-color: #2b0f10;
     transition: 300ms;
+    text-transform: uppercase;
 }
 button:hover {
     color: #3d1516;

@@ -46,7 +46,7 @@
 
   <section class="simple" style="margin-bottom: 120px">
     <div class="item" style="margin-bottom: 24px;">
-      <h4>Our Day at a Glance</h4>
+      <h2>Our Day at a Glance</h2>
     </div>
 
     <div class="glance-list">
@@ -73,7 +73,7 @@
               {{-- <span class="accent">Next to</span> --}}
               <span class="time">{{ $timeLabel }}</span>
             </div>
-            <h4 class="glance-headline">{{ $headline }}</h4>
+            <h2 class="glance-headline">{{ $headline }}</h2>
             @if(!empty($caption))
               <p class="glance-caption"><em>{{ $caption }}</em></p>
             @endif

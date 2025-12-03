@@ -98,7 +98,7 @@
 
                     <div style="display:flex; margin-top: 20px; gap:20px; height: fit-content; flex-direction: column;">
                         <div style="padding:16px; border-radius:20px; border:1px solid #F3ECDC30;">
-                            <h4 style="margin-top:0;">Add entry</h4>
+                            <h2 style="margin-top:0;">Add entry</h2>
                             <form action="{{ route('admin.dayglance.store') }}" method="POST" enctype="multipart/form-data" style="display:grid; gap:10px; margin-top:10px;" class="glance-upload-form">
                                 @csrf
                                 <label style="margin-bottom: 20px; display:flex; flex-direction: column; gap:5px;">Time Label
@@ -117,12 +117,12 @@
                                     <input type="file" name="photo" accept=".jpg,.jpeg,.png,.webp"><br>
                                     <small style="color:#F3ECDC;">Up to 20MB; auto-compresses to <5MB</small>
                                 </label>
-                                <button type="submit" style="padding:10px 14px; background:#F3ECDC; color:#3d1516; border:none; border-radius:4px; font-size: 14px;">Add</button>
+                                <button type="submit" style="padding:10px 14px; background:#F3ECDC; color:#3d1516; border:none; border-radius:4px; font-size: 14px; text-transform: uppercase;">Add</button>
                             </form>
                         </div>
 
                         <div style="padding:0;">
-                            <h4 style="margin-top:0;">Existing entries</h4>
+                            <h2 style="margin-top:0;">Existing entries</h2>
                             <div style="display:flex; flex-direction:column; gap:12px; margin-top:10px;">
 
                                 @forelse($items as $item)
@@ -155,13 +155,13 @@
                                                     <small style="color:#F3ECDC;">File Size Up to 20MB; auto-compresses to <5MB</small>
                                                 </label>
                                                 <div style="display:flex; gap:10px; align-items:center;">
-                                                    <button type="submit" style="padding:8px 12px; background:#3d1516; color:#F3ECDC; border:none; border-radius:4px;">Update</button>
+                                                    <button type="submit" style="padding:8px 12px; background:#3d1516; color:#F3ECDC; border:none; border-radius:4px; font-size: 14px; text-transform: uppercase;">Update</button>
                                                 </div>
                                             </form>
                                             <form action="{{ route('admin.dayglance.destroy', $item) }}" method="POST" onsubmit="return confirm('Delete this entry?');" style="margin-top:6px;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" style="padding:8px 12px; background:#b91c1c; color:#fff; border:none; border-radius:4px;">Delete</button>
+                                                <button type="submit" style="padding:8px 12px; background:#b91c1c; color:#fff; border:none; border-radius:4px; font-size: 14px; text-transform: uppercase;">Delete</button>
                                             </form>
                                         </div>
                                     </div>

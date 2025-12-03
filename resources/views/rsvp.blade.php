@@ -49,7 +49,7 @@
         cursor: pointer;
         display: grid;
         place-items: center;
-        font-size: 16px;
+        font-size: 14px;
         transition: transform 0.15s ease, color 0.15s ease;
     }
     .video-controls button:hover {
@@ -87,7 +87,7 @@
 
   <section class="simple">
     <div class="item">
-        <h4>WE CAN’T WAIT TO CELEBRATE WITH YOU</h4>
+        <h2>WE CAN’T WAIT TO CELEBRATE WITH YOU</h2>
         <p>
             Please let us know if you’ll be joining us for the magic.<br>
             Kindly respond by 14 of March 2026.

@@ -72,6 +72,8 @@ button.upload-photo {
     border-bottom: 1px solid #3d1516;
     background-color: transparent;
     transition: 0.25s ease;
+    font-size: 14px;
+    text-transform: uppercase;
 }
 
 button.upload-photo:hover {
@@ -89,6 +91,8 @@ button.upload-photo-admin {
     border-bottom: 1px solid #F3ECDC;
     background-color: transparent;
     transition: 0.25s ease;
+    font-size: 14px;
+    text-transform: uppercase;
 }
 
 button.upload-photo-admin:hover {

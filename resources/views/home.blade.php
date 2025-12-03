@@ -143,11 +143,11 @@
     </script>
 
 
-    <h4 style="margin-top: 40px;">Welcome</h4> 
+    <h2 style="margin-top: 40px;">Welcome</h2>
     <h1 style="font-family: 'Kunstler Script Local', cursive; text-transform:capitalize; font-size: 72px;">Michael & Amna</h1>
 
     <p>We can't wait to celebrate our special day with you.</p>
-    <h4 style="margin-top: 40px;">Along with your formal invitation, please enjoy this extension filled with all the little details we've planned.</h4>
+    <h2>Along with your formal invitation, please enjoy this extension filled with all the little details we've planned.</h2>
     <br>
       <a class="btn" href="{{ url('/details') }}" style="margin-bottom: 20px;">Click Here to Unveil That Magic</a>
       <a class="btn" style="margin-left:8px" href="{{ url('/rsvp') }}">RSVP</a>
@@ -211,7 +211,7 @@
 
     {{-- WISHES SECTION --}}
     <section class="wishes-section">
-        <h4 class="wishes-heading">Wishes From Our Loved Ones</h4>
+        <h2 class="wishes-heading">Wishes From Our Loved Ones</h2>
         <p class="wishes-subtitle">
             Small notes, big love. Here are some of the words shared for our day.
         </p>

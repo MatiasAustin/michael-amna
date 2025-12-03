@@ -26,7 +26,7 @@
         background: transparent;
         text-transform: uppercase;
         letter-spacing: 1px;
-        font-size: 16px;
+        font-size: 14px;
         transition: all 0.2s ease;
     }
     .map-btn:hover {
@@ -67,7 +67,7 @@
   <section class="simple">
 
       <div class="item">
-          <h4>Saturday</h4>
+          <h2>Saturday</h2>
         <h1>{{ optional($countdown->event_at_utc)->format('d M Y') }}</h1>
         @php
             $event = $countdown?->event_at_utc;
@@ -154,7 +154,7 @@
         {{-- <div class="divider" style="height: 0.5px; background-color: #F3ECDC10; margin: 20px 0; width: 100%;"></div> --}}
 
       <div class="item" style="margin-top:40px;">
-        <h4>Our ceremony will begin at {{ optional($countdown->event_at_utc)->format('g A') }}</h4>
+        <h2>Our ceremony will begin at {{ optional($countdown->event_at_utc)->format('g A') }}</h2>
 
         <p>Doltone House - Jones Bay Wharf - Level 3, 26-32 Pirrama Road, Pyrmont NSW 2009</p>
             @if(!empty($venue?->venue_location))
@@ -167,7 +167,7 @@
       </div>
 
       <div class="item" style="margin-top:40px;">
-          <h4>DRESS CODE</h4>
+          <h2>DRESS CODE</h2>
           <p>Black-Tie</p>
       </div>
       <div class="item" style="padding: 20px 10%; border: 1px solid #F3ECDC10; border-radius: 20px;">
@@ -178,7 +178,7 @@
     <div class="divider" style="height: 0.5px; background-color: #F3ECDC10; margin: 20px 0; width: 100%;"></div>
 
     <div class="faq" style="width: 100%; margin-left: auto; margin-right: auto; padding: 0 16px;">
-        <h4>FAQ</h4>
+        <h2>FAQ</h2>
 
         @php
             $faqs = [
@@ -198,7 +198,7 @@
         <div class="faq-list" style="margin-top: 20px; width: 100%; margin-left: auto; margin-right: auto;">
             @foreach($faqs as $i => $item)
                 <div class="faq-item">
-                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-{{ $i }}" style="width:100%; text-align:left; padding:12px; font-size:16px; border:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; margin-top: 10px;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-{{ $i }}" style="width:100%; text-align:left; padding:12px; font-size:14px; border:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; margin-top: 10px; text-transform: uppercase;">
                         {{ $item['q'] }} <span class="chev">▾</span>
                     </button>
                     <div id="faq-{{ $i }}" class="faq-content" hidden style="padding:12px; border-left:4px solid #2b0f10; background:#F3ECDC20; margin-top:4px; text-align:left;">

@@ -14,6 +14,10 @@
     * {
         text-transform: none !important;
     }
+    button {
+        text-transform: uppercase !important;
+        font-size: 14px !important;
+    }
     </style>
 
 </head>
@@ -52,7 +56,7 @@
             <button
                 type="button"
                 id="togglePassword"
-                style="position: absolute; right: 8px; background: transparent; border: 1px solid #3d1516; color: #3d1516; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;"
+                style="position: absolute; right: 8px; background: transparent; border: 1px solid #3d1516; color: #3d1516; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 14px; text-transform: uppercase;"
             >
                 Show
             </button>
@@ -70,7 +74,7 @@
 
         <button
             type="submit"
-            style="background-color: #F3ECDC; color: #3d1516; padding: 10px; border: none; border-radius: 4px; cursor: pointer;"
+            style="background-color: #F3ECDC; color: #3d1516; padding: 10px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; text-transform: uppercase;"
         >
             Login
         </button>

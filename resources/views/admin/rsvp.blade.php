@@ -20,7 +20,7 @@
 
                 <div style="margin-top: 20px; margin-bottom: 15px; box-sizing: border-box;">
                     <a href="{{ route('admin.rsvp.export') }}"
-                    style="padding:8px 20px; background:#F3ECDC; color:#3d1516; text-decoration:none;">
+                    style="padding:8px 20px; background:#F3ECDC; color:#3d1516; text-decoration:none; font-size:14px; text-transform: uppercase;">
                         Export to CSV
                     </a>
                 </div>
@@ -71,7 +71,7 @@
                                             <button type="button"
                                                 onclick="toggleEmailEdit(this)"
                                                 aria-label="Edit email"
-                                                style="padding:4px; background:#F3ECDC; color:#3d1516; border:1px solid #3d1516; border-radius:3px; display:flex; align-items:center; justify-content:center;">
+                                                style="padding:4px; background:#F3ECDC; color:#3d1516; border:1px solid #3d1516; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:14px; text-transform: uppercase;">
                                                 <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                     <path d="M12 20h9"></path>
                                                     <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5Z"></path>
@@ -111,7 +111,7 @@
                                                     onclick="copyCode(this.dataset.code)"
                                                     data-code="{{ $person['unique_code'] }}"
                                                     aria-label="Copy code"
-                                                    style="padding:4px; background:#F3ECDC; color:#3d1516; border:1px solid #3d1516; border-radius:3px; display:flex; align-items:center; justify-content:center;">
+                                                    style="padding:4px; background:#F3ECDC; color:#3d1516; border:1px solid #3d1516; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:14px; text-transform: uppercase;">
                                                     <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                                                         <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
@@ -128,7 +128,7 @@
                                                 <button type="submit"
                                                     formaction="{{ route('admin.rsvp.generateCode', ['rsvp' => $rsvpId]) }}"
                                                     formmethod="POST"
-                                                    style="padding:4px 8px; font-size:11px; background:#F3ECDC; color:#3d1516; border:none; border-radius:3px;">
+                                                    style="padding:4px 8px; font-size:14px; background:#F3ECDC; color:#3d1516; border:none; border-radius:3px; text-transform: uppercase;">
                                                     Generate Code
                                                 </button>
 
@@ -139,7 +139,7 @@
                                                     data-email="{{ $person['email'] }}"
                                                     data-name="{{ $person['contact_name'] }}"
                                                     data-code="{{ $person['unique_code'] }}"
-                                                    style="padding:4px 8px; font-size:11px; background:#3d1516; color:#F3ECDC; border:none; border-radius:3px;">
+                                                    style="padding:4px 8px; font-size:14px; background:#3d1516; color:#F3ECDC; border:none; border-radius:3px; text-transform: uppercase;">
                                                     Send Email
                                                 </button>
 
@@ -147,7 +147,7 @@
                                                 <button type="button"
                                                     onclick="confirmDeleteRsvp('{{ $rsvpId }}')"
                                                     aria-label="Delete RSVP and guests"
-                                                    style="padding:4px; background:#F3ECDC; color:#3d1516; border:1px solid #3d1516; border-radius:3px; display:flex; align-items:center; justify-content:center;">
+                                                    style="padding:4px; background:#F3ECDC; color:#3d1516; border:1px solid #3d1516; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:14px; text-transform: uppercase;">
                                                     <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                         <polyline points="3 6 5 6 21 6"></polyline>
                                                         <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
@@ -167,7 +167,7 @@
                     </div>
 
                     <div style="margin-top:20px; color:#f8f3eb;">
-                        <h4 style="margin:0 0 10px 0; letter-spacing:0.5px;">NOTES</h4>
+                        <h2 style="margin:0 0 10px 0; letter-spacing:0.5px;">NOTES</h2>
                         <p style="margin:0 0 6px 0; font-size: 12px;">
                             Generate Code is only for RSVP (main guests). Additional guests will use the same unique code as their RSVP.
                         <br>
@@ -175,7 +175,7 @@
                     </div>
 
                     <button type="submit"
-                            style="margin-top:15px; padding:8px 16px; background:#F3ECDC; color:#3d1516; border:none; border-radius:4px;">
+                            style="margin-top:15px; padding:8px 16px; background:#F3ECDC; color:#3d1516; border:none; border-radius:4px; font-size:14px; text-transform: uppercase;">
                         Save Assignments
                     </button>
                 </form>
@@ -211,7 +211,7 @@
                 <p id="successMessage" style="margin:0 0 12px 0; font-size:13px; line-height:1.4;"></p>
                 <button type="button"
                         onclick="closeSuccessModal()"
-                        style="padding:6px 10px; font-size:12px; background:#3d1516; color:#F3ECDC; border:none; border-radius:4px;">
+                        style="padding:6px 10px; font-size:14px; background:#3d1516; color:#F3ECDC; border:none; border-radius:4px; text-transform: uppercase;">
                     Close
                 </button>
             </div>
@@ -260,24 +260,24 @@
                             <a id="sendGmailBtn"
                                href="#"
                                target="_blank" rel="noopener"
-                               style="padding:6px 10px; font-size:12px; background:#3d1516; color:#F3ECDC; border:none; border-radius:4px; text-decoration:none;">
+                               style="padding:6px 10px; font-size:14px; background:#3d1516; color:#F3ECDC; border:none; border-radius:4px; text-decoration:none; text-transform: uppercase;">
                                 Send by Email
                             </a>
                             <a id="sendOutlookBtn"
                                href="#"
                                target="_blank" rel="noopener"
-                               style="padding:6px 10px; font-size:12px; background:#3d1516; color:#F3ECDC; border:none; border-radius:4px; text-decoration:none;">
+                               style="padding:6px 10px; font-size:14px; background:#3d1516; color:#F3ECDC; border:none; border-radius:4px; text-decoration:none; text-transform: uppercase;">
                                 Send by Outlook
                             </a>
                         </div>
                         <div style="display:flex; gap:8px; justify-content:flex-end;">
                             <button type="button"
                                     onclick="closeSendCodeModal()"
-                                    style="padding:6px 10px; font-size:12px; background:#eee; border:none; color:#3d1516; border-radius:4px;">
+                                    style="padding:6px 10px; font-size:14px; background:#eee; border:none; color:#3d1516; border-radius:4px; text-transform: uppercase;">
                                 Cancel
                             </button>
                             <button type="submit"
-                                    style="padding:6px 10px; font-size:12px; background:#3d1516; color:#F3ECDC; border:none; border-radius:4px;">
+                                    style="padding:6px 10px; font-size:14px; background:#3d1516; color:#F3ECDC; border:none; border-radius:4px; text-transform: uppercase;">
                                 Send with Official Domain
                             </button>
                         </div>
