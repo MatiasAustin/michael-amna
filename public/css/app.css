@@ -298,7 +298,7 @@ p {
 }
 
 .count-box span {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 300;
   color: #F3ECDC;
 }
@@ -676,6 +676,7 @@ textarea { min-height: 120px; resize: vertical; text-transform: unset; font-size
 
 button {
   border: none;
+  padding: 10px 20px;
   border-bottom: 1px solid #F3ECDC;
   font-weight: 300; cursor: pointer;
   color: #F3ECDC;
@@ -694,6 +695,7 @@ button.remove {
     background-color: #2b0f10;
     color: #F3ECDC;
     border: none;
+    padding: 10px 20px;
   }
 button.remove:hover {
     width: 100%;

@@ -170,7 +170,7 @@ a.download-button:hover {
 
 button {
     font: inherit;
-    padding: 6px 20px;
+    padding: 10px 20px;
     font-size: 14px;
     border: none;
     border-bottom: 1px solid var(--bg);

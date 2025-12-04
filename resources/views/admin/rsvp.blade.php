@@ -2,7 +2,7 @@
 @include('admin.layout.header')
     <div class="admin-dashboard-content">
         <h1>Admin Dashboard</h1>
-        <p>Amma & Michael</p>
+        <p>Michael & Amna</p>
 
         <div class="admin-dashboard-main">
             @include('admin.layout.sidebar')
