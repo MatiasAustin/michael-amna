@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Home')</title>
     <link rel="icon" href="media/anm-logo.png" type="image/png">
+    <link rel="stylesheet" href="https://use.typekit.net/zlr0kjr.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
