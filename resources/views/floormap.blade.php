@@ -62,7 +62,7 @@
 
     <section class="simple">
         <div class="item">
-          <h2>Floor Map</h2>
+          <h2 style="margin: 20px 0; letter-spacing: 10px;">Floor Map</h2>
 
             {{-- FLOOR MAP --}}
             @if($floorMapUrl)
@@ -76,7 +76,7 @@
 
         </div>
 
-        
+
 
             <div class="divider" id="find" style="height: 0.5px; background-color: #F3ECDC10; margin: 20px 0; width: 100%;"></div>
 

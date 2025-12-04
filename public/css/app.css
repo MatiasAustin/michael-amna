@@ -594,14 +594,19 @@ section.home {
     text-transform: uppercase;
 }
 
-img.gracias {
-    margin: -15% auto 40px auto;
+.foreverkhoury {
     width: 100%;
     height: auto;
-    padding: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+img.gracias {
+    margin: -3% auto 40px auto;
+    width: 60%;
+    height: auto;
     box-sizing: border-box;
     mix-blend-mode: screen;
-    overlay: white;
 }
 @media (max-width: 800px) {
     section.simple {
@@ -829,7 +834,7 @@ position: relative;
   color: #cbb8a0;
   margin: 0;
   text-transform: none;
-  font-family: 'The Seasons', cursive;
+  font-family: 'the-seasons', sans-serif;
   font-style: italic;
 }
 

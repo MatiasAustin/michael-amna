@@ -88,7 +88,7 @@
 
   <section class="simple">
     <div class="item">
-        <h2>WE CAN’T WAIT TO CELEBRATE WITH YOU</h2>
+        <h2 style="margin: 20px 0; letter-spacing: 5px;">WE CAN’T WAIT TO CELEBRATE WITH YOU</h2>
         <p>
             Please let us know if you’ll be joining us for the magic.<br>
             Kindly respond by 14 of March 2026.

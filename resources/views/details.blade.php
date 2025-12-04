@@ -68,8 +68,8 @@
   <section class="simple">
 
       <div class="item">
-          <h2>Saturday</h2>
-        <h1>{{ optional($countdown->event_at_utc)->format('d M Y') }}</h1>
+        <h2 style="margin: 20px 0; letter-spacing: 10px;">Saturday</h2>
+        <p>{{ optional($countdown->event_at_utc)->format('d M Y') }}</p>
         @php
             $event = $countdown?->event_at_utc;
             // fallback values
@@ -159,7 +159,7 @@
 
         <p>Will  begin at {{ optional($countdown->event_at_utc)->format('g A') }}</p>
 
-        <h2>Doltone House - Jones Bay Wharf</h2>
+        <h4 style="margin: 0; font-weight: 400;"><b>Doltone House - Jones Bay Wharf</b></h4>
         <p><i>Level 3, 26-32 Pirrama Road, Pyrmont NSW 2009</i></p>
             @if(!empty($venue?->venue_location))
                 <a href="{{ $venue->venue_location }}" target="_blank" rel="noopener" class="map-btn">
@@ -175,7 +175,7 @@
       </div>
 
       <div class="item" style="margin-top:40px;">
-          <h2>DRESS CODE</h2>
+          <h2 style="margin: 20px 0; letter-spacing: 10px;">DRESS CODE</h2>
           <p>Black-Tie</p>
       </div>
 
@@ -183,7 +183,7 @@
     <div class="divider" style="height: 0.5px; background-color: #F3ECDC10; margin: 20px 0; width: 100%;"></div>
 
     <div class="faq" style="width: 100%; margin-left: auto; margin-right: auto; padding: 0 16px;">
-        <h2>FAQ</h2>
+        <h2 style="margin: 20px 0; letter-spacing: 10px;">FAQ</h2>
 
         @php
             $faqs = [
