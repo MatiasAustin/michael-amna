@@ -153,25 +153,30 @@
 
         {{-- <div class="divider" style="height: 0.5px; background-color: #F3ECDC10; margin: 20px 0; width: 100%;"></div> --}}
 
-      <div class="item" style="margin-top:40px;">
-        <h2>Our ceremony will begin at {{ optional($countdown->event_at_utc)->format('g A') }}</h2>
+      <div class="item" style="margin-top:40px; background-image: url({{ asset('media/MA-favicon-trans.png') }}); background-size: contain; background-repeat: no-repeat; background-position: center; background-opacity: 0.1;">
+        <h2 style="margin: 40px 0; letter-spacing: 10px;">Our Ceremony</h2>
 
-        <p>Doltone House - Jones Bay Wharf - Level 3, 26-32 Pirrama Road, Pyrmont NSW 2009</p>
+
+        <h1 class="begin-at">Will begin at {{ optional($countdown->event_at_utc)->format('g A') }}</h1>
+
+        <h2>Doltone House Jones Bay Wharf</h2>
+        <p>Level 3, 26-32 Pirrama Road, Pyrmont NSW 2009</p>
             @if(!empty($venue?->venue_location))
                 <a href="{{ $venue->venue_location }}" target="_blank" rel="noopener" class="map-btn">
                     Open in Google Maps
                 </a>
             @else
                 <p>Venue location not set yet.</p>
-  @endif
+            @endif
+      </div>
+
+      <div class="item" style="padding: 20px 10% 0px 10%; border-radius: 20px;">
+          <p style="margin:0;">After we say “I DO” we will celebrate with drinks and canapés during cocktail hour,<br>before moving inside for dinner.</p>
       </div>
 
       <div class="item" style="margin-top:40px;">
           <h2>DRESS CODE</h2>
           <p>Black-Tie</p>
-      </div>
-      <div class="item" style="padding: 20px 10%; border: 1px solid #F3ECDC10; border-radius: 20px;">
-          <p style="margin:0;">After we say “I DO” we will celebrate with drinks and canapés during cocktail hour, before moving inside for dinner.</p>
       </div>
 
 
@@ -182,16 +187,14 @@
 
         @php
             $faqs = [
-                ['q' => 'Do I need to RSVP?', 'a' => 'Please RSVP via the RSVP page. Kindly respond by the date on your invitation.'],
-                ['q' => 'Is parking available?', 'a' => 'Limited parking is available nearby. Rideshare or public transport is recommended.'],
-                ['q' => 'Can I bring a guest?', 'a' => 'Only guests listed on your invitation can be accommodated. Please contact us for changes.'],
-                ['q' => 'Is the venue accessible?', 'a' => 'The venue is wheelchair accessible. Contact us for additional assistance.'],
-                ['q' => 'What should I wear?', 'a' => 'Formalwear.'],
-                ['q' => 'Can I bring my children?', 'a' => 'No children under 18.'],
-                ['q' => 'When should I RSVP by?', 'a' => 'Confirm with Auzita.'],
-                ['q' => 'Will transportation be provided?', 'a' => 'No.'],
-                ['q' => 'Where should I park?', 'a' => 'Wilson Parking will provide free parking vouchers for guests.'],
-                ['q' => 'What time should I arrive?', 'a' => '4:30pm to enjoy the views and get ready for the ceremony.'],
+                ['q' => 'What time should we arrive?', 'a' => 'Please aim to arrive 10-15 minutes before the ceremony starts in order to get 1 of the 60 seats available. If you\'re running late for the ceremony thats okay! you can stand and watch :)'],
+                ['q' => 'Is there a dress code?', 'a' => 'Black Tie/Formal evening wear! We encourage you all to look your best for the photos and the vibe of the night'],
+                ['q' => 'Can we bring our children?', 'a' => 'We love your little ones, but this is an adults only celebration! enjoy the night off'],
+                ['q' => 'Is there parking at the venue?', 'a' => 'Wilson parking is available (add the address here) which will be free for all guests but we highly recommend you uber it in so you can really enjoy the night'],
+                ['q' => 'Will food cater to dietary requirements?', 'a' => 'Fill in the RSVP section and let us know what your requirements are and the Doltone House will do their best to make sure they cater to you!'],
+                ['q' => 'What happens after the ceremony?', 'a' => 'Youll hang around on the wharf for drinks and canapes while you mingle with other guests waiting for the reception to open!'],
+                ['q' => 'Where should we stay if were travelling?', 'a' => 'We are looking at discounted hotels that Doltone House recommend! Reach out to us and we can provide this'],
+                ['q' => 'Is there hashtags to share photos?', 'a' => 'Not as of yet! Most likely #FOREVERKHOURY but we will update you on the night. However, you can add photos and a message to the website'],
             ];
         @endphp
 
@@ -225,7 +228,7 @@
 
     <div class="divider" style="height: 0.5px; background-color: #F3ECDC10; margin: 20px 0; width: 100%;"></div>
 
-      <img src="{{ asset('media/Foreverkhoury.png') }}" alt="" class="gracias">
+
     </section>
 
   <footer>All Right Reserved by @Freellab2025</footer>

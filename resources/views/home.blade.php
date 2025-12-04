@@ -161,7 +161,7 @@
 
 
 
-  {{-- OUR GALLERY SECTION --}}
+  {{-- OUR GALLERY SECTION --}}3
     <div class="our-gallery" id="gallery">
         @if($photos->count())
             @php
@@ -213,7 +213,7 @@
         @if($canUploadPhotos)
             <button class="btn" onclick="window.location.href='{{ url('/photoupload') }}'">Upload Your Best Picture</button>
         @else
-            <p style="font-size:12px; letter-spacing:2px; opacity:0.8;">Photo uploads will open after the countdown.</p>
+            <p style="font-size:12px; letter-spacing:2px; opacity:0.8; text-align: center;">Photo uploads will open after the countdown.</p>
         @endif
     </div>
 

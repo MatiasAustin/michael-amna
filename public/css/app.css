@@ -10,8 +10,24 @@
 @font-face {
   font-family: 'Kunstler Script Local';
   src: url('/font/KunstlerScript/kunstlerscript.ttf') format('truetype');
-  font-weight: normal;
+  font-weight: 300;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'The Seasons';
+  src: url("/font/The Seasons Font/fonnts.com-theseasons-reg.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'The Seasons';
+  src: url("/font/The Seasons Font/fonnts.com-theseasons-it.otf") format("opentype");
+  font-weight: 300;
+  font-style: italic;
   font-display: swap;
 }
 
@@ -216,6 +232,15 @@ h1 {
   text-transform: capitalize;
   font-size: clamp(42px, 12vw, 72px);
   line-height: 1;
+  font-style: italic;
+}
+.begin-at {
+  font-family: 'The Seasons', cursive;
+  text-transform: capitalize;
+  font-size:  clamp(42px, 12vw, 72px);
+  font-size:  clamp(28px, 10vw, 60px);
+  line-height: 1.5;
+  font-style: italic;
 }
 
 p {
@@ -332,6 +357,7 @@ p {
   gap: 10px;
   align-items: stretch;
   will-change: transform;
+  justify-content: center;
 }
 
 /* KARTU WISH */

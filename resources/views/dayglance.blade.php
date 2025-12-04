@@ -82,6 +82,7 @@
       @endforeach
     </div>
   </section>
+  <img src="{{ asset('media/Foreverkhoury.png') }}" alt="" class="gracias">
 
   <footer>All Right Reserved by @Freellab2025</footer>
 
