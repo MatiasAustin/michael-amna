@@ -408,7 +408,7 @@
   if (!track) return;
 
   const cards = track.children;
-  if (cards.length < 4) return; // minimal 2 card × 2 track
+  if (cards.length < 2) return; // need at least one card and its clone
 
   let baseWidth = 0;      // lebar 1 track (A saja)
   let offset = 0;         // posisi virtual dalam px

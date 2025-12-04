@@ -160,7 +160,7 @@
 
         <h1 class="begin-at">Will  begin<br>at {{ optional($countdown->event_at_utc)->format('g A') }}</h1>
 
-        <h2>Doltone House Jones Bay Wharf</h2>
+        <h2>Doltone House - Jones Bay Wharf</h2>
         <p>Level 3, 26-32 Pirrama Road, Pyrmont NSW 2009</p>
             @if(!empty($venue?->venue_location))
                 <a href="{{ $venue->venue_location }}" target="_blank" rel="noopener" class="map-btn">
