@@ -157,8 +157,7 @@
       <div class="item" style="margin-top:40px; background-image: url({{ asset('media/MA-favicon-trans.png') }}); background-size: contain; background-repeat: no-repeat; background-position: center; background-opacity: 0.1;">
         <h2 style="margin: 20px 0; letter-spacing: 10px;">Our Ceremony</h2>
 
-
-        <h1>Will  begin at {{ optional($countdown->event_at_utc)->format('g A') }}</h1>
+        <p>Will  begin at {{ optional($countdown->event_at_utc)->format('g A') }}</p>
 
         <h2>Doltone House - Jones Bay Wharf</h2>
         <p><i>Level 3, 26-32 Pirrama Road, Pyrmont NSW 2009</i></p>
