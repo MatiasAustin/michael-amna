@@ -44,9 +44,9 @@
     </div>
   </nav>
 
-  <section class="simple" style="margin-bottom: 120px">
+  <section class="simple" style="margin-bottom: 0px">
     <div class="item" style="margin-bottom: 24px;">
-      <h2>Our Day at a Glance</h2>
+      <h1 class="welcome-names" style="font-family: 'Kunstler Script Local', cursive;">Our Day at a Glance</h1>
     </div>
 
     <div class="glance-list">
@@ -71,9 +71,9 @@
             <div class="glance-title">
               {{-- <span class="photo-label">{{ $num }}</span> --}}
               {{-- <span class="accent">Next to</span> --}}
-              <span class="time">{{ $timeLabel }}</span>
+              {{-- <span class="time">{{ $timeLabel }}</span> --}}
             </div>
-            <h2 class="glance-headline">{{ $headline }}</h2>
+            <h2 class="glance-headline">{{ $timeLabel }}<p class=strip-glance-headline style="margin:0; font-family: 'Poppins', sans-serif; font-style: italic;">-</p>{{ $headline }}</h2>
             @if(!empty($caption))
               <p class="glance-caption"><em>{{ $caption }}</em></p>
             @endif

@@ -149,7 +149,7 @@
 
 
     <h2 style="margin: 40px 0; letter-spacing: 10px;">Welcome</h2>
-    <h1 class="welcome-names">Michael & Amna</h1>
+    <h1 class="welcome-names" style="font-family: 'Kunstler Script Local', cursive;">Michael & Amna</h1>
 
     <p>We can't wait to celebrate our special day with you.</p>
     <h2>Along with your formal invitation, please enjoy this extension filled with all the little details we've planned.</h2>
