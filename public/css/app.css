@@ -238,9 +238,10 @@ h1 {
 h1.welcome-names {
   font-family: 'Kunstler Script Local', cursive;
   text-transform: capitalize;
-  font-size: clamp(42px, 12vw, 72px);
+  font-size: clamp(48px, 12vw, 90px);
   line-height: 1;
   font-style: italic;
+  padding-right: 30px;
 }
 h1.begin-at {
   font-family: "the-seasons", sans-serif;

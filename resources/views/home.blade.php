@@ -149,16 +149,15 @@
     </script>
 
 
-    <h2 style="margin: 40px 0; letter-spacing: 10px;">Welcome</h2>
-    <h1 class="welcome-names" style="font-family: 'Kunstler Script Local', cursive;">Michael & Amna</h1>
-
+    <h2 style="margin: 40px 0; text-align: center;">W e l c o m e</h2>
+    <h1 class="welcome-names" style="font-family: 'Kunstler Script Local', cursive;">Michael  &  Amna</h1>
+    <br>
     <p>We can't wait to celebrate our special day with you.</p>
-    <h2>Along with your formal invitation, please enjoy this extension filled with all the little details we've planned.</h2>
+    <h4>Along with your formal invitation, please enjoy this extension filled with all the little details we've planned.</h4>
     <br>
       <a class="btn" href="{{ url('/details') }}" style="margin-bottom: 20px;">Click Here to Unveil That Magic</a>
       <a class="btn" style="margin-left:8px" href="{{ url('/rsvp') }}">RSVP</a>
 </section>
-
 
 
 
