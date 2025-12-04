@@ -61,7 +61,7 @@
     </div>
   </nav>
 
-  <header>
+  <header class=video-hr>
     <video id="heroVideo" autoplay loop playsinline preload="auto">
       <source src="{{ asset('media/michael-amna-video.mp4') }}" type="video/mp4">
       Your browser does not support the video tag.
@@ -90,7 +90,7 @@
         $canUploadPhotos = $countdownFinished || (bool) optional($countdown)->guest_upload_enabled;
     @endphp
 
-    <div class="countdown" style="display: flex; justify-content: center;margin: 40px 0 60px 0;">
+    <div class="countdown" style="display: flex; justify-content: center;">
         <div class="count-box">
             <label>DAYS</label>
             <span id="days"></span>
