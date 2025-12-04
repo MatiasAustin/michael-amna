@@ -46,7 +46,7 @@
 
   <section class="simple" style="margin-bottom: 0px">
     <div class="item" style="margin-bottom: 24px;">
-      <h1 class="welcome-names" style="font-family: 'Kunstler Script Local', cursive;">Our Day at a Glance</h1>
+      <h1 class="welcome-names" style="margin:0; font-family: 'Kunstler Script Local', cursive;">Our Day at a Glance</h1>
     </div>
 
     <div class="glance-list">

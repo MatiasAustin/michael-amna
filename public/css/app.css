@@ -237,12 +237,14 @@ h1 {
 
 .welcome-names {
   font-family: 'Kunstler Script Local', cursive;
+  text-transform: capitalize;
   font-size: clamp(42px, 12vw, 72px);
   line-height: 1;
   font-style: italic;
 }
 .begin-at {
   font-family: 'The Seasons', cursive;
+  text-transform: capitalize;
   font-size:  clamp(42px, 12vw, 72px);
   font-size:  clamp(28px, 10vw, 60px);
   line-height: 1.5;
@@ -591,7 +593,7 @@ img.gracias {
 }
 @media (max-width: 800px) {
     section.simple {
-        padding: 0 10%;
+        padding: 200px 10% 60px 10%;
         margin: 20px auto 40px auto;
     }
 }
@@ -714,7 +716,7 @@ position: relative;
   display: flex;
   flex-direction: column;
   gap: 22px;
-  margin-top: 40px;
+  margin-top: 0px;
 }
 
 .glance-card {
@@ -859,10 +861,6 @@ position: relative;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-  }
-
-  section.simple {
-    padding: 50px 5%;
   }
 
   .glance-card,
