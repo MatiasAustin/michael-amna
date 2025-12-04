@@ -83,8 +83,13 @@
 
   {{-- <section class="simple" style="text-align: center; margin-top: 60px; background-image: url({{ asset('media/MA-favicon-trans.png') }}); background-size: contain; background-repeat: no-repeat; background-position: center; background-opacity: 0.1;"> --}}
   <section class="simple" style="text-align: center; margin-top: 60px; background-size: contain; background-repeat: no-repeat; background-position: center; background-opacity: 0.1;">
+    @php
+        $event = optional($countdown)->event_at_utc;
+        $countdownFinished = $event ? now()->greaterThanOrEqualTo($event) : false;
+        $canUploadPhotos = $countdownFinished || (bool) optional($countdown)->guest_upload_enabled;
+    @endphp
 
-    <div class="countdown" style="display: flex; justify-content: center;margin: 40px 0 80px 0;">
+    <div class="countdown" style="display: flex; justify-content: center;margin: 40px 0 60px 0;">
         <div class="count-box">
             <label>DAYS</label>
             <span id="days"></span>
@@ -143,8 +148,8 @@
     </script>
 
 
-    <h2 style="margin-top: 40px;">Welcome</h2>
-    <h1 style="font-family: 'Kunstler Script Local', cursive; text-transform:capitalize; font-size: 72px;">Michael & Amna</h1>
+    <h2 style="margin: 40px 0; letter-spacing: 10px;">Welcome</h2>
+    <h1 class="welcome-names">Michael & Amna</h1>
 
     <p>We can't wait to celebrate our special day with you.</p>
     <h2>Along with your formal invitation, please enjoy this extension filled with all the little details we've planned.</h2>
@@ -205,7 +210,11 @@
     </div>
 
     <div class="button-cont">
-        <button class="btn" onclick="window.location.href='{{ url('/photoupload') }}'">Upload Your Best Picture</button>
+        @if($canUploadPhotos)
+            <button class="btn" onclick="window.location.href='{{ url('/photoupload') }}'">Upload Your Best Picture</button>
+        @else
+            <p style="font-size:12px; letter-spacing:2px; opacity:0.8;">Photo uploads will open after the countdown.</p>
+        @endif
     </div>
 
 
