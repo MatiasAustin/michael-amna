@@ -62,17 +62,19 @@
     </div>
   </nav>
 
-  <header>
-    <video id="heroVideo" autoplay loop playsinline preload="auto">
+  <header class="hero-video-mobile">
+    <video id="heroVideoMobile" class="hero-video-el" autoplay loop muted playsinline preload="auto">
+      <source src="{{ asset('media/michael-amna-video-portrait.mp4') }}" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="veil"></div>
+  </header>
+  <header class="hero-video">
+    <video id="heroVideoDesktop" class="hero-video-el" autoplay loop muted playsinline preload="auto">
       <source src="{{ asset('media/michael-amna-video.mp4') }}" type="video/mp4">
       Your browser does not support the video tag.
     </video>
     <div class="veil"></div>
-    <!-- <div class="hero-txt">
-      <h1 class="names">Michael & Amna</h1>
-      <p class="tag">Not a tradition—our tradition. Food, music, and the people we love.</p>
-      <p class="date">Saturday · 18 April 2026 · Bandung</p>
-    </div> -->
   </header>
 
   <button id="soundToggle" class="sound-toggle" type="button" aria-label="Toggle sound" aria-pressed="false" data-state="off" style="padding: 0">
@@ -503,52 +505,63 @@
 <script>
 // Hero video sound toggle
 document.addEventListener('DOMContentLoaded', () => {
-    const video = document.getElementById('heroVideo');
+    const videos = Array.from(document.querySelectorAll('.hero-video-el'));
     const toggle = document.getElementById('soundToggle');
-    if (!video || !toggle) return;
+    if (!videos.length || !toggle) return;
 
     const icons = {
         off: '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5z"></path><line x1="19" y1="5" x2="19" y2="19"></line><line x1="16" y1="8" x2="22" y2="14"></line></svg>',
         on: '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>'
     };
 
-    const setState = (muted) => {
-        video.muted = muted;
+    let muted = true;
+
+    const getActiveVideo = () =>
+        videos.find((video) => video.closest('header') && video.closest('header').offsetParent !== null);
+
+    const applyState = () => {
+        const activeVideo = getActiveVideo();
+
+        videos.forEach((video) => {
+            const isActive = video === activeVideo;
+
+            if (isActive) {
+                video.muted = muted;
+                if (muted) {
+                    video.setAttribute('muted', '');
+                } else {
+                    video.removeAttribute('muted');
+                }
+                const playPromise = video.play();
+                if (playPromise && typeof playPromise.then === 'function') {
+                    playPromise.catch(() => {});
+                }
+            } else {
+                video.muted = true;
+                video.setAttribute('muted', '');
+                video.pause();
+            }
+        });
+
         toggle.dataset.state = muted ? 'off' : 'on';
         toggle.setAttribute('aria-pressed', muted ? 'false' : 'true');
         toggle.innerHTML = muted ? icons.off : icons.on;
     };
 
-    const tryPlayUnmute = () => {
-        video.muted = false;
-        const playPromise = video.play();
-        if (playPromise && typeof playPromise.then === 'function') {
-            playPromise.then(() => setState(false)).catch(() => setState(true));
-        } else {
-            setState(false);
-        }
-    };
-
     toggle.addEventListener('click', () => {
-        if (video.muted) {
-            tryPlayUnmute();
-        } else {
-            setState(true);
-        }
+        muted = !muted;
+        applyState();
     });
 
     const kickoff = () => {
-        if (video.muted) {
-            tryPlayUnmute();
-        }
+        muted = false;
+        applyState();
     };
+
     document.addEventListener('click', kickoff, { once: true });
     document.addEventListener('touchstart', kickoff, { once: true, passive: true });
 
-    // try to start with sound immediately
-    tryPlayUnmute();
-    // fallback: ensure icon reflects current mute
-    setState(video.muted);
+    applyState(); // start muted so autoplay is allowed
 });
 </script>
 
