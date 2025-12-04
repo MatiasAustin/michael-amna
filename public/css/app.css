@@ -237,7 +237,6 @@ h1 {
 
 .welcome-names {
   font-family: 'Kunstler Script Local', cursive;
-  text-transform: capitalize;
   font-size: clamp(42px, 12vw, 72px);
   line-height: 1;
   font-style: italic;
