@@ -158,10 +158,10 @@
         <h2 style="margin: 20px 0; letter-spacing: 10px;">Our Ceremony</h2>
 
 
-        <h1 class="begin-at">Will  begin<br>at {{ optional($countdown->event_at_utc)->format('g A') }}</h1>
+        <h1>Will  begin at {{ optional($countdown->event_at_utc)->format('g A') }}</h1>
 
         <h2>Doltone House - Jones Bay Wharf</h2>
-        <p>Level 3, 26-32 Pirrama Road, Pyrmont NSW 2009</p>
+        <p><i>Level 3, 26-32 Pirrama Road, Pyrmont NSW 2009</i></p>
             @if(!empty($venue?->venue_location))
                 <a href="{{ $venue->venue_location }}" target="_blank" rel="noopener" class="map-btn">
                     Open in Google Maps
