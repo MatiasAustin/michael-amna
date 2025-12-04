@@ -83,7 +83,7 @@
   </button>
 
   {{-- <section class="simple" style="text-align: center; margin-top: 60px; background-image: url({{ asset('media/MA-favicon-trans.png') }}); background-size: contain; background-repeat: no-repeat; background-position: center; background-opacity: 0.1;"> --}}
-  <section class="simple" style="text-align: center; margin-top: 60px; background-size: contain; background-repeat: no-repeat; background-position: center; background-opacity: 0.1;">
+  <section class="home" style="text-align: center; background-size: contain; background-repeat: no-repeat; background-position: center; background-opacity: 0.1;">
     @php
         $event = optional($countdown)->event_at_utc;
         $countdownFinished = $event ? now()->greaterThanOrEqualTo($event) : false;
@@ -157,7 +157,7 @@
     <br>
       <a class="btn" href="{{ url('/details') }}" style="margin-bottom: 20px;">Click Here to Unveil That Magic</a>
       <a class="btn" style="margin-left:8px" href="{{ url('/rsvp') }}">RSVP</a>
-  </section>
+</section>
 
 
 
