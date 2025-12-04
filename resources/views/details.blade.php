@@ -65,7 +65,7 @@
 
 
   <section class="simple">
-
+`
       <div class="item">
           <h2>Saturday</h2>
         <h1>{{ optional($countdown->event_at_utc)->format('d M Y') }}</h1>
@@ -154,7 +154,7 @@
         {{-- <div class="divider" style="height: 0.5px; background-color: #F3ECDC10; margin: 20px 0; width: 100%;"></div> --}}
 
       <div class="item" style="margin-top:40px; background-image: url({{ asset('media/MA-favicon-trans.png') }}); background-size: contain; background-repeat: no-repeat; background-position: center; background-opacity: 0.1;">
-        <h2 style="margin: 40px 0; letter-spacing: 10px;">Our Ceremony</h2>
+        <h2 style="margin: 20px 0; letter-spacing: 10px;">Our Ceremony</h2>
 
 
         <h1 class="begin-at">Will begin at {{ optional($countdown->event_at_utc)->format('g A') }}</h1>

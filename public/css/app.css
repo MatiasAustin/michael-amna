@@ -243,7 +243,7 @@ h1 {
   font-style: italic;
 }
 .begin-at {
-  font-family: 'The Seasons', cursive;
+  font-family: 'The Seasons No Demo', serif;
   text-transform: capitalize;
   font-size:  clamp(42px, 12vw, 72px);
   font-size:  clamp(28px, 10vw, 60px);
