@@ -6,6 +6,7 @@
   <title>Michael & Amna - Our Day at a Glance</title>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
+  <link rel="stylesheet" href="https://use.typekit.net/zlr0kjr.css">
   <link rel="icon" href="{{ asset('media/MA-favicon-beige.png') }}" type="image/png">
 
   <style>
@@ -73,7 +74,8 @@
               {{-- <span class="accent">Next to</span> --}}
               {{-- <span class="time">{{ $timeLabel }}</span> --}}
             </div>
-            <h2 class="glance-headline">{{ $timeLabel }}<p class=strip-glance-headline style="margin:0; font-family: 'Poppins', sans-serif; font-style: italic;">-</p>{{ $headline }}</h2>
+            {{-- <h2 class="glance-headline">{{ $timeLabel }}<p class=strip-glance-headline style="margin:0; font-family: 'Poppins', sans-serif; font-style: italic;">-</p>{{ $headline }}</h2> --}}
+            <h2 class="glance-headline">{{ $timeLabel }} - {{ $headline }}</h2>
             @if(!empty($caption))
               <p class="glance-caption"><em>{{ $caption }}</em></p>
             @endif

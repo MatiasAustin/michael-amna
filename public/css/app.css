@@ -235,20 +235,20 @@ h1 {
     text-transform: uppercase;
 }
 
-.welcome-names {
+h1.welcome-names {
   font-family: 'Kunstler Script Local', cursive;
   text-transform: capitalize;
   font-size: clamp(42px, 12vw, 72px);
   line-height: 1;
   font-style: italic;
 }
-.begin-at {
-  font-family: 'The Seasons No Demo', serif;
+h1.begin-at {
+  font-family: "the-seasons", sans-serif;
+    font-style: italic;
   text-transform: capitalize;
-  font-size:  clamp(42px, 12vw, 72px);
-  font-size:  clamp(28px, 10vw, 60px);
+  /* font-size:  clamp(42px, 12vw, 72px); */
+  font-size:  clamp(28px, 10vw, 48px);
   line-height: 1.5;
-  font-style: italic;
 }
 
 p {
@@ -803,7 +803,7 @@ position: relative;
 }
 
 .glance-headline {
-    font-family: 'The Seasons No Demo', serif;
+   font-family: "the-seasons", sans-serif;
   font-size: 20px;
   margin: 6px 0 4px;
   display: flex;
