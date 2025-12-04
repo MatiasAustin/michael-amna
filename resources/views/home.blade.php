@@ -27,8 +27,9 @@
             backdrop-filter: blur(6px);
             z-index: 999;
             transition: background 0.2s ease, transform 0.2s ease;
+            opacity: 0.2;
         }
-        .sound-toggle:hover { background: rgba(0, 0, 0, 0.7); transform: translateY(-1px); }
+        .sound-toggle:hover { background: rgba(0, 0, 0, 0.7); transform: translateY(-1px); opacity: 1; }
         .sound-toggle svg { width: 20px; height: 20px; }
     </style>
 
