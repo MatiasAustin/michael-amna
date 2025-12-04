@@ -61,7 +61,7 @@
     </div>
   </nav>
 
-  <header class=video-hr>
+  <header>
     <video id="heroVideo" autoplay loop playsinline preload="auto">
       <source src="{{ asset('media/michael-amna-video.mp4') }}" type="video/mp4">
       Your browser does not support the video tag.
@@ -74,7 +74,7 @@
     </div> -->
   </header>
 
-  <button id="soundToggle" class="sound-toggle" type="button" aria-label="Toggle sound" aria-pressed="false" data-state="off">
+  <button id="soundToggle" class="sound-toggle" type="button" aria-label="Toggle sound" aria-pressed="false" data-state="off" style="padding: 0">
       <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M11 5L6 9H3v6h3l5 4V5z"></path>
           <line x1="19" y1="5" x2="19" y2="19"></line>
