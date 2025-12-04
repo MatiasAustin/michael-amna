@@ -66,7 +66,7 @@
 
 
   <section class="simple">
-`
+
       <div class="item">
           <h2>Saturday</h2>
         <h1>{{ optional($countdown->event_at_utc)->format('d M Y') }}</h1>
