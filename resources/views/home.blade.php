@@ -208,7 +208,7 @@
 
             </div>
         @else
-            <p class="text-center text-muted" style="width: 100%; margin: 0 auto; text-align: center;">No photos yet.</p>
+            <p class="text-center text-muted" style="width: 100%; margin: 0 auto; text-align: center;">No guest photos yet. Be the first to upload!</p>
         @endif
     </div>
 

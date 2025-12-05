@@ -84,8 +84,8 @@
                 <div class="divider" style="height: 0.5px; background-color: #F3ECDC10; margin: 20px 0; width: 100%;"></div>
 
                 {{-- Gallery Management --}}
-                <h3>Gallery</h3>
-                <p>Manage gallery photos here.</p>
+                <h3>Guest Gallery</h3>
+                <p>Manage guest gallery photos here.</p>
 
                  <form action="{{ route('gallery.store') }}" method="POST" enctype="multipart/form-data" class="upload-form" id="galleryUploadForm">
                     @csrf
@@ -96,7 +96,7 @@
                     <div id="previewContainer" style="margin-top: 10px;"></div>
 
                     <button class="upload-photo-admin" type="submit">
-                        Upload Photos
+                        Upload Guest Photos (Additional)
                     </button>
                 </form>
 
@@ -122,7 +122,7 @@
                             </div>
                         </div>
                     @empty
-                        <p class="text-center text-muted">No photo yet.</p>
+                        <p class="text-center text-muted">No guest photo yet.</p>
                     @endforelse
                 </div>
             </div>
