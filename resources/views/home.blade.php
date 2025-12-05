@@ -216,7 +216,7 @@
         @if($canUploadPhotos)
             <button class="btn" onclick="window.location.href='{{ url('/photoupload') }}'">Upload Your Best Picture</button>
         @else
-            <p style="font-size:12px; letter-spacing:2px; opacity:0.8; text-align: center;padding: 0 10%">Photo uploads will open after the countdown.</p>
+            <p style="font-size:12px; letter-spacing:2px; opacity:0.8; text-align: center;padding: 0 10%">Guest photo uploads will be available after the countdown. We can’t wait to see the memories you’ll share.</p>
         @endif
     </div>
 
