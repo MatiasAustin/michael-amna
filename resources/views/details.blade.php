@@ -73,7 +73,7 @@
         @php
             $event = $countdown?->event_at_utc;
             // fallback values
-            $evTitle = 'Michael & Amna — The Promise';
+            $evTitle = 'Michael & Amna';
             $evLocation = $venue?->venue_name ? $venue->venue_name . ', ' . ($venue?->venue_location_text ?? '') : 'Doltone House - Jones Bay Wharf - Level 3, 26-32 Pirrama Road, Pyrmont NSW 2009';
             $evDesc = 'Ceremony — The Promise.';
             // Google Calendar needs UTC timestamp in YYYYMMDDTHHMMSSZ
@@ -94,8 +94,8 @@
 
                 <div id="calMenu" style="display:none; margin-top:.5rem;">
                     <a class="cal-link" href="{{ $googleHref }}" target="_blank" rel="noopener">Google Calendar</a>
-                    &nbsp;|&nbsp;
-                    <a class="cal-link" href="#" id="downloadIcs">Download .ics (Apple / Outlook / Phone)</a>
+                    {{-- &nbsp;|&nbsp;
+                    <a class="cal-link" href="#" id="downloadIcs">Download .ics (Apple / Outlook / Phone)</a> --}}
                 </div>
 
                 <script>
@@ -116,11 +116,11 @@
                             e.preventDefault();
                             // Build .ics content
                             const now = new Date().toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z';
-                            const uid = Date.now() + '@ammamichael';
+                            const uid = Date.now() + '@michaelamna';
                             const icsLines = [
                                 'BEGIN:VCALENDAR',
                                 'VERSION:2.0',
-                                'PRODID:-//AR//Wedding//EN',
+                                'PRODID:-//MA//Wedding//EN',
                                 'CALSCALE:GREGORIAN',
                                 'BEGIN:VEVENT',
                                 'UID:' + uid,
@@ -138,7 +138,7 @@
                             const url = URL.createObjectURL(blob);
                             const a = document.createElement('a');
                             a.href = url;
-                            a.download = 'ava-mateo-event.ics';
+                            a.download = 'michael-amna-event.ics';
                             document.body.appendChild(a);
                             a.click();
                             a.remove();
