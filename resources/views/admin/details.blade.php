@@ -9,7 +9,7 @@
 
 
             <div class="admin-dashboard-panel">
-                <div class="details-section">
+                    <div class="details-section">
                         <div class="maps">
                             <h3>Venue Location</h3>
 
@@ -46,35 +46,36 @@
 
 
                         <div class="floor-map" style="margin-top:40px; border-top:1px solid #ccc; padding-top:20px;">
-                        <h3>Floor Map</h3>
+                            <h3>Floor Map</h3>
 
 
 
-                        {{-- preview current floor map --}}
-                        @if(!empty($floorMapUrl))
-                            <p>Current floor map:</p>
-                            <img src="{{ $floorMapUrl }}" alt="Floor Map"
-                                style="max-width:400px; border:1px solid #ddd; margin-bottom:10px;">
-                        @else
-                            <p><em>Belum ada floor map.</em></p>
-                        @endif
+                            {{-- preview current floor map --}}
+                            @if(!empty($floorMapUrl))
+                                <p>Current floor map:</p>
+                                <img src="{{ $floorMapUrl }}" alt="Floor Map"
+                                    style="max-width:400px; border:1px solid #ddd; margin-bottom:10px;">
+                            @else
+                                <p><em>Belum ada floor map.</em></p>
+                            @endif
 
-                        <form action="{{ url('/admin/details/floor-map') }}"
-                            method="POST"
-                            enctype="multipart/form-data"
-                            style="margin-top:10px;">
-                            @csrf
-                            <label for="floor_map">Upload Floor Map (JPG):</label><br>
-                            <input type="file" name="floor_map" id="floor_map" accept=".jpg,.jpeg" required>
+                            <form action="{{ url('/admin/details/floor-map') }}"
+                                method="POST"
+                                enctype="multipart/form-data"
+                                style="margin-top:10px;">
+                                @csrf
+                                <label for="floor_map">Upload Floor Map (PDF/JPG):</label><br>
+                                <input type="file" name="floor_map" id="floor_map" accept=".jpg,.jpeg" required>
 
-                            <br><br>
+                                <br><br>
 
-                            <button type="submit"
-                                    style="padding:8px 16px; background:#3d1516; color:#F3ECDC; border:none; border-radius:4px; font-size: 14px; text-transform: uppercase;">
-                                Update Floor Map
-                            </button>
-                        </form>
-                </div>
+                                <button type="submit"
+                                        style="padding:8px 16px; background:#3d1516; color:#F3ECDC; border:none; border-radius:4px; font-size: 14px; text-transform: uppercase;">
+                                    Update Floor Map
+                                </button>
+                            </form>
+                        </div>
+                    </div>
 
                     <script>
                     const input = document.getElementById('venue_location');
