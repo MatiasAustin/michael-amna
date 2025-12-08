@@ -95,5 +95,9 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+<footer style="margin: 40px 0 20px; padding-top: 16px; text-align: center; font-size: 12px; letter-spacing: 1px; border-top: 1px solid #F3ECDC30; opacity: 0.8;">
+    All Right Reserved by @Freelab2025
+</footer>
+
 </body>
 </html>

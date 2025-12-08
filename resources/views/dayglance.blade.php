@@ -89,7 +89,7 @@
         <img src="{{ asset('media/Foreverkhoury.png') }}" alt="" class="gracias">
     </div>
 
-  <footer>All Right Reserved by @Freellab2025</footer>
+  <footer>All Right Reserved by @Freelab2025</footer>
 
   <script>
     const hamb = document.querySelector('.hamb');

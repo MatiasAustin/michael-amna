@@ -286,6 +286,8 @@
             </div>
         </div>
 
+        @include('admin.layout.footer')
+
 
         {{-- JS EMAIL POPUP --}}
         <script>

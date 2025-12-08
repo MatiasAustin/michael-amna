@@ -184,7 +184,7 @@
     </div>
   </section>
 
-  <footer>All Right Reserved by @Freellab2025</footer>
+  <footer>All Right Reserved by @Freelab2025</footer>
 
   <script>
     /// General

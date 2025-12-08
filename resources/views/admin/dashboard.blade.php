@@ -129,6 +129,7 @@
         </div>
 
     </div>
+    @include('admin.layout.footer')
     <div class="loading-overlay" id="uploadOverlay">
         <div style="display:flex; flex-direction:column; align-items:center; gap:14px;">
             <div class="loading-spinner" aria-label="Uploading"></div>
