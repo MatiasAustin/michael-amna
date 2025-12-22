@@ -70,8 +70,8 @@
                     </select>
 
                     <br>
-                    <label style="display:flex;align-items:center;gap:10px; margin-top:8px;">
-                        <input type="checkbox" name="guest_upload_enabled" value="1"
+                    <label style="display:flex;align-items:start;gap:10px; margin-top:8px;">
+                        <input type="checkbox" name="guest_upload_enabled" style="    height: 100%; margin-top: 8px;" value="1"
                             @checked(old('guest_upload_enabled', $cd->guest_upload_enabled ?? false))>
                         Allow guest photo upload before countdown ends
                     </label>
