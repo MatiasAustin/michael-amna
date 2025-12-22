@@ -187,14 +187,38 @@
 
         @php
             $faqs = [
-                ['q' => 'What time should we arrive?', 'a' => 'Please aim to arrive 10-15 minutes before the ceremony starts in order to get 1 of the 60 seats available. If you\'re running late for the ceremony thats okay! you can stand and watch :)'],
-                ['q' => 'Is there a dress code?', 'a' => 'Black Tie/Formal evening wear! We encourage you all to look your best for the photos and the vibe of the night'],
-                ['q' => 'Can we bring our children?', 'a' => 'We love your little ones, but this is an adults only celebration! enjoy the night off'],
-                ['q' => 'Is there parking at the venue?', 'a' => 'Wilson parking is available (add the address here) which will be free for all guests but we highly recommend you uber it in so you can really enjoy the night'],
-                ['q' => 'Will food cater to dietary requirements?', 'a' => 'Fill in the RSVP section and let us know what your requirements are and the Doltone House will do their best to make sure they cater to you!'],
-                ['q' => 'What happens after the ceremony?', 'a' => 'Youll hang around on the wharf for drinks and canapes while you mingle with other guests waiting for the reception to open!'],
-                ['q' => 'Where should we stay if were travelling?', 'a' => 'We are looking at discounted hotels that Doltone House recommend! Reach out to us and we can provide this'],
-                ['q' => 'Is there hashtags to share photos?', 'a' => 'Not as of yet! Most likely #FOREVERKHOURY but we will update you on the night. However, you can add photos and a message to the website'],
+                ['q' => 'WHAT TIME SHOULD WE ARRIVE?', 'a' => 'Please aim to arrive 10–15 minutes before the ceremony to secure one of the limited 60 seats available.
+                <br><br>
+                If you arrive closer to the start time, that’s completely fine — standing room will be available.'],
+                ['q' => 'IS THERE A DRESS CODE?', 'a' => 'We encourage you to dress to impress and enjoy the elegance of the night — it will also make for beautiful photos!'],
+                ['q' => 'CAN WE BRING OUR CHILDREN?', 'a' => 'While we adore your little ones, this will be an adults-only celebration.
+                <br><br>
+                We hope you enjoy a night off to relax and celebrate with us.'],
+                ['q' => 'IS THERE PARKING AT THE VENUE?', 'a' => 'Yes. Parking is available at Wilson Jones Bay Wharf Car Park, located at 17–23 Pirrama Road, Pyrmont (opposite Doltone House).
+                <br><br>
+                Guests can pre-book parking via <a href="https://bookabay.wilsonparking.com.au" target="_blank" rel="noopener">bookabay.wilsonparking.com.au</a> using the promotional code Doltone.
+                <br><br>
+                We do still recommend Uber or rideshare if you’d prefer a stress-free night, but parking is readily available for those driving.'],
+                ['q' => 'WILL FOOD CATER TO DIETARY REQUIREMENTS', 'a' => 'Absolutely.
+                <br><br>
+                Please let us know your dietary requirements when completing your RSVP, and Doltone House will do their best to accommodate.'],
+                ['q' => 'WHAT HAPPENS AFTER THE CEREMONY', 'a' => 'Following the ceremony, guests are invited to remain on the wharf for drinks and canapés, mingling while we prepare for the reception to open.'],
+                ['q' => 'WHERE SHOULD WE STAY IF WE ARE TRAVELLING?', 'a' => 'We are currently organising discounted accommodation options recommended by Doltone House.<br>Please reach out to us if you’d like these details.
+                <br>
+                <ul>
+                    <li><p>Closest & Most Convenient (Pyrmont / Darling Harbour)</p></li>
+                    <li><p>The Darling – Luxury boutique hotel at The Star precinct</p></li>
+                    <li><p>The Star Grand Hotel – Stylish and comfortable</p></li>
+                    <li><p>Hotel Woolstore 1888 – Charming boutique option</p></li>
+                    <li><p>Novotel Sydney on Darling Harbour – Reliable choice with harbour views</p></li>
+                    <li><p>Aiden Hotel Darling Harbour – Modern and well-reviewed</p></li>
+                    <li><p>Ibis Sydney Darling Harbour – Good value and location</p></li>
+                    <li><p>Terminus Hotel Pyrmont – Cozy, boutique style with pub downstairs</p></li>
+                </ul>'],
+                ['q' => 'IS THERE HASHTAGS TO SHARE PHOTOS?', 'a' => 'Not just yet — most likely #ForeverKhoury.
+                <br><br>
+                We’ll confirm on the night. In the meantime, you’re welcome to leave messages on the website, and on the day you’ll also be able to upload photos directly.'],
+                ['q' => 'HOW DOES THE FLOOR MAP WORK?', 'a' => 'A few weeks out from the date, you will recieve a code via email which you will be enter into “enter unique code” search and it will allocate you your table number for the night.'],
             ];
         @endphp
 
@@ -205,7 +229,7 @@
                         {{ $item['q'] }} <span class="chev">▾</span>
                     </button>
                     <div id="faq-{{ $i }}" class="faq-content" hidden style="padding:12px; border-left:4px solid #2b0f10; background:#F3ECDC20; margin-top:4px; text-align:left;">
-                        <p>{{ $item['a'] }}</p>
+                        <p>{!! $item['a'] !!}</p>
                     </div>
                 </div>
             @endforeach
