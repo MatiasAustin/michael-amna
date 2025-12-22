@@ -130,7 +130,7 @@
             </table>
 
             @else
-                <p style="margin: 20px auto;">Please enter your unique code to view the invitation details here.</p>
+                <p style="margin: 20px auto;">When received, please enter your unique code to view your seating arrangement for the night.</p>
             @endif
 
     </section>
