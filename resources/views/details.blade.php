@@ -204,9 +204,9 @@
                 Please let us know your dietary requirements when completing your RSVP, and Doltone House will do their best to accommodate.'],
                 ['q' => 'WHAT HAPPENS AFTER THE CEREMONY', 'a' => 'Following the ceremony, guests are invited to remain on the wharf for drinks and canapés, mingling while we prepare for the reception to open.'],
                 ['q' => 'WHERE SHOULD WE STAY IF WE ARE TRAVELLING?', 'a' => 'We are currently organising discounted accommodation options recommended by Doltone House.<br>Please reach out to us if you’d like these details.
-                <br>
-                Closest & Most Convenient (Pyrmont / Darling Harbour)
                 <br><br>
+                Closest & Most Convenient (Pyrmont / Darling Harbour)
+                <br>
                 <ul>
                     <li><p>The Darling – Luxury boutique hotel at The Star precinct</p></li>
                     <li><p>The Star Grand Hotel – Stylish and comfortable</p></li>
