@@ -205,8 +205,9 @@
                 ['q' => 'WHAT HAPPENS AFTER THE CEREMONY', 'a' => 'Following the ceremony, guests are invited to remain on the wharf for drinks and canapés, mingling while we prepare for the reception to open.'],
                 ['q' => 'WHERE SHOULD WE STAY IF WE ARE TRAVELLING?', 'a' => 'We are currently organising discounted accommodation options recommended by Doltone House.<br>Please reach out to us if you’d like these details.
                 <br>
+                Closest & Most Convenient (Pyrmont / Darling Harbour)
+                <br><br>
                 <ul>
-                    <li><p>Closest & Most Convenient (Pyrmont / Darling Harbour)</p></li>
                     <li><p>The Darling – Luxury boutique hotel at The Star precinct</p></li>
                     <li><p>The Star Grand Hotel – Stylish and comfortable</p></li>
                     <li><p>Hotel Woolstore 1888 – Charming boutique option</p></li>
@@ -218,7 +219,7 @@
                 ['q' => 'IS THERE HASHTAGS TO SHARE PHOTOS?', 'a' => 'Not just yet — most likely #ForeverKhoury.
                 <br><br>
                 We’ll confirm on the night. In the meantime, you’re welcome to leave messages on the website, and on the day you’ll also be able to upload photos directly.'],
-                ['q' => 'HOW DOES THE FLOOR MAP WORK?', 'a' => 'A few weeks out from the date, you will recieve a code via email which you will be enter into “enter unique code” search and it will allocate you your table number for the night.'],
+                ['q' => 'HOW DOES THE FLOOR MAP WORK?', 'a' => 'A FEW WEEKS OUT FROM THE DATE, YOU WILL RECIEVE A CODE VIA EMAIL WHICH YOU WILL BE REQUIRED TO ENTER INTO THE “ENTER UNIQUE CODE” SEARCH WHICH WILL ALLOCATE YOU YOUR TABLE NUMBER FOR THE NIGHT.'],
             ];
         @endphp
 
