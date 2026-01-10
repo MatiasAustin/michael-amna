@@ -101,6 +101,7 @@
         {{-- tamu utama / contact --}}
         <input name="full_name"  placeholder="Your Full Name" required>
         <input name="email"      placeholder="Email (Required)" type="email" required>
+        <input name="dietary"    placeholder="Dietary Requirements (optional)">
 
         <fieldset class="attendance">
             <legend style="margin-bottom: 20px;">Are you attending?</legend>
@@ -120,6 +121,7 @@
             <div class="guest-row" data-index="0">
                 <input name="guests[0][full_name]" placeholder="Guest Full Name" required>
                 <input name="guests[0][email]"     placeholder="Guest Email (optional)" type="email">
+                <input name="guests[0][dietary]"   placeholder="Dietary Requirements (optional)">
                 <button type="button" class="remove">Remove</button>
             </div>
         </div>

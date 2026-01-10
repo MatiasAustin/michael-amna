@@ -34,6 +34,7 @@
                                     <th style="padding:5px; border:0.5px solid #F3ECDC; font-weight: normal;">Type</th>
                                     <th style="padding:5px; border:0.5px solid #F3ECDC; font-weight: normal;">Name</th>
                                     <th style="padding:5px; border:0.5px solid #F3ECDC; font-weight: normal;">Email</th>
+                                    <th style="padding:5px; border:0.5px solid #F3ECDC; font-weight: normal;">Dietary</th>
                                     <th style="padding:5px; border:0.5px solid #F3ECDC; font-weight: normal;">Attend</th>
                                     <th style="padding:5px; border:0.5px solid #F3ECDC; font-weight: normal;">Table</th>
                                     <th style="padding:5px; border:0.5px solid #F3ECDC; font-weight: normal;">Seat</th>
@@ -78,6 +79,10 @@
                                                 </svg>
                                             </button>
                                         </div>
+                                    </td>
+
+                                    <td style="padding:6px; border:1px solid #F3ECDC;">
+                                        {{ $person['dietary'] ?? '-' }}
                                     </td>
 
                                     <td style="padding:6px; border:1px solid #F3ECDC;">

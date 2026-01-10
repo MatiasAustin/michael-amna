@@ -11,6 +11,7 @@
         row.innerHTML = `
             <input name="guests[${index}][full_name]" placeholder="Guest full name" required>
             <input name="guests[${index}][email]" type="email" placeholder="Guest email (optional)">
+            <input name="guests[${index}][dietary]" placeholder="Dietary Requirements (optional)">
             <button type="button" class="remove">Remove</button>
         `;
         return row;

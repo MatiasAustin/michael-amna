@@ -20,6 +20,7 @@ class AdminRsvpController extends Controller
                 'full_name',
                 'email',
                 'attend',
+                'dietary',
                 'table_number',
                 'seat_number',
                 'unique_code',
@@ -37,6 +38,7 @@ class AdminRsvpController extends Controller
                     'contact_name' => $r->full_name,
                     'email'        => $r->email,
                     'attend'       => $r->attend,
+                    'dietary'      => $r->dietary,
                     'table_number' => $r->table_number,
                     'seat_number'  => $r->seat_number,
                     'unique_code'  => $r->unique_code,
@@ -45,6 +47,7 @@ class AdminRsvpController extends Controller
 
         // Guests tambahan
         $guests = Guest::with('rsvp:id,full_name,attend,unique_code')
+            ->select('id', 'rsvp_id', 'full_name', 'email', 'dietary', 'table_number', 'seat_number', 'unique_code')
             ->get()
             ->map(function ($g) {
                 return [
@@ -53,7 +56,9 @@ class AdminRsvpController extends Controller
 
                     'source_type'  => 'Guest',
                     'contact_name' => $g->full_name,
+                    'contact_name' => $g->full_name,
                     'email'        => $g->email,
+                    'dietary'      => $g->dietary,
                     'attend'       => optional($g->rsvp)->attend,
                     'table_number' => $g->table_number,
                     'seat_number'  => $g->seat_number,
@@ -113,8 +118,8 @@ class AdminRsvpController extends Controller
      public function exportCsv(): StreamedResponse
     {
         // Ambil data yang sama kayak di index()
-        $rsvps  = Rsvp::select(['id','full_name','email','attend','message','table_number','seat_number'])->get();
-        $guests = Guest::select(['id','rsvp_id','full_name','email','table_number','seat_number'])->get();
+        $rsvps  = Rsvp::select(['id','full_name','email','attend','message','dietary','table_number','seat_number'])->get();
+        $guests = Guest::select(['id','rsvp_id','full_name','email','dietary','table_number','seat_number'])->get();
 
         $people = collect();
 
@@ -123,7 +128,9 @@ class AdminRsvpController extends Controller
                 'source_type' => 'RSVP',
                 'name'        => $rsvp->full_name,
                 'email'       => $rsvp->email,
+                'email'       => $rsvp->email,
                 'attend'      => $rsvp->attend,
+                'dietary'     => $rsvp->dietary,
                 'message'     => $rsvp->message,
                 'table'       => (string) ($rsvp->table_number ?? ''),
                 'seat'        => (string) ($rsvp->seat_number ?? ''),
@@ -136,6 +143,7 @@ class AdminRsvpController extends Controller
                 'name'        => $guest->full_name,
                 'email'       => $guest->email,
                 'attend'      => null,
+                'dietary'     => $guest->dietary,
                 'message'     => null,
                 'table'       => (string) ($guest->table_number ?? ''),
                 'seat'        => (string) ($guest->seat_number ?? ''),
@@ -162,6 +170,7 @@ class AdminRsvpController extends Controller
                 'Name',
                 'Email',
                 'Attend',
+                'Dietary',
                 'Message',
                 'Table',
                 'Seat',
@@ -173,6 +182,7 @@ class AdminRsvpController extends Controller
                     $row['name'],
                     $row['email'],
                     $row['attend'],
+                    $row['dietary'],
                     $row['message'],
                     $row['table'],
                     $row['seat'],

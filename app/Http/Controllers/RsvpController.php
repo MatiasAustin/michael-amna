@@ -14,11 +14,13 @@ class RsvpController extends Controller
             'full_name' => ['required', 'string', 'max:255'],
             'email'     => ['nullable', 'email', 'max:255'],
             'attend'    => ['required', 'in:yes,no'],
+            'dietary'   => ['nullable', 'string'],
             'message'   => ['nullable', 'string'],
 
             'guests'                => ['nullable', 'array'],
             'guests.*.full_name'    => ['required_with:guests.*.email', 'string', 'max:255'],
             'guests.*.email'        => ['nullable', 'email', 'max:255'],
+            'guests.*.dietary'      => ['nullable', 'string'],
         ]);
 
         // simpan rsvp utama
@@ -26,6 +28,7 @@ class RsvpController extends Controller
             'full_name' => $data['full_name'],
             'email'     => $data['email'] ?? null,
             'attend'    => $data['attend'],
+            'dietary'   => $data['dietary'] ?? null,
             'message'   => $data['message'] ?? null,
         ]);
 
@@ -41,6 +44,7 @@ class RsvpController extends Controller
                     'rsvp_id'   => $rsvp->id,
                     'full_name' => $guestData['full_name'],
                     'email'     => $guestData['email'] ?? null,
+                    'dietary'   => $guestData['dietary'] ?? null,
                 ]);
             }
         }

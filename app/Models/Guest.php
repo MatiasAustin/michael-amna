@@ -10,6 +10,7 @@ class Guest extends Model
         'rsvp_id',
         'full_name',
         'email',
+        'dietary',
         'table_number',
         'seat_number',
         'unique_code',

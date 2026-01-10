@@ -1,0 +1,2 @@
+ALTER TABLE `rsvps` ADD COLUMN `dietary` TEXT NULL;
+ALTER TABLE `guests` ADD COLUMN `dietary` TEXT NULL;

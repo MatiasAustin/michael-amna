@@ -11,6 +11,7 @@ class Rsvp extends Model
         'email',
         'attend',
         'message',
+        'dietary',
         'table_number',
         'seat_number',
         'unique_code',
