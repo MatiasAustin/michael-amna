@@ -134,7 +134,7 @@
     </form>
 
     {{-- JS untuk dynamic guest rows (pastikan file ini cuma ngurus tambah/hapus guest, bukan submit) --}}
-    <script src="{{ asset('js/rsvp-form.js') }}"></script>
+    <script src="{{ asset('js/rsvp-form.js') }}?v={{ time() }}"></script>
 
     {{-- POPUP --}}
     <div id="successPopup" class="popup" style="
