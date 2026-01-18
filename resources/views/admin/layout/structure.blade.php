@@ -13,4 +13,4 @@
 
 
     </head>
-<body style="background-color: #3d1516; color: #F3ECDC;">
+<body>

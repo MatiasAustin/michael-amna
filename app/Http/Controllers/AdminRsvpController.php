@@ -56,7 +56,6 @@ class AdminRsvpController extends Controller
 
                     'source_type'  => 'Guest',
                     'contact_name' => $g->full_name,
-                    'contact_name' => $g->full_name,
                     'email'        => $g->email,
                     'dietary'      => $g->dietary,
                     'attend'       => optional($g->rsvp)->attend,
@@ -127,7 +126,6 @@ class AdminRsvpController extends Controller
             $people->push([
                 'source_type' => 'RSVP',
                 'name'        => $rsvp->full_name,
-                'email'       => $rsvp->email,
                 'email'       => $rsvp->email,
                 'attend'      => $rsvp->attend,
                 'dietary'     => $rsvp->dietary,

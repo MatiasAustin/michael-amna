@@ -5,6 +5,7 @@
         <li><a href="{{ route('admin.details') }}">Finer Details</a></li>
         <li><a href="{{ route('admin.dayglance.index') }}">Our Day at a Glance</a></li>
         <li><a href="{{ route('admin.rsvp') }}">RSVP</a></li>
+        <li><a href="{{ route('admin.change-password') }}">Account Settings</a></li>
     </ul>
 </div>
 

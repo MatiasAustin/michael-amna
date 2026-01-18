@@ -81,13 +81,13 @@
                     @endif
 
                     @if(session('success'))
-                        <div style="padding:8px 12px; background:#d1fae5; color:#065f46; margin-bottom:10px; border-radius:4px;">
+                        <div class="alert alert-success">
                             {{ session('success') }}
                         </div>
                     @endif
 
                     @if($errors->any())
-                        <div style="padding:8px 12px; background:#fee2e2; color:#b91c1c; margin-bottom:10px; border-radius:4px;">
+                        <div class="alert alert-error">
                             <ul style="margin:0; padding-left:18px;">
                                 @foreach($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -97,27 +97,29 @@
                     @endif
 
                     <div style="display:flex; margin-top: 20px; gap:20px; height: fit-content; flex-direction: column;">
-                        <div style="padding:16px; border-radius:20px; border:1px solid #F3ECDC30;">
+                        <div style="padding:16px; border-radius:8px; border:1px solid var(--border-color); background: rgba(243, 236, 220, 0.05);">
                             <h2 style="margin-top:0;">Add entry</h2>
                             <form action="{{ route('admin.dayglance.store') }}" method="POST" enctype="multipart/form-data" style="display:grid; gap:10px; margin-top:10px;" class="glance-upload-form">
                                 @csrf
                                 <label style="margin-bottom: 20px; display:flex; flex-direction: column; gap:5px;">Time Label
-                                    <input type="text" name="time_label" placeholder="e.g. 4:45 PM" required>
+                                    <input type="text" name="time_label" placeholder="e.g. 4:45 PM" class="form-control" required>
                                 </label>
                                 <label style="display:flex; flex-direction: column; gap:5px;">Headline
-                                    <input type="text" name="headline" placeholder="Guests Arrive" required>
+                                    <input type="text" name="headline" placeholder="Guests Arrive" class="form-control" required>
                                 </label>
                                 <label style="display:flex; flex-direction: column; gap:5px;">Caption
-                                    <input type="text" name="caption" placeholder="Let the celebrations begin">
+                                    <input type="text" name="caption" placeholder="Let the celebrations begin" class="form-control">
                                 </label>
                                 <label style="display:flex; flex-direction: column; gap:5px;">Display Order
-                                    <input type="number" name="display_order" min="0" value="0">
+                                    <input type="number" name="display_order" min="0" value="0" class="form-control">
                                 </label>
                                 <label style="display:flex; flex-direction: column; gap:5px;">Photo (optional)
                                     <input type="file" name="photo" accept=".jpg,.jpeg,.png,.webp"><br>
-                                    <small style="color:#F3ECDC;">Up to 20MB; auto-compresses to <5MB</small>
+                                    <small style="color:var(--text-color); opacity: 0.7;">Up to 20MB; auto-compresses to <5MB</small>
                                 </label>
-                                <button type="submit" style="padding:10px 14px; background:#F3ECDC; color:#3d1516; border:none; border-radius:4px; font-size: 14px; text-transform: uppercase;">Add</button>
+                                <div>
+                                    <button type="submit" class="btn btn-primary">Add</button>
+                                </div>
                             </form>
                         </div>
 
@@ -126,8 +128,8 @@
                             <div style="display:flex; flex-direction:column; gap:12px; margin-top:10px;">
 
                                 @forelse($items as $item)
-                                    <div class="update-glance" style="border:1px solid #F3ECDC30; border-radius:15px; padding:12px; display:flex; gap:20px; align-items:start; background: #00000036; ">
-                                        <div class="update-item-glance" style="border:1px dashed #F3ECDC30; border-radius:8px; overflow:hidden; height: fit-content; min-height:120px; display:flex; align-items:center; justify-content:center; margin-bottom: 20px; width: 50%; flex-shrink:0;">
+                                    <div class="update-glance" style="border:1px solid var(--border-color); border-radius:8px; padding:12px; display:flex; gap:20px; align-items:start; background: rgba(0,0,0,0.2);">
+                                        <div class="update-item-glance" style="border:1px dashed var(--border-color); border-radius:8px; overflow:hidden; height: fit-content; min-height:120px; display:flex; align-items:center; justify-content:center; margin-bottom: 20px; width: 50%; flex-shrink:0;">
                                             @if($item->photo_path)
                                                 <img src="{{ asset($item->photo_path) }}" alt="Photo {{ $item->id }}" style="width:100%; height:100%; object-fit:cover;">
                                             @else
@@ -139,29 +141,29 @@
                                                 @csrf
                                                 @method('PUT')
                                                 <label style="margin-bottom: 10px; display:flex; flex-direction: column; gap:5px;">Time Label
-                                                    <input type="text" name="time_label" value="{{ $item->time_label }}" required>
+                                                    <input type="text" name="time_label" value="{{ $item->time_label }}" class="form-control" required>
                                                 </label>
                                                 <label style="margin-bottom: 10px; display:flex; flex-direction: column; gap:5px;">Headline
-                                                    <input type="text" name="headline" value="{{ $item->headline }}" required>
+                                                    <input type="text" name="headline" value="{{ $item->headline }}" class="form-control" required>
                                                 </label>
                                                 <label style="margin-bottom: 10px; display:flex; flex-direction: column; gap:5px;">Caption
-                                                    <input type="text" name="caption" value="{{ $item->caption }}">
+                                                    <input type="text" name="caption" value="{{ $item->caption }}" class="form-control">
                                                 </label>
                                                 <label style="margin-bottom: 10px; display:flex; flex-direction: column; gap:5px;">Display Order
-                                                    <input type="number" name="display_order" min="0" value="{{ $item->display_order }}">
+                                                    <input type="number" name="display_order" min="0" value="{{ $item->display_order }}" class="form-control">
                                                 </label>
                                                 <label style="margin-bottom: 10px; display:flex; flex-direction: column; gap:5px;">Replace Photo
                                                     <input type="file" name="photo" accept=".jpg,.jpeg,.png,.webp"><br>
-                                                    <small style="color:#F3ECDC;">File Size Up to 20MB; auto-compresses to <5MB</small>
+                                                    <small style="color:var(--text-color); opacity: 0.7;">File Size Up to 20MB; auto-compresses to <5MB</small>
                                                 </label>
                                                 <div style="display:flex; gap:10px; align-items:center;">
-                                                    <button type="submit" style="padding:8px 12px; background:#3d1516; color:#F3ECDC; border:none; border-radius:4px; font-size: 14px; text-transform: uppercase;">Update</button>
+                                                    <button type="submit" class="btn btn-primary btn-sm">Update</button>
                                                 </div>
                                             </form>
                                             <form action="{{ route('admin.dayglance.destroy', $item) }}" method="POST" onsubmit="return confirm('Delete this entry?');" style="margin-top:6px;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" style="padding:8px 12px; background:#b91c1c; color:#fff; border:none; border-radius:4px; font-size: 14px; text-transform: uppercase;">Delete</button>
+                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                             </form>
                                         </div>
                                     </div>

@@ -7,88 +7,68 @@
         <div class="admin-dashboard-main">
             @include('admin.layout.sidebar')
 
-
             <div class="admin-dashboard-panel">
-                    <div class="details-section">
-                        <div class="maps">
-                            <h3>Venue Location</h3>
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
 
-                             @if(session('success'))
-                                <div style="padding:8px 12px; background:#d1fae5; color:#065f46; margin-bottom:10px; border-radius:4px;">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
+                @if($errors->has('floor_map'))
+                    <div class="alert alert-error">
+                        {{ $errors->first('floor_map') }}
+                    </div>
+                @endif
+                
+                <div class="details-section">
+                    <div class="maps card">
+                        <h3>Venue Location</h3>
 
-                            @if($errors->has('floor_map'))
-                                <div style="padding:8px 12px; background:#fee2e2; color:#b91c1c; margin-bottom:10px; border-radius:4px;">
-                                    {{ $errors->first('floor_map') }}
-                                </div>
-                            @endif
-                            @if(session('success'))
-                            <p class="text-success">{{ session('success') }}</p>
-                            @endif
-
-                            <form action="{{ route('admin.details.update') }}" method="POST" class="details-form">
+                        <form action="{{ route('admin.details.update') }}" method="POST" class="details-form">
                             @csrf
-                            <label for="venue_location">Google Maps Embed Link:</label>
+                            <label for="venue_location" style="display:block; margin-bottom:5px;">Google Maps Embed Link:</label>
                             <input type="text" id="venue_location" name="venue_location"
+                                    class="form-control"
                                     placeholder="Enter Google Maps embed link"
                                     value="{{ old('venue_location', $venue->venue_location ?? '') }}" required>
-                            <button type="submit">Update Location</button>
-                            </form>
-
-                            {{-- Preview (opsional) --}}
-                            {{-- <div class="map-preview" style="margin-top:12px;">
-                            <iframe id="mapPreview" src="{{ $venue->venue_location ?? '' }}" width="100%" height="500"
-                                    style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                            </div> --}}
-                        </div>
-
-
-                        <div class="floor-map" style="margin-top:40px; border-top:1px solid #ccc; padding-top:20px;">
-                            <h3>Floor Map</h3>
-
-
-
-                            {{-- preview current floor map --}}
-                            @if(!empty($floorMapUrl))
-                                <p>Current floor map:</p>
-                                <img src="{{ $floorMapUrl }}" alt="Floor Map"
-                                    style="max-width:400px; border:1px solid #ddd; margin-bottom:10px;">
-                            @else
-                                <p><em>Belum ada floor map.</em></p>
-                            @endif
-
-                            <form action="{{ url('/admin/details/floor-map') }}"
-                                method="POST"
-                                enctype="multipart/form-data"
-                                style="margin-top:10px;">
-                                @csrf
-                                <label for="floor_map">Upload Floor Map (PDF/JPG):</label><br>
-                                <input type="file" name="floor_map" id="floor_map" accept=".jpg,.jpeg" required>
-
-                                <br><br>
-
-                                <button type="submit"
-                                        style="padding:8px 16px; background:#3d1516; color:#F3ECDC; border:none; border-radius:4px; font-size: 14px; text-transform: uppercase;">
-                                    Update Floor Map
-                                </button>
-                            </form>
-                        </div>
+                            <div style="margin-top: 10px;">
+                                <button type="submit" class="btn btn-primary">Update Location</button>
+                            </div>
+                        </form>
                     </div>
 
-                    <script>
-                    const input = document.getElementById('venue_location');
-                    const frame = document.getElementById('mapPreview');
-                    input.addEventListener('input', () => {
-                        const v = input.value.trim();
-                        frame.src = v || '';
-                    });
-                    </script>
+                    <div class="floor-map card">
+                        <h3>Floor Map</h3>
+
+                        {{-- preview current floor map --}}
+                        @if(!empty($floorMapUrl))
+                            <p style="margin-bottom:10px;">Current floor map:</p>
+                            <img src="{{ $floorMapUrl }}" alt="Floor Map"
+                                style="max-width:100%; height:auto; border:1px solid var(--border-color); border-radius:4px; margin-bottom:15px; display:block;">
+                        @else
+                            <p style="margin-bottom:10px;"><em>Belum ada floor map.</em></p>
+                        @endif
+
+                        <form action="{{ url('/admin/details/floor-map') }}"
+                            method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <label for="floor_map" style="display:block; margin-bottom:5px;">Upload Floor Map (PDF/JPG):</label>
+                            <input type="file" name="floor_map" id="floor_map" accept=".jpg,.jpeg" required style="margin-bottom: 10px;">
+                            
+                            <div>
+                                <button type="submit" class="btn btn-primary">
+                                    Update Floor Map
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
             </div>
         </div>
+    </div>
 
     @include('admin.layout.footer')
-    </body>
+</body>
 </html>

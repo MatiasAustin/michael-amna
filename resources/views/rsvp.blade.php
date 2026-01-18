@@ -57,6 +57,71 @@
         transform: scale(1.08);
         color: #ffffff;
     }
+    /* Floating Help Button */
+    .floating-help {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        height: 50px;
+        /* Outlined Style */
+        background-color: transparent;
+        border: 1px solid #F3ECDC;
+        color: #F3ECDC;
+        border-radius: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        z-index: 9998;
+        transition: width 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+        text-decoration: none;
+        overflow: hidden;
+        /* Initial state: circle - account for border */
+        width: 50px;
+        box-sizing: border-box;
+    }
+    .floating-help:hover {
+        /* Expanded state */
+        width: 200px;
+        background-color: #F3ECDC; /* Fill on hover for contrast */
+        color: #3d1516;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+    }
+    
+    .floating-text {
+        opacity: 0;
+        white-space: nowrap;
+        font-size: 14px;
+        font-weight: 600;
+        font-family: 'Inter', sans-serif;
+        max-width: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        transform: translateX(-10px);
+    }
+
+    .floating-help:hover .floating-text {
+        opacity: 1;
+        max-width: 150px; /* Space for text */
+        margin-left: 15px;
+        margin-right: 5px;
+        transform: translateX(0);
+    }
+
+    .floating-icon {
+        width: 48px; /* 50px - 2px border */
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .floating-help svg {
+        width: 24px;
+        height: 24px;
+        fill: currentColor;
+    }
   </style>
 </head>
 <body>
@@ -132,6 +197,24 @@
 
         <button type="submit">I DO</button>
     </form>
+    
+    @if(!empty($help_email))
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ trim($help_email) }}&su=Report%20Problem%20-%20ForeverKhoury"
+           class="floating-help"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Report a problem">
+            
+            <span class="floating-text">Report Problem</span>
+            
+            <div class="floating-icon">
+                {{-- Rounded Warning Icon --}}
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2C12.4 2 12.8 2.2 13 2.5L22.5 19.1C22.9 19.8 22.4 20.8 21.5 20.8H2.5C1.6 20.8 1.1 19.8 1.5 19.1L11 2.5C11.2 2.2 11.6 2 12 2ZM12 15C11.4 15 11 15.4 11 16V17C11 17.6 11.4 18 12 18C12.6 18 13 17.6 13 17V16C13 15.4 12.6 15 12 15ZM11 7V13C11 13.6 11.4 14 12 14C12.6 14 13 13.6 13 13V7C13 6.4 12.6 6 12 6C11.4 6 11 6.4 11 7Z"/>
+                </svg>
+            </div>
+        </a>
+    @endif
 
     {{-- JS untuk dynamic guest rows (pastikan file ini cuma ngurus tambah/hapus guest, bukan submit) --}}
     <script src="{{ asset('js/rsvp-form.js') }}?v={{ time() }}"></script>

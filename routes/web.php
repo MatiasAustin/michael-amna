@@ -39,7 +39,13 @@ Route::get('/floor-map', [FloorMapController::class, 'show'])->name('floormap');
 // Route to display the floor map
 
 
-Route::view('/rsvp', 'rsvp')->name('rsvp');
+Route::get('/rsvp', function () {
+    $venue = Venue::first();
+    // Jika kolom help_email belum ada di DB (misal belum migrate), antisipasi error
+    $help_email = $venue->help_email ?? null;
+    
+    return view('rsvp', compact('help_email'));
+})->name('rsvp');
 Route::post('/rsvp', [RsvpController::class, 'store'])->name('rsvp.store');
 
 
@@ -65,6 +71,12 @@ Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])
         ->name('admin.dashboard');
+
+    Route::get('/admin/change-password', [AdminAuthController::class, 'showChangePasswordForm'])->name('admin.change-password');
+    Route::put('/admin/change-password', [AdminAuthController::class, 'changePassword'])->name('admin.change-password.update');
+    Route::post('/admin/change-password/verify', [AdminAuthController::class, 'verifyPasswordChangeOtp'])->name('admin.change-password.verify');
+    Route::put('/admin/change-email', [AdminAuthController::class, 'updateEmail'])->name('admin.change-email.update');
+    Route::put('/admin/settings/help-email', [AdminAuthController::class, 'updateHelpEmail'])->name('admin.settings.help-email');
 });
 
 // Countdown Management
