@@ -39,7 +39,7 @@
                     @if(optional($cd)->event_at_utc)
                         <strong>{{ $cd->headline ?? '—' }}</strong> ·
                         UTC: {{ $cd->event_at_utc->toIso8601String() }} ·
-                        Local: {{ $cd->event_at_utc->setTimezone(config('app.timezone'))->toDayDateTimeString() }}
+                        Sydney: {{ $sydneyTime ?? 'N/A' }}
                     @else
                         <em>Not set yet</em>
                     @endif
@@ -63,7 +63,7 @@
                     <br>
                     <label>Timezone</label><br>
                     <select name="tz" required>
-                        @php $tz = old('tz', config('app.timezone')); @endphp
+                        @php $tz = old('tz', 'Australia/Sydney'); @endphp
                         @foreach(timezone_identifiers_list() as $zone)
                             <option value="{{ $zone }}" @selected($tz===$zone)>{{ $zone }}</option>
                         @endforeach

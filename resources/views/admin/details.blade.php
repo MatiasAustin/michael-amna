@@ -31,6 +31,12 @@
                                     class="form-control"
                                     placeholder="Enter Google Maps embed link"
                                     value="{{ old('venue_location', $venue->venue_location ?? '') }}" required>
+
+                            <label for="ceremony_start_time" style="display:block; margin-top:15px; margin-bottom:5px;">Ceremony Start Time:</label>
+                            <input type="time" id="ceremony_start_time" name="ceremony_start_time"
+                                   class="form-control"
+                                   value="{{ old('ceremony_start_time', optional($venue->ceremony_start_time ?? null)->format('H:i')) }}">
+                            
                             <div style="margin-top: 10px;">
                                 <button type="submit" class="btn btn-primary">Update Location</button>
                             </div>

@@ -22,6 +22,7 @@ class AdminDetailsController extends Controller
     {
         $data = $request->validate([
             'venue_location' => ['required', 'string', 'max:2000'],
+            'ceremony_start_time' => ['nullable', 'date_format:H:i'],
         ]);
 
         $venue = Venue::first();

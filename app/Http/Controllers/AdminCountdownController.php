@@ -18,6 +18,7 @@ class AdminCountdownController extends Controller
         return view('admin.dashboard', [
             'cd' => $cd,
             'datetimeLocal' => $value,
+            'sydneyTime' => optional($cd?->event_at_utc)?->setTimezone('Australia/Sydney')?->toDayDateTimeString(),
         ]);
     }
 

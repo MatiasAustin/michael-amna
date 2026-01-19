@@ -93,7 +93,7 @@
         $canUploadPhotos = $countdownFinished || (bool) optional($countdown)->guest_upload_enabled;
     @endphp
 
-    <div class="countdown" style="display: flex; justify-content: center;">
+    <div class="countdown" style="display: flex; justify-content: center; margin-bottom: 15px;">
         <div class="count-box">
             <label>DAYS</label>
             <span id="days"></span>
@@ -111,6 +111,12 @@
             <span id="seconds"></span>
         </div>
     </div>
+
+    @if(optional($countdown)->event_at_utc)
+        <p style="margin-top: 0; margin-bottom: 60px; font-size: 14px; opacity: 0.8; letter-spacing: 1px; text-transform: uppercase;">
+            {{ $countdown->event_at_utc->setTimezone('Australia/Sydney')->format('F d, Y, g:i A') }} Sydney Time
+        </p>
+    @endif
 
     <script>
         (function(){
