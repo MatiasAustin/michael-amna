@@ -6,7 +6,31 @@ use App\Models\Venue;
 use App\Models\Countdown;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\HomeController;
+// ... (keep usage of controllers)
+
+// ...
+
+// TEST EMAIL ROUTE (Run and then delete)
+Route::get('/test-email', function () {
+    try {
+        $dummy = new Rsvp([
+            'full_name' => 'Tias Austin (Tester)',
+            'unique_code' => 'TEST-123',
+        ]);
+        
+        // Force set ID for any logic that might need it
+        $dummy->id = 99999; 
+
+        Mail::to('tiasaustin32@gmail.com')->send(new App\Mail\RsvpCodeMail($dummy));
+
+        return "Test email sent to tiasaustin32@gmail.com! <br> Check your inbox.";
+    } catch (\Throwable $e) {
+        return "<h1>Error!</h1>" . $e->getMessage() . "<br><pre>" . $e->getTraceAsString() . "</pre>";
+    }
+});
 use App\Http\Controllers\RsvpController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\AdminAuthController;
@@ -36,13 +60,23 @@ Route::get('/debug-path', function () {
     $base = rtrim($env ?: $default, DIRECTORY_SEPARATOR);
     $target = $base . DIRECTORY_SEPARATOR . 'day-glance';
     
-    echo "<h1>Path Debugger</h1>";
-    echo "<b>1. Loaded from .env:</b> " . var_export($env, true) . "<br>";
-    echo "<b>2. Default public_path:</b> " . $default . "<br>";
-    echo "<b>3. Target Folder:</b> " . $target . "<br>";
-    echo "<b>4. Is Directory?</b> " . (is_dir($target) ? '<span style="color:green">YES</span>' : '<span style="color:red">NO</span>') . "<br>";
-    echo "<b>5. Is Writable?</b> " . (is_writable($target) ? '<span style="color:green">YES</span>' : '<span style="color:red">NO</span>') . "<br>";
-    echo "<br><i>Cache has been cleared.</i>";
+    $mailUser = config('mail.mailers.smtp.username');
+    $mailPass = config('mail.mailers.smtp.password');
+    $maskedPass = substr($mailPass, 0, 2) . '****' . substr($mailPass, -2); // Show first 2 and last 2 chars
+
+    echo "<h1>Path & Mail Debugger</h1>";
+    echo "<h3>File System</h3>";
+    echo "<b>1. Turn on .env:</b> " . var_export($env, true) . "<br>";
+    echo "<b>2. Target Folder:</b> " . $target . "<br>";
+    echo "<b>3. Is Writable?</b> " . (is_writable($target) ? '<span style="color:green">YES</span>' : '<span style="color:red">NO</span>') . "<br>";
+    
+    echo "<h3>Mail Config (Loaded in App)</h3>";
+    echo "<b>Host:</b> " . config('mail.mailers.smtp.host') . "<br>";
+    echo "<b>Port:</b> " . config('mail.mailers.smtp.port') . "<br>";
+    echo "<b>Username:</b> " . $mailUser . "<br>";
+    echo "<b>Password:</b> " . $maskedPass . " (Length: " . strlen($mailPass) . ")<br>";
+    
+    echo "<br><i>Cache has been cleared. if password looks wrong, edit .env</i>";
 });
 
 Route::get('/details', function (Request $request) {
