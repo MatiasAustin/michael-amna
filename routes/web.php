@@ -25,10 +25,24 @@ use App\Http\Controllers\AdminFloorMapController;
 // Public Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Temporary Route to Clear Cache (Run this then delete)
-Route::get('/clear-cache', function () {
+// Temporary Route to Debug Path & Clear Cache
+Route::get('/debug-path', function () {
     Artisan::call('optimize:clear');
-    return 'Cache cleared! <br> ' . nl2br(Artisan::output());
+    
+    $env = env('PHOTO_PUBLIC_BASE');
+    $default = public_path();
+    
+    // Simulate Controller Logic
+    $base = rtrim($env ?: $default, DIRECTORY_SEPARATOR);
+    $target = $base . DIRECTORY_SEPARATOR . 'day-glance';
+    
+    echo "<h1>Path Debugger</h1>";
+    echo "<b>1. Loaded from .env:</b> " . var_export($env, true) . "<br>";
+    echo "<b>2. Default public_path:</b> " . $default . "<br>";
+    echo "<b>3. Target Folder:</b> " . $target . "<br>";
+    echo "<b>4. Is Directory?</b> " . (is_dir($target) ? '<span style="color:green">YES</span>' : '<span style="color:red">NO</span>') . "<br>";
+    echo "<b>5. Is Writable?</b> " . (is_writable($target) ? '<span style="color:green">YES</span>' : '<span style="color:red">NO</span>') . "<br>";
+    echo "<br><i>Cache has been cleared.</i>";
 });
 
 Route::get('/details', function (Request $request) {
