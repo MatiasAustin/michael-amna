@@ -55,8 +55,24 @@ Route::get('/details', function (Request $request) {
     ]);
 })->name('details');
 
-Route::get('/floor-map', [FloorMapController::class, 'show'])->name('floormap');
 // Route to display the floor map
+Route::get('/floor-map', [FloorMapController::class, 'show'])->name('floormap');
+
+
+// TEST EMAIL ROUTE (Run and then delete)
+Route::get('/test-email', function () {
+    $dummy = new Rsvp([
+        'full_name' => 'Tias Austin (Tester)',
+        'unique_code' => 'TEST-123',
+    ]);
+    
+    // Force set ID for any logic that might need it (though blade mostly uses code)
+    $dummy->id = 99999; 
+
+    Mail::to('tiasaustin32@gmail.com')->send(new App\Mail\RsvpCodeMail($dummy));
+
+    return "Test email sent to tiasaustin32@gmail.com! <br> Check your inbox.";
+});
 
 
 Route::get('/rsvp', function () {
