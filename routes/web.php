@@ -49,6 +49,58 @@ use App\Http\Controllers\AdminFloorMapController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Temporary Route to Debug Path & Clear Cache
+Route::get('/debug-path', function () {
+    Artisan::call('optimize:clear');
+    
+    $env = env('PHOTO_PUBLIC_BASE');
+    $default = public_path();
+    
+    // Simulate Controller Logic
+    $base = rtrim($env ?: $default, DIRECTORY_SEPARATOR);
+    $target = $base . DIRECTORY_SEPARATOR . 'day-glance';
+    
+    $mailUser = config('mail.mailers.smtp.username');
+    $mailPass = config('mail.mailers.smtp.password');
+    $maskedPass = substr($mailPass, 0, 2) . '****' . substr($mailPass, -2); 
+
+    echo "<h1>Path & Mail Debugger</h1>";
+    echo "<h3>File System</h3>";
+    echo "<b>1. Turn on .env:</b> " . var_export($env, true) . "<br>";
+    echo "<b>2. Target Folder:</b> " . $target . "<br>";
+    echo "<b>3. Is Writable?</b> " . (is_writable($target) ? '<span style="color:green">YES</span>' : '<span style="color:red">NO</span>') . "<br>";
+    
+    echo "<h3>Mail Config (Loaded in App)</h3>";
+    echo "<b>Host:</b> " . config('mail.mailers.smtp.host') . "<br>";
+    echo "<b>Port:</b> " . config('mail.mailers.smtp.port') . "<br>";
+    echo "<b>Encryption:</b> " . config('mail.mailers.smtp.encryption') . "<br>";
+    echo "<b>Username:</b> " . $mailUser . "<br>";
+    echo "<b>From Address:</b> " . config('mail.from.address') . " (Must match Username usually)<br>";
+    echo "<b>From Name:</b> " . config('mail.from.name') . "<br>";
+    echo "<b>Password:</b> " . $maskedPass . " (Length: " . strlen($mailPass) . ")<br>";
+    
+    echo "<br><i>Cache has been cleared. if password looks wrong, edit .env</i>";
+});
+
+// TEST EMAIL ROUTE (Sends real email)
+Route::get('/test-email', function () {
+    try {
+        $dummy = new Rsvp([
+            'full_name' => 'Tias Austin (Tester)',
+            'unique_code' => 'TEST-123',
+        ]);
+        
+        $dummy->id = 99999; 
+
+        Mail::to('tiasaustin32@gmail.com')->send(new App\Mail\RsvpCodeMail($dummy));
+
+        return "<h1>Success!</h1> Email sent to tiasaustin32@gmail.com. <br>Please check your inbox (and spam folder).";
+        
+    } catch (\Throwable $e) {
+        return "<h1>Error Sending Email!</h1>" . $e->getMessage() . "<br><pre>" . $e->getTraceAsString() . "</pre>";
+    }
+});
+
+// Temporary Route to Debug Path & Clear Cache
 
 
 Route::get('/details', function (Request $request) {
