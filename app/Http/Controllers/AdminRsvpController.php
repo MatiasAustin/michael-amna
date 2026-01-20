@@ -230,9 +230,9 @@ class AdminRsvpController extends Controller
 
         $targetEmail = $data['email'];
 
-        // opsional: sekalian update email di DB
-        $rsvp->email = $targetEmail;
-        $rsvp->save();
+        // opsional: sekalian update email di DB -> DISABLED untuk mencegah overwrite email tamu utama saat email ke guest
+        // $rsvp->email = $targetEmail;
+        // $rsvp->save();
 
         Mail::to($targetEmail)->send(new RsvpCodeMail($rsvp));
 

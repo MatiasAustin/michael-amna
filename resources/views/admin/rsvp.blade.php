@@ -109,17 +109,19 @@
                                 </td>
 
                                 <td>
-                                    @if($person['source_type'] === 'RSVP' && !empty($rsvpId))
-                                        <div style="display:flex; flex-wrap:wrap; gap:4px; align-items:center;">
-                                            {{-- Generate Code (tetap submit langsung) --}}
+                                    <div style="display:flex; flex-wrap:wrap; gap:4px; align-items:center;">
+                                        @if($person['source_type'] === 'RSVP' && !empty($rsvpId))
+                                            {{-- Generate Code (Main RSVP Only) --}}
                                             <button type="submit"
                                                 formaction="{{ route('admin.rsvp.generateCode', ['rsvp' => $rsvpId]) }}"
                                                 formmethod="POST"
                                                 class="btn btn-primary btn-sm">
                                                 Gen Code
                                             </button>
+                                        @endif
 
-                                            {{-- Send Email via popup --}}
+                                        @if(!empty($rsvpId) && ($person['source_type'] === 'RSVP' || ($person['source_type'] === 'Guest' && !empty($person['email']))))
+                                            {{-- Send Email (RSVP or Guest with Email) --}}
                                             <button type="button"
                                                 onclick="openSendCodeModal(this)"
                                                 data-rsvp-id="{{ $rsvpId }}"
@@ -129,8 +131,10 @@
                                                 class="btn btn-secondary btn-sm">
                                                 Email
                                             </button>
+                                        @endif
 
-                                            {{-- Delete RSVP + guests --}}
+                                        @if($person['source_type'] === 'RSVP' && !empty($rsvpId))
+                                            {{-- Delete RSVP (Main RSVP Only) --}}
                                             <button type="button"
                                                 onclick="confirmDeleteRsvp('{{ $rsvpId }}')"
                                                 aria-label="Delete RSVP"
@@ -141,8 +145,8 @@
                                                     <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
                                                 </svg>
                                             </button>
-                                        </div>
-                                    @endif
+                                        @endif
+                                    </div>
                                 </td>
 
                             </tr>
