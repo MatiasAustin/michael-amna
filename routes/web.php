@@ -25,6 +25,12 @@ use App\Http\Controllers\AdminFloorMapController;
 // Public Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+// Temporary Route to Clear Cache (Run this then delete)
+Route::get('/clear-cache', function () {
+    Artisan::call('optimize:clear');
+    return 'Cache cleared! <br> ' . nl2br(Artisan::output());
+});
+
 Route::get('/details', function (Request $request) {
     $venue     = Venue::first();
     $countdown = Countdown::first();
