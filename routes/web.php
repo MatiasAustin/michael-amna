@@ -13,7 +13,7 @@ use App\Http\Controllers\HomeController;
 
 // ...
 
-// TEST EMAIL ROUTE (Run and then delete)
+// TEST EMAIL ROUTE (Sends real email)
 Route::get('/test-email', function () {
     try {
         $dummy = new Rsvp([
@@ -21,14 +21,14 @@ Route::get('/test-email', function () {
             'unique_code' => 'TEST-123',
         ]);
         
-        // Force set ID for any logic that might need it
         $dummy->id = 99999; 
 
         Mail::to('tiasaustin32@gmail.com')->send(new App\Mail\RsvpCodeMail($dummy));
 
-        return "Test email sent to tiasaustin32@gmail.com! <br> Check your inbox.";
+        return "<h1>Success!</h1> Email sent to tiasaustin32@gmail.com. <br>Please check your inbox (and spam folder).";
+        
     } catch (\Throwable $e) {
-        return "<h1>Error!</h1>" . $e->getMessage() . "<br><pre>" . $e->getTraceAsString() . "</pre>";
+        return "<h1>Error Sending Email!</h1>" . $e->getMessage() . "<br><pre>" . $e->getTraceAsString() . "</pre>";
     }
 });
 use App\Http\Controllers\RsvpController;
@@ -73,7 +73,10 @@ Route::get('/debug-path', function () {
     echo "<h3>Mail Config (Loaded in App)</h3>";
     echo "<b>Host:</b> " . config('mail.mailers.smtp.host') . "<br>";
     echo "<b>Port:</b> " . config('mail.mailers.smtp.port') . "<br>";
+    echo "<b>Encryption:</b> " . config('mail.mailers.smtp.encryption') . "<br>";
     echo "<b>Username:</b> " . $mailUser . "<br>";
+    echo "<b>From Address:</b> " . config('mail.from.address') . " (Must match Username usually)<br>";
+    echo "<b>From Name:</b> " . config('mail.from.name') . "<br>";
     echo "<b>Password:</b> " . $maskedPass . " (Length: " . strlen($mailPass) . ")<br>";
     
     echo "<br><i>Cache has been cleared. if password looks wrong, edit .env</i>";
