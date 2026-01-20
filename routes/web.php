@@ -12,24 +12,7 @@ use App\Http\Controllers\HomeController;
 
 // ...
 
-// TEST EMAIL ROUTE (Sends real email)
-Route::get('/test-email', function () {
-    try {
-        $dummy = new Rsvp([
-            'full_name' => 'Tias Austin (Tester)',
-            'unique_code' => 'TEST-123',
-        ]);
-        
-        $dummy->id = 99999; 
 
-        Mail::to('tiasaustin32@gmail.com')->send(new App\Mail\RsvpCodeMail($dummy));
-
-        return "<h1>Success!</h1> Email sent to tiasaustin32@gmail.com. <br>Please check your inbox (and spam folder).";
-        
-    } catch (\Throwable $e) {
-        return "<h1>Error Sending Email!</h1>" . $e->getMessage() . "<br><pre>" . $e->getTraceAsString() . "</pre>";
-    }
-});
 use App\Http\Controllers\RsvpController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\AdminAuthController;
@@ -50,24 +33,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 
-// TEST EMAIL ROUTE (Sends real email)
-Route::get('/test-email', function () {
-    try {
-        $dummy = new Rsvp([
-            'full_name' => 'Tias Austin (Tester)',
-            'unique_code' => 'TEST-123',
-        ]);
-        
-        $dummy->id = 99999; 
 
-        Mail::to('tiasaustin32@gmail.com')->send(new App\Mail\RsvpCodeMail($dummy));
-
-        return "<h1>Success!</h1> Email sent to tiasaustin32@gmail.com. <br>Please check your inbox (and spam folder).";
-        
-    } catch (\Throwable $e) {
-        return "<h1>Error Sending Email!</h1>" . $e->getMessage() . "<br><pre>" . $e->getTraceAsString() . "</pre>";
-    }
-});
 
 // Temporary Route to Debug Path & Clear Cache
 
