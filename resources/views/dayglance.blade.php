@@ -16,6 +16,12 @@
     .brand img {
         mix-blend-mode: screen;
     }
+    @font-face {
+        font-family: 'Brittany Signature';
+        src: url("{{ asset('font/brittany_signature/BrittanySignature.ttf') }}") format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
   </style>
 </head>
 <body>

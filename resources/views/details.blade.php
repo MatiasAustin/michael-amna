@@ -176,7 +176,7 @@
 
       <div class="item" style="margin-top:40px;">
           <h2 style="margin: 20px 0; letter-spacing: 10px;">DRESS CODE</h2>
-          <p>Black-Tie</p>
+          <p>Formal/Black-Tie</p>
       </div>
 
 
