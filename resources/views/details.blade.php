@@ -220,6 +220,7 @@
                 <br><br>
                 We’ll confirm on the night. In the meantime, you’re welcome to leave messages on the website, and on the day you’ll also be able to upload photos directly.'],
                 ['q' => 'HOW DOES THE FLOOR MAP WORK?', 'a' => 'A FEW WEEKS OUT FROM THE DATE, YOU WILL RECIEVE A CODE VIA EMAIL WHICH YOU WILL BE REQUIRED TO ENTER INTO THE “ENTER UNIQUE CODE” SEARCH WHICH WILL ALLOCATE YOU YOUR TABLE NUMBER FOR THE NIGHT.'],
+                ['q' => 'DO YOU HAVE A GIFT REGISTRY?', 'a' => 'Your presence at our wedding is the greatest gift of all. However, should you wish to honour us with a gift, a wishing well will be available at reception.'],
             ];
         @endphp
 
