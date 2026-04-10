@@ -27,10 +27,14 @@
                     <tr>
                         <td style="padding: 40px 30px; text-align: center;">
                             <p style="margin: 0 0 20px 0; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #3d1516;">
-                                Dear <strong>{{ $rsvp->full_name }}</strong>,
+                                Hi {{ explode(' ', trim($rsvp->full_name))[0] }},
                             </p>
-                            <p style="margin: 0 0 30px 0; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #5c4a4a;">
-                                We are so excited to celebrate with you. Use the unique code below to access your invitation details and seating information.
+                            <p style="margin: 0 0 20px 0; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #5c4a4a;">
+                                We’re so excited to celebrate with you.
+                            </p>
+
+                            <p style="margin: 0 0 10px 0; font-family: Arial, sans-serif; font-size: 16px; color: #5c4a4a;">
+                                Your seating code is:
                             </p>
 
                             <!-- Code Box -->
@@ -40,14 +44,27 @@
                                 </span>
                             </div>
 
-                            <p style="margin: 0 0 30px 0; font-family: Arial, sans-serif; font-size: 14px; color: #5c4a4a;">
-                                Please click the button below to view the floor map and other details.
+                            <p style="margin: 0 0 20px 0; font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6; color: #5c4a4a; max-width: 480px; margin-left: auto; margin-right: auto;">
+                                This code will let you view your table and seat number ahead of the wedding.
+                            </p>
+
+                            <p style="margin: 0 0 30px 0; font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6; color: #5c4a4a; max-width: 480px; margin-left: auto; margin-right: auto;">
+                                Our full floor plan will be kept as a surprise until the day, but don’t worry — if you forget your seating details, there will be a chart at the venue to help you find your place.
+                            </p>
+
+                            <p style="margin: 0 0 20px 0; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #3d1516;">
+                                Can’t wait to see you there.
+                            </p>
+
+                            <p style="margin: 0 0 30px 0; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #3d1516;">
+                                With love,<br>
+                                Michael & Amna ❤️
                             </p>
 
                             <!-- Button -->
                             <a href="{{ url('/floor-map') }}?code={{ urlencode($rsvp->unique_code) }}#find" 
                                style="display: inline-block; padding: 14px 28px; background-color: #3d1516; color: #F3ECDC; text-decoration: none; font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; border-radius: 2px;">
-                                View Invitation
+                                View Details
                             </a>
                         </td>
                     </tr>

@@ -65,10 +65,14 @@
           <h2 style="margin: 20px 0; letter-spacing: 10px;">Floor Map</h2>
 
             {{-- FLOOR MAP --}}
-            @if($floorMapUrl)
+            @if($isEventStarted && $floorMapUrl)
                 <a href="{{ $floorMapUrl }}" class="map-btn" target="_blank" rel="noopener" download>
                     View / Download Floor Map
                 </a>
+            @elseif(!$isEventStarted)
+                <p style="font-size: 15px; color: rgba(243, 236, 220, 0.6); font-style: italic; line-height: 1.5;">
+                    Our floor plan is kept as a surprise until the wedding day.<br>Please check back then!
+                </p>
             @else
                 <p>Floor map is not available yet.</p>
             @endif

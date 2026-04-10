@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Countdown;
 use App\Models\Rsvp;
 use Illuminate\Http\Request;
 
@@ -21,9 +22,13 @@ class FloorMapController extends Controller
 
         $floorMapUrl = $this->resolveFloorMapUrl();
 
+        $countdown = Countdown::first();
+        $isEventStarted = $countdown && now()->gte($countdown->event_at_utc);
+
         return view('floormap', [
-            'rsvp'        => $rsvp,
-            'floorMapUrl' => $floorMapUrl,
+            'rsvp'           => $rsvp,
+            'floorMapUrl'    => $floorMapUrl,
+            'isEventStarted' => $isEventStarted,
         ]);
     }
 

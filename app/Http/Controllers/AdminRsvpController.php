@@ -65,7 +65,26 @@ class AdminRsvpController extends Controller
                 ];
             });
 
-        $people = $mains->concat($guests)->sortBy('contact_name')->values();
+        $mains = $mains->sortBy('contact_name');
+        $people = collect();
+
+        foreach ($mains as $main) {
+            $people->push($main);
+            $relatedGuests = $guests->where('rsvp_id', $main['rsvp_id']);
+            foreach ($relatedGuests as $guest) {
+                $guest['parent_name'] = $main['contact_name'];
+                $people->push($guest);
+            }
+        }
+
+        // Handle orphan guests if any exist
+        $orphanIds = $guests->pluck('rsvp_id')->diff($mains->pluck('rsvp_id'));
+        if ($orphanIds->isNotEmpty()) {
+            $orphanGuests = $guests->whereIn('rsvp_id', $orphanIds);
+            $people = $people->concat($orphanGuests);
+        }
+
+        $people = $people->values();
 
         return view('admin.rsvp', compact('people'));
     }
