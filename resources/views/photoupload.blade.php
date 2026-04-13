@@ -107,7 +107,11 @@
         <a href="{{ route('floormap') }}" style="color: #3d1516;">Floor Map</a>
         <a href="{{ url('/rsvp') }}" style="color: #3d1516;">RSVP</a>
       </div>
-      <button class="hamb" aria-label="Open menu" aria-controls="mPanel" aria-expanded="false"><span style="background: #2b0f10;"></span></button>
+      <button class="hamb" aria-label="Open menu" aria-controls="mPanel" aria-expanded="false">
+        <span style="background: #2b0f10;"></span>
+        <span style="background: #2b0f10;"></span>
+        <span style="background: #2b0f10;"></span>
+      </button>
     </div>
     <div id="mPanel" class="panel">
       <button class="close-btn" aria-label="Close menu" aria-controls="mPanel">&times;</button>

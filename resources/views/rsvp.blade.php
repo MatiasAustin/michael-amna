@@ -139,7 +139,11 @@
         <a href="{{ route('floormap') }}">Floor Map</a>
         <a href="{{ url('/rsvp') }}">RSVP</a>
       </div>
-      <button class="hamb" aria-label="Open menu" aria-controls="mPanel" aria-expanded="false"><span></span></button>
+      <button class="hamb" aria-label="Open menu" aria-controls="mPanel" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
     <div id="mPanel" class="panel">
       <button class="close-btn" aria-label="Close menu" aria-controls="mPanel">&times;</button>

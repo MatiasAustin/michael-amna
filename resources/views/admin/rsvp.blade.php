@@ -163,18 +163,43 @@
                     </table>
                 </div>
 
-                <div style="margin-top:20px; color:rgba(243, 236, 220, 0.7);">
-                    <h5 style="margin:0 0 10px 0; letter-spacing:0.5px;">NOTES</h5>
-                    <p style="margin:0 0 6px 0; font-size: 13px;">
-                        Generate Code is only for RSVP (main guests). Additional guests will use the same unique code as
-                        their RSVP.
-                        <br>
-                        Invitation details will show both the RSVP and any additional guests together when extra guests
-                        are added in the RSVP form.
-                    </p>
-                </div>
+                <style>
+                    .admin-floating-actions {
+                        position: sticky;
+                        bottom: 0;
+                        background: var(--bg-color);
+                        padding: 15px 0;
+                        border-top: 1px solid rgba(243, 236, 220, 0.2);
+                        z-index: 1000;
+                        margin-top: 20px;
+                    }
+                    @media (max-width: 799px) {
+                        .admin-floating-actions {
+                            position: fixed;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            padding: 15px 5%;
+                            margin-top: 0;
+                            box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+                        }
+                        /* Add space at bottom of table so it's not hidden behind fixed bar */
+                        .admin-table {
+                            margin-bottom: 120px;
+                        }
+                    }
+                </style>
 
-                <div class="mt-4" style="margin-top: 20px;">
+                {{-- Floating Action Bar (Notes + Save Button) --}}
+                <div class="admin-floating-actions">
+                    <div style="margin-bottom:15px; color:rgba(243, 236, 220, 0.8);">
+                        <h5 style="margin:0 0 5px 0; letter-spacing:0.5px; font-size: 11px; font-weight: 500;">NOTES</h5>
+                        <p style="margin:0; font-size: 11px; line-height: 1.4;">
+                            Generate Code is only for RSVP (main guests). Additional guests use the same code as their RSVP.<br>
+                            Details will show both the RSVP and additional guests together.
+                        </p>
+                    </div>
+
                     <button type="submit" class="btn btn-primary">
                         Save Assignments
                     </button>
@@ -243,7 +268,11 @@
                         <p style="margin:0 0 12px 0; font-size:16px; font-weight:bold;">
                             <span id="previewCode"></span>
                         </p>
-                        <p style="margin:0 0 8px 0;">This code will let you view your table and seat number ahead of the wedding.</p>
+                        <p style="margin:0 0 6px 0;">This code will let you view your table and seat number ahead of the wedding.</p>
+                        <p style="margin:0 0 12px 0; color: #3d1516; font-weight: bold;">
+                            Check your seating plan here:<br>
+                            <span id="previewLink" style="font-weight: normal; text-decoration: underline;"></span>
+                        </p>
                         <p style="margin:0 0 12px 0;">Our full floor plan will be kept as a surprise until the day, but don’t worry — if you forget your seating details, there will be a chart at the venue to help you find your place.</p>
                         <p style="margin:0 0 8px 0;">Can’t wait to see you there.</p>
                         <p style="margin:0;">With love,<br>Michael & Amna ❤️</p>
@@ -340,6 +369,7 @@
         function renderEmailPreview(name, code) {
             const nameEl = document.getElementById('previewName');
             const codeEl = document.getElementById('previewCode');
+            const linkEl = document.getElementById('previewLink');
             const baseUrl = "{{ url('/floor-map') }}";
             const emailInput = document.getElementById('send-code-email');
             const gmailBtn = document.getElementById('sendGmailBtn');
@@ -352,8 +382,9 @@
 
             const email = emailInput?.value || '';
             const inviteLink = code ? `${baseUrl}?code=${encodeURIComponent(code)}#find` : `${baseUrl}#find`;
+            if (linkEl) linkEl.textContent = inviteLink;
             const subject = 'Your Seating Details for Our Wedding';
-            const body = `Hi ${firstName},%0D%0A%0D%0AWe’re so excited to celebrate with you.%0D%0A%0D%0AYour seating code is: ${code || '(generate code first)'}%0D%0A%0D%0AThis code will let you view your table and seat number ahead of the wedding.%0D%0A%0D%0AOur full floor plan will be kept as a surprise until the day, but don’t worry — if you forget your seating details, there will be a chart at the venue to help you find your place.%0D%0A%0D%0ACan’t wait to see you there.%0D%0A%0D%0AWith love,%0D%0AMichael & Amna ❤️`;
+            const body = `Hi ${firstName},%0D%0A%0D%0AWe’re so excited to celebrate with you.%0D%0A%0D%0AYour seating code is: ${code || '(generate code first)'}%0D%0A%0D%0AThis code will let you view your table and seat number ahead of the wedding.%0D%0A%0D%0ACheck your seating plan here:%0D%0A${inviteLink}%0D%0A%0D%0AOur full floor plan will be kept as a surprise until the day, but don’t worry — if you forget your seating details, there will be a chart at the venue to help you find your place.%0D%0A%0D%0ACan’t wait to see you there.%0D%0A%0D%0AWith love,%0D%0AMichael & Amna ❤️`;
 
             if (gmailBtn) {
                 gmailBtn.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent(subject)}&body=${body}`;
